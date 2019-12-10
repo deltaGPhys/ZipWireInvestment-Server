@@ -12,10 +12,15 @@ public class InvestmentService {
     private InvestmentRepository investmentRepository;
 
 
-    public InvestmentService(InvestmentRepository investmentRepository) {
+    public InvestmentService(InvestmentRepository investmentRepository) {this.investmentRepository = investmentRepository;}
 
-        
-    }
+        public Iterable<Investment> index(){
+        return investmentRepository.findAll();
+
+        }
+
+
+
 
 
 
