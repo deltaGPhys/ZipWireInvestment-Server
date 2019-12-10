@@ -19,14 +19,6 @@ public abstract class Account {
     private User owner;
     private String acctName;
 
-    public double deposit (double amount) {
-        return 0.0;
-    }
-
-    public double withdraw (double amount) {
-        return 0.0;
-    }
-
     public long getId() {
         return id;
     }

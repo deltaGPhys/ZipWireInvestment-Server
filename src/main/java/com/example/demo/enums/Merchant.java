@@ -1,6 +1,4 @@
-package com.example.demo.other;
-
-import com.example.demo.other.SpendingCategories;
+package com.example.demo.enums;
 
 
 public enum Merchant {
