@@ -1,9 +1,7 @@
 package com.example.demo.services;
 
 import org.springframework.stereotype.Service;
-
 import com.example.demo.repositories.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import com.example.demo.entities.reports.Statement;
@@ -29,11 +27,11 @@ public class StatementService {
     public  StatementService() {
     }
 
-    public Statement getStatementForAccount(Long accountId, Date date){
+    public Statement getStatementForAccount(long accountId, Date date){
         return null;
     }
 
-    public Statement getStatementForUser(Long userId, Date date){
+    public Statement getStatementForUser(long userId, Date date){
         return null;
     }
 
