@@ -31,7 +31,7 @@ public class GoalController {
     {return null;}
 
     @PutMapping("/goal/{id}")
-    public ResponseEntity<SavingGoal> updateGoal(@PathVariable Long id) {
+    public ResponseEntity<SavingGoal> updateGoal(@PathVariable long id) {
         return null;
     }
 
