@@ -22,6 +22,8 @@ public class User {
     private PasswordField password;
     @OneToMany
     private List<? extends Account> accounts;
+    private double rent;
+    private double salary;
 
     public long getId() {
         return id;
@@ -69,5 +71,21 @@ public class User {
 
     public void setAccounts(List<? extends Account> accounts) {
         this.accounts = accounts;
+    }
+
+    public double getRent() {
+        return rent;
+    }
+
+    public void setRent(double rent) {
+        this.rent = rent;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 }
