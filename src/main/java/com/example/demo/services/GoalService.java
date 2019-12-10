@@ -28,11 +28,11 @@ public class GoalService {
         return savingGoalRepository.findAll();
     }
 
-    public GoalAccount showUGoalAccount(Long id) {
+    public GoalAccount showUGoalAccount(long id) {
         return goalAccountRepository.findById(id).get();
     }
 
-    public SavingGoal showSavingGoal(Long id) {
+    public SavingGoal showSavingGoal(long id) {
         return savingGoalRepository.findById(id).get();
     }
 
@@ -44,28 +44,28 @@ public class GoalService {
         return savingGoalRepository.save(savingGoal);
     }
 
-    public GoalAccount updateGoalAccount (Long id, User userToUpdate) {
+    public GoalAccount updateGoalAccount (long id, User userToUpdate) {
         //User originalUser = userRepository.findById(id).get();
         //return repository.save(originalUser);
         return null;
     }
 
-    public SavingGoal updateSavingGoal(Long id, User userToUpdate) {
+    public SavingGoal updateSavingGoal(long id, User userToUpdate) {
         //User originalUser = userRepository.findById(id).get();
         //return repository.save(originalUser);
         return null;
     }
 
-    public Boolean deleteGoalAccount(Long id) {
+    public boolean deleteGoalAccount(long id) {
         goalAccountRepository.deleteById(id);
         return true;
     }
-    public Boolean deleteSavingGoal(Long id) {
+    public boolean deleteSavingGoal(long id) {
         savingGoalRepository.deleteById(id);
         return true;
     }
 
-    public GoalAccount existingGoalAcctCheck (Long id) {
+    public GoalAccount existingGoalAcctCheck (long id) {
         return null;
     }
 

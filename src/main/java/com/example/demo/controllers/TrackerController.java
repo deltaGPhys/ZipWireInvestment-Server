@@ -1,7 +1,9 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.reports.SpendingReport;
-import jdk.internal.net.http.common.OperationTrackers;
+import com.example.demo.services.AccountService;
+import com.example.demo.services.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,13 @@ import java.util.Date;
 
 @Controller
 public class TrackerController {
+
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
+    TransactionService transactionService;
+
 
     @GetMapping("/tracker/account/{accountId}")
     public ResponseEntity<SpendingReport> getTrackerForAccount(@PathVariable long accountId) {

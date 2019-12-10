@@ -2,6 +2,8 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.Transaction;
 import com.example.demo.entities.accounts.Account;
+import com.example.demo.services.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,9 @@ import java.util.Date;
 
 @Controller
 public class TransactionController {
+
+    @Autowired
+    TransactionService transactionService;
 
     @GetMapping("/transaction/{id}")
     public ResponseEntity<Transaction> getTransaction(@PathVariable long id) {
