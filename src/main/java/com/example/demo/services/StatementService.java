@@ -37,5 +37,16 @@ public class StatementService {
         return null;
     }
 
+    public Statement create(Statement statement){
+        return null;
+    }
+
+    public Statement update(long id, Statement newStatementData){
+        return null;
+    }
+
+    public Boolean delete(long id) {
+        return null;
+    }
 
 }
