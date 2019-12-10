@@ -1,4 +1,4 @@
-package com.example.demo.other;
+package com.example.demo.enums;
 
 public enum SpendingCategories {
 

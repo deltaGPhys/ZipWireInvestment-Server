@@ -1,9 +1,8 @@
 package com.example.demo.entities.reports;
 
 import com.example.demo.entities.User;
-import com.example.demo.other.SpendingCategories;
+import com.example.demo.enums.SpendingCategories;
 
-import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.HashMap;
 
