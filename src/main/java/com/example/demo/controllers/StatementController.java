@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.accounts.Account;
+import com.example.demo.entities.reports.Statement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,11 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Statement;
+
 import java.util.Date;
 
 @Controller
-public class StatementController{
+public class StatementController {
+
+
 
     @GetMapping("/statement/{accountId}")
     public ResponseEntity<Statement> getStatementForAccount(@PathVariable long accountId, @RequestParam Date date) {
