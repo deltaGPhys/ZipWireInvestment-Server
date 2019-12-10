@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Statement;
-import java.util.Date;
 
 @Controller
 public class GoalController {
@@ -34,7 +32,5 @@ public class GoalController {
     public ResponseEntity<SavingGoal> updateGoal(@PathVariable long id) {
         return null;
     }
-
-
 }
 
