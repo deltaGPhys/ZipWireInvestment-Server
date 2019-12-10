@@ -15,10 +15,18 @@ public class InvestmentService {
     public InvestmentService(InvestmentRepository investmentRepository) {this.investmentRepository = investmentRepository;}
 
         public Iterable<Investment> index(){
-        return investmentRepository.findAll();
+        return null;
+    }
 
-        }
+    public Investment get(Long id){return null;}
 
+
+
+    public Investment buy(Long id) {return null;}
+
+
+
+    public Investment value(Long id) {return null;}
 
 
 
