@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountService {
 
-    @Autowired
-    CheckingRepository checkingRepository;
 
     @Autowired
     SavingsRepository savingsRepository;
+
+    @Autowired
+    CheckingRepository checkingRepository;
 
     @Autowired
     InvestmentRepository investmentRepository;
