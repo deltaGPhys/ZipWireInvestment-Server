@@ -6,7 +6,7 @@ import com.example.demo.enums.TransactionType;
 import javax.persistence.*;
 
 @Entity
-public class Transaction<E extends Account> {
+public class Transaction {
 
     @Id
     @GeneratedValue
@@ -41,13 +41,13 @@ public class Transaction<E extends Account> {
         this.amount = amount;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
+//    public Account getAccount() {
+//        return account;
+//    }
+//
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
 
     public String getComment() {
         return comment;
