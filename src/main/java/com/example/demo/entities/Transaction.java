@@ -14,7 +14,7 @@ public class Transaction<E extends Account> {
     private TransactionType type;
     private double amount;
     @ManyToOne
-    private E account;
+    private Account account;
     private String comment;
 
     public long getId() {
@@ -41,11 +41,11 @@ public class Transaction<E extends Account> {
         this.amount = amount;
     }
 
-    public E getAccount() {
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(E account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 

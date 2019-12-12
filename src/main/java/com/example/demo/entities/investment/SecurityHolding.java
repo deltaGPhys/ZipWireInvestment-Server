@@ -10,7 +10,7 @@ public class SecurityHolding {
     @Id
     @GeneratedValue
     private long id;
-    @OneToMany
+    @ManyToOne
     private User owner;
     @ManyToOne
     private Security security;

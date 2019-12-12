@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class AccountController {
 
     @Autowired
@@ -17,6 +17,11 @@ public class AccountController {
 
     @GetMapping("/account/{id}")
     public ResponseEntity<Account> getAccount(@PathVariable long id) {
+        return null;
+    }
+
+    @GetMapping("/accounts")
+    public ResponseEntity<Account> getAccounts() {
         return null;
     }
 
