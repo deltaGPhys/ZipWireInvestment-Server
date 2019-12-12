@@ -15,7 +15,7 @@ public abstract class Account {
     private long id;
     private double balance;
     private Date openingDate;
-    @OneToMany
+    //@OneToMany
     private User owner;
     private String acctName;
 
