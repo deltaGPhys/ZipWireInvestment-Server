@@ -1,7 +1,7 @@
 package com.example.demo.entities;
 
 import com.example.demo.entities.accounts.Account;
-//import javafx.scene.control.PasswordField;
+import javafx.scene.control.PasswordField;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +18,8 @@ public class User {
     private long id;
     private String lastName;
     private String firstName;
-    //private Email email;
-    //private PasswordField password;
+    private Email email;
+    private PasswordField password;
     @OneToMany
     private List<Account> accounts;
     private double rent;
@@ -49,29 +49,29 @@ public class User {
         this.firstName = firstName;
     }
 
-//    public Email getEmail() {
-//        return email;
-//    }
-//
-//   public void setEmail(Email email) {
-//       this.email = email;
-//    }
+    public Email getEmail() {
+        return email;
+    }
 
-//    public PasswordField getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(PasswordField password) {
-//        this.password = password;
-//    }
+   public void setEmail(Email email) {
+       this.email = email;
+    }
 
-//    public List<? extends Account> getAccounts() {
-//        return accounts;
-//    }
-//
-//    public void setAccounts(List<? extends Account> accounts) {
-//        this.accounts = accounts;
-//    }
+    public PasswordField getPassword() {
+        return password;
+    }
+
+    public void setPassword(PasswordField password) {
+        this.password = password;
+    }
+
+    public List<? extends Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<? extends Account> accounts) {
+        this.accounts = accounts;
+    }
 
     public double getRent() {
         return rent;

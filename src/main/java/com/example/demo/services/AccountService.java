@@ -71,32 +71,59 @@ public class AccountService {
         return goalAccountRepository.findGoalAccountById();
     }
 
-    public Checking createChecking(User user){
-
-        return checkingRepository.save(user);
+    public Checking createChecking(Checking checking, User owner){
+        return checkingRepository.save(checking);
     }
 
-    public Savings createSavings(User user) {
-        return savingsRepository.save(user);
+    public Savings createSavings(Savings savings, User owner) {
+        return savingsRepository.save(savings);
 
     }
 
-    public Investment createInvestments(User user){
-        return investmentRepository.save(user);
+    public Investment createInvestments(Investment investment, User owner){
+        return investmentRepository.save(investment);
     }
 
-    public GoalAccount createGoalAccount(User user) {
-        return goalAccountRepository.save(user);
+    public GoalAccount createGoalAccount(GoalAccount goalAccount, User owner) {
+        return goalAccountRepository.save(goalAccount);
     }
 
-    public Checking updateChecking(long id, User newUserData) {
-        User originalUser = userRepository.findUserById();
-        originalUser.setEmail(newUserData.getEmail());
-        originalUser.setPassword(newUserData.getPassword());
-        return userRepository.save(originalUser);
-
-
-
+    public Boolean closeChecking(Checking checking, long id){
+        if(checking.getBalance() == 0){
+             checkingRepository.deleteById(id);
+            return true;}
+        else
+            return false;
     }
+
+    public Boolean closeSavings(Savings savings, long id) {
+        if(savings.getBalance() == 0) {
+            savingsRepository.deleteById(id);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public Boolean closeInvestments(Investment investment, long id) {
+        if(investment.getBalance() == 0) {
+            investmentRepository.deleteById(id);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public Boolean closeGoalAccount(GoalAccount goalAccount, long id) {
+        if(goalAccount.getBalance() == 0) {
+            goalAccountRepository.deleteById(id);
+            return true;
+        }
+        else
+            return false;
+    }
+
+
+
 
 }
