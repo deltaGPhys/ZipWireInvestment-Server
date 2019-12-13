@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CheckingRepository extends CrudRepository<Checking, Long> {
+
+     Checking findCheckingById();
 }
