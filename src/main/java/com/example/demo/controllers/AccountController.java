@@ -62,9 +62,6 @@ public class AccountController {
         return null;
     }
 
-
-
-
 //    @DeleteMapping("/account/checking/{id}")
 //    public ResponseEntity<Checking> closeChecking(@RequestBody Checking checking, @PathVariable long id) {
 //        return new ResponseEntity<>(accountService.closeChecking(checking, id), HttpStatus.OK);
