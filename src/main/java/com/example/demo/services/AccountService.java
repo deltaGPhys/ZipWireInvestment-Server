@@ -25,14 +25,24 @@ public class AccountService {
     @Autowired
     UserRepository userRepository;
 
+    private double balance;
 
-    public double deposit (double amount) {
+    public void deposit (double amountToIncreaseBy) {
+        if(amountToIncreaseBy < 0) {
+            throw new   IllegalArgumentException();
+        }
+        this.balance += amountToIncreaseBy;
+        }
 
-        return 0.0;
+    public void withdraw (double amountToDecreaseBy) {
+        if(amountToDecreaseBy < 0 || amountToDecreaseBy > this.balance) {
+            throw new IllegalArgumentException();
+        }
+        this.balance -= amountToDecreaseBy;
     }
 
-    public double withdraw (double amount) {
-        return 0.0;
+    public Double getBalance() {
+        return this.balance;
     }
 
     public Iterable<Checking>showAllChecking(User user){
