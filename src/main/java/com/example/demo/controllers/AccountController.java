@@ -18,22 +18,22 @@ public class AccountController {
 
     @GetMapping("/account/checking/{id}")
     public ResponseEntity<Checking> getCheckingAccount(@RequestBody User user, @PathVariable long id) {
-        return new ResponseEntity<>(service.showAChecking(user), HttpStatus.OK);
+        return new ResponseEntity<>(service.showAChecking(id), HttpStatus.OK);
     }
 
     @GetMapping("/account/savings/{id}")
     public ResponseEntity<Checking> getSavingsAccount(@RequestBody User user, @PathVariable long id) {
-        return new ResponseEntity<>(service.showSavings(user), HttpStatus.OK);
+        return new ResponseEntity<>(service.showSavings(id), HttpStatus.OK);
     }
 
     @GetMapping("/account/investment/{id}")
     public ResponseEntity<Checking> getInvestmentAccount(@RequestBody User user, @PathVariable long id) {
-        return new ResponseEntity<>(service.showInvestments(user), HttpStatus.OK);
+        return new ResponseEntity<>(service.showInvestments(id), HttpStatus.OK);
     }
 
     @GetMapping("/account/goalaccount/{id}")
     public ResponseEntity<Checking> getGoalAccount(@RequestBody User user, @PathVariable long id) {
-        return new ResponseEntity<>(service.showGoalAccounts(user), HttpStatus.OK);
+        return new ResponseEntity<>(service.showGoalAccounts(id), HttpStatus.OK);
     }
 
     @GetMapping("/accounts/checking")
@@ -69,7 +69,7 @@ public class AccountController {
 
     @DeleteMapping("/account/checking/{id}")
     public ResponseEntity<Checking> closeCheckingAccount(@RequestBody Checking checking, @PathVariable long id) {
-        return new ResponseEntity<>(service.closeChecking(checking, id));
+        return new ResponseEntity<>(service.closeChecking(checking, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/account/savings/{id}")
