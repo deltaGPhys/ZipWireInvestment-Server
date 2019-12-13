@@ -2,11 +2,10 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.User;
 import com.example.demo.entities.accounts.*;
-import com.example.demo.repositories.*;
 import com.example.demo.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,17 +21,17 @@ public class AccountController {
     }
 
     @GetMapping("/account/savings/{id}")
-    public ResponseEntity<Checking> getSavingsAccount(@RequestBody User user, @PathVariable long id) {
+    public ResponseEntity<Savings> getSavingsAccount(@RequestBody User user, @PathVariable long id) {
         return new ResponseEntity<>(service.showSavings(id), HttpStatus.OK);
     }
 
     @GetMapping("/account/investment/{id}")
-    public ResponseEntity<Checking> getInvestmentAccount(@RequestBody User user, @PathVariable long id) {
+    public ResponseEntity<Investment> getInvestmentAccount(@RequestBody User user, @PathVariable long id) {
         return new ResponseEntity<>(service.showInvestments(id), HttpStatus.OK);
     }
 
     @GetMapping("/account/goalaccount/{id}")
-    public ResponseEntity<Checking> getGoalAccount(@RequestBody User user, @PathVariable long id) {
+    public ResponseEntity<GoalAccount> getGoalAccount(@RequestBody User user, @PathVariable long id) {
         return new ResponseEntity<>(service.showGoalAccounts(id), HttpStatus.OK);
     }
 
