@@ -135,23 +135,19 @@ public class AccountService {
         return goalAccountRepository.findAll();
     }
 
-    public Checking showAChecking(User user){
-        long userCheckingId = user.getId();
+    public Checking showAChecking(long userId){
         return checkingRepository.findCheckingById();
     }
 
-    public Savings showSavings(User user){
-        long userSavingsId = user.getId();
+    public Savings showSavings(long userId){
         return savingsRepository.findSavingsById();
     }
 
-    public Investment showInvestments(User user){
-        long userInvestmentsId = user.getId();
+    public Investment showInvestments(long userId){
         return investmentRepository.findInvestmentById();
     }
 
-    public GoalAccount showSavingGoalAccounts(User user){
-        long userSavingGoalId = user.getId();
+    public GoalAccount showGoalAccounts(long userId){
         return goalAccountRepository.findGoalAccountById();
     }
 
