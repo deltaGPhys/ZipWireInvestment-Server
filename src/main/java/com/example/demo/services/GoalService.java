@@ -19,12 +19,14 @@ public class GoalService {
     SavingGoalRepository savingGoalRepository;
 
     public Iterable<GoalAccount> findAllGoalAccounts() {
-
         return goalAccountRepository.findAll();
     }
 
-    public Iterable<SavingGoal> findAllSavingGoals() {
+    public Iterable<SavingGoal> findAllSavingGoals(User owner) {
+        return savingGoalRepository.findAllByOwner(owner);
+    }
 
+    public Iterable<SavingGoal> findAllGoals() {
         return savingGoalRepository.findAll();
     }
 

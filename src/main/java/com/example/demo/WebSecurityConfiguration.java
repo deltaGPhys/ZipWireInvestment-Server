@@ -5,6 +5,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+
 @Configuration
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -18,6 +19,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/newuser/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/master/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/exploreCourse").permitAll()
+                .antMatchers(HttpMethod.POST, "/goal").permitAll()
+                .antMatchers(HttpMethod.GET,"/goal/").permitAll()
+                .antMatchers(HttpMethod.POST, "/goal/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/goal/*").permitAll()
+                .antMatchers(HttpMethod.GET,"/goals/").permitAll()
                 .anyRequest().authenticated();
     }
 }

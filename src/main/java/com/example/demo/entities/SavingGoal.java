@@ -2,11 +2,9 @@ package com.example.demo.entities;
 
 import com.example.demo.entities.accounts.GoalAccount;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import java.util.Date;
+import javax.persistence.*;
+import java.time.LocalDate;
+
 
 @Entity
 public class SavingGoal {
@@ -15,9 +13,11 @@ public class SavingGoal {
     @GeneratedValue
     private long id;
     private double goalAmount;
+    @ManyToOne
+    private User owner;
     @OneToOne
     private GoalAccount account;
-    private Date endDate;
+    private LocalDate endDate;
     private String description;
 
     public long getId() {
@@ -36,11 +36,11 @@ public class SavingGoal {
         this.goalAmount = goalAmount;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -50,5 +50,21 @@ public class SavingGoal {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public GoalAccount getAccount() {
+        return account;
+    }
+
+    public void setAccount(GoalAccount account) {
+        this.account = account;
     }
 }
