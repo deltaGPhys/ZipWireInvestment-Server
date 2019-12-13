@@ -26,6 +26,12 @@ public class AuthenticationService {
     public User update(Long id, User userToUpdate) {
         //User originalUser = userRepository.findById(id).get();
         //return repository.save(originalUser);
+
+//        public User updateChecking(long id, User newUserData) {
+//            User originalUser = userRepository.findUserById();
+//            originalUser.setEmail(newUserData.getEmail());
+//            originalUser.setPassword(newUserData.getPassword());
+//            return userRepository.save(originalUser);
         return null;
     }
 
