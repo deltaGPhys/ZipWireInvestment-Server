@@ -53,8 +53,8 @@ public class User {
 //        return email;
 //    }
 //
-//    public void setEmail(Email email) {
-//        this.email = email;
+//   public void setEmail(Email email) {
+//       this.email = email;
 //    }
 
 //    public PasswordField getPassword() {
