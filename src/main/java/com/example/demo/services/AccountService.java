@@ -12,21 +12,17 @@ public class AccountService {
 
     @Autowired
     SavingsRepository savingsRepository;
-
     @Autowired
     CheckingRepository checkingRepository;
-
     @Autowired
     InvestmentRepository investmentRepository;
-
     @Autowired
     GoalAccountRepository goalAccountRepository;
-
     @Autowired
     UserRepository userRepository;
 
 
-    public Checking deposit (Checking checking, double amountToIncreaseBy) {
+    public Checking depositIntoChecking (Checking checking, double amountToIncreaseBy) {
         if(amountToIncreaseBy < 0) {
             throw new   IllegalArgumentException();
         }
@@ -36,7 +32,7 @@ public class AccountService {
         return checkingRepository.save(checking);
         }
 
-    public Savings deposit (Savings saving, double amountToIncreaseBy) {
+    public Savings depositIntoSavings (Savings saving, double amountToIncreaseBy) {
         if(amountToIncreaseBy < 0) {
             throw new   IllegalArgumentException();
         }
@@ -47,7 +43,7 @@ public class AccountService {
     }
 
 
-    public Investment deposit (Investment investment, double amountToIncreaseBy) {
+    public Investment depositIntoInvestment (Investment investment, double amountToIncreaseBy) {
         if(amountToIncreaseBy < 0) {
             throw new   IllegalArgumentException();
         }
@@ -57,7 +53,7 @@ public class AccountService {
         return investmentRepository.save(investment);
     }
 
-    public GoalAccount deposit (GoalAccount goalAccount, double amountToIncreaseBy) {
+    public GoalAccount depositIntoGoalAccount (GoalAccount goalAccount, double amountToIncreaseBy) {
         if(amountToIncreaseBy < 0) {
             throw new   IllegalArgumentException();
         }
@@ -67,7 +63,7 @@ public class AccountService {
         return goalAccountRepository.save(goalAccount);
     }
 
-    public Checking withdraw (Checking checking, double amountToDecreaseBy) {
+    public Checking withdrawFromChecking (Checking checking, double amountToDecreaseBy) {
         if(amountToDecreaseBy < 0 || amountToDecreaseBy > checking.getBalance() ) {
             throw new IllegalArgumentException();
         }
@@ -77,7 +73,7 @@ public class AccountService {
         return checkingRepository.save(checking);
     }
 
-    public Savings withdraw (Savings savings, double amountToDecreaseBy) {
+    public Savings withdrawFromSavings (Savings savings, double amountToDecreaseBy) {
         if(amountToDecreaseBy < 0 || amountToDecreaseBy > savings.getBalance()) {
             throw new IllegalArgumentException();
         }
@@ -87,7 +83,7 @@ public class AccountService {
         return savingsRepository.save(savings);
     }
 
-    public Investment withdraw (Investment investment, double amountToDecreaseBy) {
+    public Investment withdrawFromInvestment (Investment investment, double amountToDecreaseBy) {
         if(amountToDecreaseBy < 0 || amountToDecreaseBy > investment.getBalance()) {
             throw new IllegalArgumentException();
         }
@@ -97,7 +93,7 @@ public class AccountService {
         return investmentRepository.save(investment);
     }
 
-    public GoalAccount withdraw (GoalAccount goalAccount, double amountToDecreaseBy) {
+    public GoalAccount withdrawFromGoalAccount (GoalAccount goalAccount, double amountToDecreaseBy) {
         if(amountToDecreaseBy < 0 || amountToDecreaseBy > goalAccount.getBalance()) {
             throw new IllegalArgumentException();
         }
@@ -119,6 +115,9 @@ public class AccountService {
         return goalAccount.getBalance();
     }
 
+    public Double getCheckingBalance(Checking checking) {
+        return checking.getBalance();
+    }
 
     public Iterable<Checking>showAllChecking(User user){
         return checkingRepository.findAll();
@@ -207,8 +206,5 @@ public class AccountService {
         else
             return false;
     }
-
-
-
 
 }
