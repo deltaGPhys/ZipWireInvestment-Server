@@ -16,8 +16,6 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-
-
     @GetMapping("/account/checking/{id}")
     public ResponseEntity<Checking> getCheckingAccount(@RequestBody User user, @PathVariable long id) {
         return new ResponseEntity<>(service.showAChecking(user), HttpStatus.OK);
