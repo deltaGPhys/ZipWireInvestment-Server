@@ -119,19 +119,19 @@ public class AccountService {
         return checking.getBalance();
     }
 
-    public Iterable<Checking>showAllChecking(User user){
+    public Iterable<Checking>showAllChecking(User owner){
         return checkingRepository.findAll();
     }
 
-    public Iterable<Savings>showAllSavings(User user){
+    public Iterable<Savings>showAllSavings(User owner){
         return savingsRepository.findAll();
     }
 
-    public Iterable<Investment>showAllInvestments(User user){
+    public Iterable<Investment>showAllInvestments(User owner){
         return investmentRepository.findAll();
     }
 
-    public Iterable<GoalAccount>showAllGoalAccounts(User user){
+    public Iterable<GoalAccount>showAllGoalAccounts(User owner){
         return goalAccountRepository.findAll();
     }
 
