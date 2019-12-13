@@ -25,25 +25,100 @@ public class AccountService {
     @Autowired
     UserRepository userRepository;
 
-    private double balance;
 
-    public void deposit (double amountToIncreaseBy) {
+    public Checking deposit (Checking checking, double amountToIncreaseBy) {
         if(amountToIncreaseBy < 0) {
             throw new   IllegalArgumentException();
         }
-        this.balance += amountToIncreaseBy;
+        double checkingBalance = checking.getBalance();
+        checkingBalance += amountToIncreaseBy;
+        checking.setBalance(checkingBalance);
+        return checkingRepository.save(checking);
         }
 
-    public void withdraw (double amountToDecreaseBy) {
-        if(amountToDecreaseBy < 0 || amountToDecreaseBy > this.balance) {
+    public Savings deposit (Savings saving, double amountToIncreaseBy) {
+        if(amountToIncreaseBy < 0) {
+            throw new   IllegalArgumentException();
+        }
+        double savingBalance = saving.getBalance();
+        savingBalance += amountToIncreaseBy;
+        saving.setBalance(savingBalance);
+        return savingsRepository.save(saving);
+    }
+
+
+    public Investment deposit (Investment investment, double amountToIncreaseBy) {
+        if(amountToIncreaseBy < 0) {
+            throw new   IllegalArgumentException();
+        }
+        double investmentBalance = investment.getBalance();
+        investmentBalance += amountToIncreaseBy;
+        investment.setBalance(investmentBalance);
+        return investmentRepository.save(investment);
+    }
+
+    public GoalAccount deposit (GoalAccount goalAccount, double amountToIncreaseBy) {
+        if(amountToIncreaseBy < 0) {
+            throw new   IllegalArgumentException();
+        }
+        double goalAccountBalance = goalAccount.getBalance();
+        goalAccountBalance += amountToIncreaseBy;
+        goalAccount.setBalance(goalAccountBalance);
+        return goalAccountRepository.save(goalAccount);
+    }
+
+    public Checking withdraw (Checking checking, double amountToDecreaseBy) {
+        if(amountToDecreaseBy < 0 || amountToDecreaseBy > checking.getBalance() ) {
             throw new IllegalArgumentException();
         }
-        this.balance -= amountToDecreaseBy;
+        double checkingBalance = checking.getBalance();
+        checkingBalance -= amountToDecreaseBy;
+        checking.setBalance(checkingBalance);
+        return checkingRepository.save(checking);
     }
 
-    public Double getBalance() {
-        return this.balance;
+    public Savings withdraw (Savings savings, double amountToDecreaseBy) {
+        if(amountToDecreaseBy < 0 || amountToDecreaseBy > savings.getBalance()) {
+            throw new IllegalArgumentException();
+        }
+        double savingsBalance = savings.getBalance();
+        savingsBalance -= amountToDecreaseBy;
+        savings.setBalance(savingsBalance);
+        return savingsRepository.save(savings);
     }
+
+    public Investment withdraw (Investment investment, double amountToDecreaseBy) {
+        if(amountToDecreaseBy < 0 || amountToDecreaseBy > investment.getBalance()) {
+            throw new IllegalArgumentException();
+        }
+        double investmentBalance = investment.getBalance();
+        investmentBalance -= amountToDecreaseBy;
+        investment.setBalance(investmentBalance);
+        return investmentRepository.save(investment);
+    }
+
+    public GoalAccount withdraw (GoalAccount goalAccount, double amountToDecreaseBy) {
+        if(amountToDecreaseBy < 0 || amountToDecreaseBy > goalAccount.getBalance()) {
+            throw new IllegalArgumentException();
+        }
+        double goalAccountBalance = goalAccount.getBalance();
+        goalAccountBalance -= amountToDecreaseBy;
+        goalAccount.setBalance(goalAccountBalance);
+        return goalAccountRepository.save(goalAccount);
+    }
+
+    public Double getSavingBalance(Savings savings) {
+        return savings.getBalance();
+    }
+
+    public Double getInvestmentBalance(Investment investment) {
+        return investment.getBalance();
+    }
+
+    public Double getGoalAccountBalance(GoalAccount goalAccount) {
+        return goalAccount.getBalance();
+    }
+
 
     public Iterable<Checking>showAllChecking(User user){
         return checkingRepository.findAll();
