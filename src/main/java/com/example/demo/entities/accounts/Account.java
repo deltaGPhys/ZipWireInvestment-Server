@@ -2,12 +2,10 @@ package com.example.demo.entities.accounts;
 
 import com.example.demo.entities.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public abstract class Account {
 
     @Id
@@ -15,7 +13,8 @@ public abstract class Account {
     private long id;
     private double balance;
     private Date openingDate;
-    @OneToMany
+
+    @ManyToOne
     private User owner;
     private String acctName;
 

@@ -21,7 +21,7 @@ public class User {
     private Email email;
     private PasswordField password;
     @OneToMany
-    private List<? extends Account> accounts;
+    private List<Account> accounts;
     private double rent;
     private double salary;
 
@@ -53,8 +53,8 @@ public class User {
         return email;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
+   public void setEmail(Email email) {
+       this.email = email;
     }
 
     public PasswordField getPassword() {
@@ -70,7 +70,7 @@ public class User {
     }
 
     public void setAccounts(List<? extends Account> accounts) {
-        this.accounts = accounts;
+        this.accounts = (List<Account>) accounts;
     }
 
     public double getRent() {

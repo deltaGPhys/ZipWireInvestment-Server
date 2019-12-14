@@ -27,10 +27,10 @@ public class TrackerController {
         return null;
     }
 
-    @GetMapping("/tracker/account/{accountId}")
-    public ResponseEntity<SpendingReport> getTrackerForAccountTimePeriod(@PathVariable long accountId, @RequestParam Date date) {
-        return null;
-    }
+//    @GetMapping("/tracker/account/{accountId}")
+//    public ResponseEntity<SpendingReport> getTrackerForAccountTimePeriod(@PathVariable long accountId, @RequestParam Date date) {
+//        return null;
+//    }
 
     @GetMapping("/tracker/user/{userId}")
     public ResponseEntity<SpendingReport> getTrackerForUser(@PathVariable long userId) {
