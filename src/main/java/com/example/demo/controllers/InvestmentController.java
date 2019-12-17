@@ -1,7 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entities.SavingGoal;
-import com.example.demo.entities.accounts.Account;
 import com.example.demo.entities.investment.Security;
 import com.example.demo.entities.investment.SecurityHolding;
 import com.example.demo.services.InvestmentService;

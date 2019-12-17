@@ -1,6 +1,6 @@
 package com.example.demo.entities.reports;
 
-import com.example.demo.entities.accounts.Account;
+import com.example.demo.entities.Account;
 
 import java.util.Date;
 

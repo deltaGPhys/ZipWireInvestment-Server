@@ -3,7 +3,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.SavingGoal;
 import com.example.demo.entities.User;
-import com.example.demo.entities.accounts.GoalAccount;
+import com.example.demo.entities.GoalAccount;
 import com.example.demo.repositories.GoalAccountRepository;
 import com.example.demo.repositories.SavingGoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;

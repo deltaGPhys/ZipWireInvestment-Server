@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.entities.accounts.Account;
+import com.example.demo.entities.Account;
 import com.example.demo.repositories.CheckingRepository;
 import com.example.demo.repositories.GoalAccountRepository;
 import com.example.demo.repositories.InvestmentRepository;
