@@ -23,7 +23,13 @@ public class SpendTracker {
     InvestmentRepository investmentRepository;
 
     public SpendingReport trackSpendingForAccount(long accountId, Date date) {
+        SpendingReport report = new SpendingReport();
+//        report.setUser();
+//        report.setEndDate();
+//        report.setEndingTotalBalance();
+//        report.
         return new SpendingReport();
+
     }
 
     /*looping through each account's transactions
