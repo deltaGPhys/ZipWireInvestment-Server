@@ -2,7 +2,6 @@ package com.example.demo.services;
 
 import com.example.demo.DemoApplication;
 import com.example.demo.controllers.*;
-import com.example.demo.accounts.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import com.example.demo.entities.accounts.Checking;
+import com.example.demo.entities.Checking;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
