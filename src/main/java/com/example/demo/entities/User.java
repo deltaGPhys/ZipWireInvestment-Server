@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.example.demo.authentication.EmailValidator;
 import javafx.scene.control.PasswordField;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -19,10 +22,15 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
+    @NotBlank(message = "This field cannot be left blank")
     private String firstName;
+    @NotBlank(message = "This field cannot be left blank")
     private String lastName;
     @Email
+    @NotNull
+    @NotBlank(message = "You must enter a valid email")  //MORE DEFINITION OF PASSWORD SPECS ON THE WEBSITE
     private String email;
+    @NotBlank(message = "You must enter a valid password")
     private String password;
     @OneToMany
     private List<Account> accounts;
@@ -81,7 +89,8 @@ public class User {
     }
 
    public void setEmail(String email) {
-       this.email = email;
+       if(EmailValidator.validateEmail(email))
+        this.email = email;
     }
 
     public CharSequence getPassword() {

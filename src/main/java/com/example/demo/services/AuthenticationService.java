@@ -32,6 +32,8 @@ public class AuthenticationService {
 //        return userRepository.save(user);
 //    }
 
+
+
     public Iterable<User> findAll() {
         return userRepository.findAll();
     }
@@ -44,11 +46,14 @@ public class AuthenticationService {
     }
 
     public User create(User user) {
+        user.setFirstName(user.getFirstName());
+        user.setLastName(user.getLastName());
+        user.setEmail(user.getEmail());
         return userRepository.save(user);
     }
 
-    public User update(Long id, User newUserData) {
-        User getUser = showUser(id);
+    public User update(User newUserData) {
+        User getUser = showUser(newUserData.getId());
         getUser.setFirstName(newUserData.getFirstName());
         getUser.setLastName(newUserData.getLastName());
         getUser.setEmail(newUserData.getEmail());
@@ -58,12 +63,17 @@ public class AuthenticationService {
         return userRepository.save(getUser);
     }
 
+    public User updatePassword (User user){
+    return null;
+    }
+
     public Boolean delete(Long id) {
         userRepository.deleteById(id);
         return true;
     }
 
-    public User existingUserCheck (Long id) {
+    public User existingUserCheck (String email) {
+
         return null;
     }
 

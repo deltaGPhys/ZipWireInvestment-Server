@@ -4,12 +4,10 @@ import com.example.demo.entities.*;
 import com.example.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
-=======
-import com.example.demo.entities.accounts.*;
+
 import com.example.demo.entities.User;
 import com.example.demo.repositories.*;
->>>>>>> 0d144c1c95f1d9d76e12966d3274a81e98629895
+
 
 @Service
 public class AccountService {

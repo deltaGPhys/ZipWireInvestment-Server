@@ -1,11 +1,10 @@
 package com.example.demo.controllers;
 
-<<<<<<< HEAD
+
 import com.example.demo.entities.Account;
-=======
+
 import com.example.demo.entities.User;
-import com.example.demo.entities.accounts.*;
->>>>>>> 0d144c1c95f1d9d76e12966d3274a81e98629895
+
 import com.example.demo.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

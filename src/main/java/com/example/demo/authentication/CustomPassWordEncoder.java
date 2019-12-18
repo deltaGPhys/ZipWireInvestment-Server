@@ -1,10 +1,9 @@
-package com.example.demo;
+package com.example.demo.authentication;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class CustomPassWordEncoder implements PasswordEncoder {
-
 
     @Override
     public String encode(CharSequence rawPassword) {
