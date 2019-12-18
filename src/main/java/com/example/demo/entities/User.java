@@ -1,7 +1,7 @@
 package com.example.demo.entities;
 
 import com.example.demo.authentication.EmailValidator;
-import javafx.scene.control.PasswordField;
+import com.example.demo.authentication.PasswordValidator;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -89,8 +89,9 @@ public class User {
     }
 
    public void setEmail(String email) {
-       if(EmailValidator.validateEmail(email))
-        this.email = email;
+       if(EmailValidator.validateEmail(email)){
+           this.email = email;
+       }
     }
 
     public CharSequence getPassword() {
@@ -98,7 +99,9 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        if(PasswordValidator.validatePassword(password)) {
+            this.password = password;
+        }
     }
 
     public List<? extends Account> getAccounts() {
