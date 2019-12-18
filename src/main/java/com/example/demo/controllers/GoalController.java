@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
+
 
 
 @Controller
@@ -36,11 +36,7 @@ public class GoalController {
 
     @GetMapping("/goal/{owner}")
     public ResponseEntity<Iterable<SavingGoal>> getGoalsForUser(@PathVariable User owner) {
-        try{
             return new ResponseEntity<>(goalService.findAllSavingGoals(owner), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     @PostMapping("/goal")

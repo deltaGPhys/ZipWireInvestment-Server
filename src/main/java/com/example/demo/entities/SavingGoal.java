@@ -1,7 +1,5 @@
 package com.example.demo.entities;
 
-import com.example.demo.entities.accounts.GoalAccount;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
