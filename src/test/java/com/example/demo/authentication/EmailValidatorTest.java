@@ -24,7 +24,7 @@ class EmailValidatorTest {
 
     @Test
     void validateEmail4() {
-        Assertions.assertFalse(EmailValidator.validateEmail("WALDO!2482"));
+        Assertions.assertFalse(EmailValidator.validateEmail("WALDO!2482@yahoo..com"));
     }
 
     @Test
@@ -39,6 +39,11 @@ class EmailValidatorTest {
 
     @Test
     void validateEmail7() {
-        Assertions.assertTrue(EmailValidator.validateEmail("R@chelSm!th@hotmail.com"));
+        Assertions.assertTrue(EmailValidator.validateEmail("Rachel_Sm+th@hotmail.com"));
+    }
+
+    @Test
+    void validateEmail8() {
+        Assertions.assertTrue(EmailValidator.validateEmail("R%achel_Sm-th@hotmail.com"));
     }
 }
