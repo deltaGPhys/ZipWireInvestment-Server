@@ -2,7 +2,6 @@ package com.example.demo.entities;
 
 import com.example.demo.authentication.EmailValidator;
 import com.example.demo.authentication.PasswordValidator;
-import javafx.scene.control.PasswordField;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -100,8 +99,9 @@ public class User {
     }
 
     public void setPassword(String password) {
-        if(PasswordValidator.validatePassword(password)){
+        if(PasswordValidator.validatePassword(password)) {
             this.password = password;
+        }
     }
 
     public List<? extends Account> getAccounts() {
