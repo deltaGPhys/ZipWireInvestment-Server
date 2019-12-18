@@ -17,10 +17,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
-
-@RunWith(SpringRunner.class)
-    @ContextConfiguration(classes = DemoApplication.class)
-    public class AccountServiceTest {
+//
+//@RunWith(SpringRunner.class)
+//    @ContextConfiguration(classes = DemoApplication.class)
+//    public class AccountServiceTest {
 //
 //        @MockBean
 //        private AccountService  service;
@@ -62,6 +62,6 @@ import static org.mockito.BDDMockito.then;
 //            Assert.assertEquals(expectedChecking, actualChecking);
 //        }
 //
-
-
-}
+//
+//
+//}
