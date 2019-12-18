@@ -1,7 +1,7 @@
 package com.example.demo.entities;
 
 import com.example.demo.authentication.EmailValidator;
-import javafx.scene.control.PasswordField;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
