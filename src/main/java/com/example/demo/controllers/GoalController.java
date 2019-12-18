@@ -36,11 +36,7 @@ public class GoalController {
 
     @GetMapping("/goal/{owner}")
     public ResponseEntity<Iterable<SavingGoal>> getGoalsForUser(@PathVariable User owner) {
-        try{
             return new ResponseEntity<>(goalService.findAllSavingGoals(owner), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     @PostMapping("/goal")

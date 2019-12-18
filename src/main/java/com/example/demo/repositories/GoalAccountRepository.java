@@ -1,7 +1,6 @@
 package com.example.demo.repositories;
 
-import com.example.demo.entities.accounts.GoalAccount;
-import com.example.demo.entities.accounts.Savings;
+import com.example.demo.entities.GoalAccount;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

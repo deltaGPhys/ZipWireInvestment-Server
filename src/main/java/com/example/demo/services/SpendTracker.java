@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.reports.SpendingReport;
+import com.example.demo.repositories.AccountRepository;
 import com.example.demo.repositories.CheckingRepository;
 import com.example.demo.repositories.InvestmentRepository;
 import com.example.demo.repositories.SavingsRepository;
@@ -22,11 +23,11 @@ public class SpendTracker {
     @Autowired
     InvestmentRepository investmentRepository;
 
+    @Autowired
+    AccountRepository accountRepository;
+
     public SpendingReport trackSpendingForAccount(long accountId, Date date) {
-        SpendingReport report = new SpendingReport();
-//        report.setUser();
-//        report.setEndDate();
-//        report.setEndingTotalBalance();
+//        SpendingReport report = new SpendingReport();
 //        report.
         return new SpendingReport();
 

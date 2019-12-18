@@ -1,6 +1,6 @@
 package com.example.demo.automatons;
 
-import com.example.demo.entities.accounts.Savings;
+import com.example.demo.entities.Savings;
 import com.example.demo.services.AccountService;
 
 public class InterestMaker implements Runnable {

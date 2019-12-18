@@ -1,6 +1,5 @@
 package com.example.demo.entities;
 
-import com.example.demo.entities.accounts.Account;
 import com.example.demo.enums.TransactionType;
 
 import javax.persistence.*;

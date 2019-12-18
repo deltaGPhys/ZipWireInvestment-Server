@@ -1,7 +1,7 @@
 package com.example.demo.automatons;
 
 import com.example.demo.entities.User;
-import com.example.demo.entities.accounts.Account;
+import com.example.demo.entities.Account;
 import com.example.demo.services.AccountService;
 import com.example.demo.services.AuthenticationService;
 

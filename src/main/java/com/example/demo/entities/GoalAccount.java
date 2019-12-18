@@ -1,7 +1,4 @@
-package com.example.demo.entities.accounts;
-
-import com.example.demo.entities.SavingGoal;
-import com.example.demo.entities.User;
+package com.example.demo.entities;
 
 import javax.persistence.*;
 

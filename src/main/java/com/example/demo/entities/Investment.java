@@ -1,4 +1,4 @@
-package com.example.demo.entities.accounts;
+package com.example.demo.entities;
 
 import com.example.demo.entities.investment.SecurityHolding;
 
