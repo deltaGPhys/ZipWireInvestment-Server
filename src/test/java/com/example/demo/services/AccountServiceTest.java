@@ -62,6 +62,4 @@ import static org.mockito.BDDMockito.then;
 //            Assert.assertEquals(expectedChecking, actualChecking);
 //        }
 //
-//
-//
 //}
