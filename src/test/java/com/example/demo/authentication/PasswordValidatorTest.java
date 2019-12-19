@@ -47,5 +47,8 @@ class PasswordValidatorTest {
         Assertions.assertTrue(PasswordValidator.validatePassword("Mr.Smith9"));
     }
 
-
+    @Test
+    void validPassword8() {
+        Assertions.assertTrue(PasswordValidator.validatePassword("WALdO.2482"));
+    }
 }
