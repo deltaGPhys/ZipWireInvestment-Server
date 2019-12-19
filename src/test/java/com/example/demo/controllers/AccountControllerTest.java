@@ -18,10 +18,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Optional;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@RunWith(SpringRunner.class)
-public class AccountControllerTest {
+//@SpringBootTest
+//@AutoConfigureMockMvc
+//@RunWith(SpringRunner.class)
+//public class AccountControllerTest {
 //    @Autowired
 //    private MockMvc mvc;
 //
@@ -207,4 +207,4 @@ public class AccountControllerTest {
 //
 
 
-}
+//}
