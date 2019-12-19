@@ -1,10 +1,9 @@
 package com.example.demo.entities;
 
+
+import com.example.demo.authentication.CustomPassWordEncoder;
 import com.example.demo.authentication.EmailValidator;
 import com.example.demo.authentication.PasswordValidator;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.provisioning.UserDetailsManager;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -64,10 +62,6 @@ public class User {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -94,13 +88,14 @@ public class User {
        }
     }
 
-    public CharSequence getPassword() {
+    public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         if(PasswordValidator.validatePassword(password)) {
-            this.password = password;
+            CustomPassWordEncoder pwencoder = new CustomPassWordEncoder();
+            this.password = pwencoder.encode(password);
         }
     }
 

@@ -3,8 +3,6 @@ package com.example.demo.authentication;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class PasswordValidatorTest {
 
     @Test
@@ -47,5 +45,8 @@ class PasswordValidatorTest {
         Assertions.assertTrue(PasswordValidator.validatePassword("Mr.Smith9"));
     }
 
-
+    @Test
+    void validPassword8() {
+        Assertions.assertTrue(PasswordValidator.validatePassword("WALdO.2482"));
+    }
 }
