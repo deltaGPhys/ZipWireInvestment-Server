@@ -1,7 +1,5 @@
 package com.example.demo.entities;
 
-import com.example.demo.entities.User;
-
 import javax.persistence.*;
 import java.util.Date;
 
