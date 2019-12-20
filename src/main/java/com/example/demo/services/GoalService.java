@@ -35,6 +35,7 @@ public class GoalService {
     }
 
     public SavingGoal showSavingGoal(long id) {
+
         return savingGoalRepository.findById(id).get();
     }
 
@@ -71,7 +72,7 @@ public class GoalService {
         return null;
     }
 
-    public SavingGoal existingSavingGoalCheck (Long id) {
+    public SavingGoal existingSavingGoalCheck (long id) {
         return null;
     }
 
