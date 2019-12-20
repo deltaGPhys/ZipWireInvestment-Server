@@ -32,6 +32,9 @@ target/*
 *.idea/
 *.idea/*
 
+*.mvn/
+*.mvn/*
+
 
 
 
