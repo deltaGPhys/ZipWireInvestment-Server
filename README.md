@@ -1,7 +1,7 @@
 # FinanceApp
 Online Account-Management Application (Spring/Angular)
 
-To run this code on a local machine:
+Follow the following instructions to successfully run this application on your local machine!
 __________________________________________
 
 Cloning This Repository
@@ -28,29 +28,29 @@ or you can also use
 __________________________________________
 
 
-Running Application After Building:
-___________________________________
+Running Application After Building
 
 
-Run Spring Boot app using Maven
+
+- Run Spring Boot app using Maven
 
 You can also use Maven plugin to run your Spring Boot app. Use the below example to run your Spring Boot app with Maven plugin:
 
     mvn spring-boot:run
 
-__________________________________________
 
 
-Run Spring Boot app with java -jar command
+
+- Run Spring Boot app with java -jar command
 
 To run your Spring Boot app from a command line in a Terminal window you can you the java -jar command. This is provided your Spring Boot app was packaged as an executable jar file.
 
     java -jar target/mywebserviceapp-0.0.1-SNAPSHOT.jar
 
-__________________________________________
 
 
-Run Spring Boot App with Gradle
+
+- Run Spring Boot App with Gradle
 
 And if you use Gradle you can run the Spring Boot app with the following command:
 
