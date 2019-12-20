@@ -1,8 +1,7 @@
-# FinanceApp
+# ZipWire
 ## Online Account-Management Application (Spring/Angular)
 
 Follow the following instructions to successfully run this application on your local machine!
-__________________________________________
 
 # Cloning This Repository
 
