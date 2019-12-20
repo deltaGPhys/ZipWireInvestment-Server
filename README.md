@@ -2,6 +2,7 @@
 Online Account-Management Application (Spring/Angular)
 
 To run this code on a local machine:
+__________________________________________
 
 Cloning This Repository
 
@@ -12,7 +13,7 @@ Navigate to the folder on your computer you would like to place the repository.
 Type "git clone" and then paste the repository url or SSH key. 
 Navigate into project repository to confirm clone was successful.
 
-
+__________________________________________
 
 Building Spring Boot Project with Maven
 
@@ -24,8 +25,12 @@ or you can also use
 
     mvn install
 
+__________________________________________
+
 
 Running Application After Building:
+___________________________________
+
 
 Run Spring Boot app using Maven
 
@@ -33,6 +38,7 @@ You can also use Maven plugin to run your Spring Boot app. Use the below example
 
     mvn spring-boot:run
 
+__________________________________________
 
 
 Run Spring Boot app with java -jar command
@@ -41,6 +47,7 @@ To run your Spring Boot app from a command line in a Terminal window you can you
 
     java -jar target/mywebserviceapp-0.0.1-SNAPSHOT.jar
 
+__________________________________________
 
 
 Run Spring Boot App with Gradle
