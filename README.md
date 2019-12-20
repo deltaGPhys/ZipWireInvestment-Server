@@ -1,5 +1,5 @@
 # ZipWire
-## Online Account-Management Application (Spring/Angular)
+## Account-Management Micro Web Application - Server
 
 Follow the following instructions to successfully run this application on your local machine!
 
