@@ -24,6 +24,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/goal/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/goal/*").permitAll()
                 .antMatchers(HttpMethod.GET,"/goals/").permitAll()
+                .antMatchers(HttpMethod.GET,"/tracker/*").permitAll()
                 .anyRequest().authenticated();
     }
 }
