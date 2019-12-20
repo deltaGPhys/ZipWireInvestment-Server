@@ -49,13 +49,10 @@ public class GoalController {
         return new ResponseEntity<>(goalService.findAllGoals(), HttpStatus.CREATED);
     }
 
-//    @PutMapping("/goal/{id}")
-//    public ResponseEntity<SavingGoal> updateGoal(@PathVariable long id) {
-//        return null;
-//    }
+    @PutMapping("/goal/{id}")
+    public ResponseEntity<SavingGoal> updateGoal(@PathVariable long id) {
+        return null;
+    }
 
-//    public ResponseEntity<SavingGoal> idNotFound (){
-//
-//    }
 }
 
