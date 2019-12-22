@@ -2,6 +2,7 @@ package com.example.demo.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import javax.persistence.Id;
 
 @Entity
 public abstract class Account {

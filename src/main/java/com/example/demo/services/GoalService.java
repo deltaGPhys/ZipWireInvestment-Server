@@ -35,8 +35,10 @@ public class GoalService {
 //    }
 
     public SavingGoal showSavingGoal(long id) {
-
-        return savingGoalRepository.findById(id).get();
+        if (savingGoalRepository.findById(id).isPresent()){
+            return savingGoalRepository.findById(id).get();
+        }
+        return null;
     }
 
 //    public GoalAccount createGoalAccount(GoalAccount goalAccount) {
@@ -44,7 +46,6 @@ public class GoalService {
 //    }
 
     public SavingGoal createSavingGoal(SavingGoal savingGoal) {
-
         return savingGoalRepository.save(savingGoal);
     }
 
@@ -54,10 +55,14 @@ public class GoalService {
 //        return null;
 //    }
 
-    public SavingGoal updateSavingGoal(long id, User userToUpdate) {
-        //User originalUser = userRepository.findById(id).get();
-        //return repository.save(originalUser);
-        return null;
+    public SavingGoal updateSavingGoal(long id, SavingGoal updatedSavingGoal) {
+        SavingGoal savingGoal = showSavingGoal(id);
+        savingGoal.setGoalAmount(updatedSavingGoal.getGoalAmount());
+        savingGoal.setOwner(updatedSavingGoal.getOwner());
+        savingGoal.setAccount(updatedSavingGoal.getAccount());
+        savingGoal.setEndDate(updatedSavingGoal.getEndDate());
+        savingGoal.setDescription(updatedSavingGoal.getDescription());
+        return savingGoalRepository.save(savingGoal);
     }
 
 //    public boolean deleteGoalAccount(long id) {
@@ -73,14 +78,6 @@ public class GoalService {
 //    public GoalAccount existingGoalAcctCheck (long id) {
 //        return null;
 //    }
-
-    public SavingGoal existingSavingGoalCheck (long id) {
-        if (goalAccountRepository.findById(id).isPresent()){
-            return savingGoalRepository.findById(id).get();
-        }
-        return null;
-    }
-
 
 
 }

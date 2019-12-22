@@ -16,12 +16,4 @@ public class Configuration {
         return new BCryptPasswordEncoder();
     }
 
-
-//    @Bean
-//    public DaoAuthenticationProvider authProvider() {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//        authProvider.setUserDetailsService(mongoUserDetails());
-//        authProvider.setPasswordEncoder(new CustomPasswordEncoder());
-//        return authProvider;
-//    }
 }
