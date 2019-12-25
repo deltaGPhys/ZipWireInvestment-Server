@@ -99,7 +99,7 @@ public class User {
         }
     }
 
-    public List<? extends Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 

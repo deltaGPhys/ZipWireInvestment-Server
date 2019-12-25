@@ -1,7 +1,7 @@
 package com.example.demo.entities;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public abstract class Account {
@@ -10,11 +10,30 @@ public abstract class Account {
     @GeneratedValue
     private long id;
     private double balance;
-    private Date openingDate;
+    private LocalDate openingDate = LocalDate.now();
 
     @ManyToOne
     private User owner;
     private String acctName;
+
+    public Account(long id, double balance,  LocalDate openingDate, User owner, String acctName) {
+        this.id = id;
+        this.balance = balance;
+        this.openingDate = openingDate;
+        this.owner = owner;
+        this.acctName = acctName;
+    }
+
+
+    public Account(double balance,  LocalDate openingDate, User owner, String acctName) {
+        this.balance = balance;
+        this.openingDate = openingDate;
+        this.owner = owner;
+        this.acctName = acctName;
+    }
+
+    public Account() {
+    }
 
     public long getId() {
         return id;
@@ -32,11 +51,11 @@ public abstract class Account {
         this.balance = balance;
     }
 
-    public Date getOpeningDate() {
+    public java.time.LocalDate getOpeningDate() {
         return openingDate;
     }
 
-    public void setOpeningDate(Date openingDate) {
+    public void setOpeningDate(LocalDate openingDate) {
         this.openingDate = openingDate;
     }
 
