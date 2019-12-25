@@ -88,8 +88,6 @@ public class AccountController {
 //    }
 
 
-
-
     @DeleteMapping("/checking/{id}")
     public ResponseEntity<Checking> closeChecking(@RequestBody Checking checking, @PathVariable long id) {
         accountService.closeChecking(checking, id);
