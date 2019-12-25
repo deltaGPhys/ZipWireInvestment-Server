@@ -54,7 +54,7 @@ public class AccountController {
     public ResponseEntity<GoalAccount> getGoalAccount(@PathVariable long id) {
         return new ResponseEntity<>(accountService.showGoalAccounts(id), HttpStatus.OK);
     }
-
+//
 //    @GetMapping("/checking/{owner}")
 //    public ResponseEntity<Checking> showAllChecking(@PathVariable User owner) {
 //        accountService.showAllChecking(owner);
@@ -86,56 +86,56 @@ public class AccountController {
 //    public ResponseEntity<Account> modifyAccount(@RequestBody Account account, @PathVariable long id) {
 //        return null;
 //    }
-//
-//
-//
-//
-//    @DeleteMapping("/checking/{id}")
-//    public ResponseEntity<Checking> closeChecking(@RequestBody Checking checking, @PathVariable long id) {
-//        accountService.closeChecking(checking, id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/savings/{id}")
-//    public ResponseEntity<Savings> closeSavings(@RequestBody Savings savings, @PathVariable long id) {
-//        accountService.closeSavings(savings, id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/investment/{id}")
-//    public ResponseEntity<Investment> closeInvestments(@RequestBody Investment investment, @PathVariable long id) {
-//        accountService.closeInvestments(investment, id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/goalaccount/{id}")
-//    public ResponseEntity<GoalAccount> closeGoalAccount(@RequestBody GoalAccount goalAccount, @PathVariable long id) {
-//        accountService.closeGoalAccount(goalAccount, id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//
-//    @GetMapping("/checking/{userId}")
-//    public ResponseEntity<Iterable<Checking>> getCheckingAccountsForUser(@RequestBody Checking checking, @PathVariable long userId) {
-//        accountService.getCheckingBalance(checking);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/savings/{userId}")
-//    public ResponseEntity<Iterable<Savings>> getSavingsAccountsForUser(@RequestBody Savings savings, @PathVariable long userId) {
-//        accountService.getSavingBalance(savings);
-//        return new  ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/investment/{userId}")
-//    public ResponseEntity<Iterable<Investment>> getInvestmentAccountsForUser(@RequestBody Investment investment, @PathVariable long userId) {
-//        accountService.getInvestmentBalance(investment);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/goalaccount/{userId}")
-//    public ResponseEntity<Iterable<GoalAccount>> getGoalAccountsForUser(@RequestBody GoalAccount goalAccount, @PathVariable long userId) {
-//        accountService.getGoalAccountBalance(goalAccount);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+
+
+
+
+    @DeleteMapping("/checking/{id}")
+    public ResponseEntity<Checking> closeChecking(@RequestBody Checking checking, @PathVariable long id) {
+        accountService.closeChecking(checking, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/savings/{id}")
+    public ResponseEntity<Savings> closeSavings(@RequestBody Savings savings, @PathVariable long id) {
+        accountService.closeSavings(savings, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/investment/{id}")
+    public ResponseEntity<Investment> closeInvestments(@RequestBody Investment investment, @PathVariable long id) {
+        accountService.closeInvestments(investment, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/goalaccount/{id}")
+    public ResponseEntity<GoalAccount> closeGoalAccount(@RequestBody GoalAccount goalAccount, @PathVariable long id) {
+        accountService.closeGoalAccount(goalAccount, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @GetMapping("/checking/{userId}")
+    public ResponseEntity<Iterable<Checking>> getCheckingAccountsForUser(@RequestBody Checking checking, @PathVariable long userId) {
+        accountService.getCheckingBalance(checking);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/savings/{userId}")
+    public ResponseEntity<Iterable<Savings>> getSavingsAccountsForUser(@RequestBody Savings savings, @PathVariable long userId) {
+        accountService.getSavingBalance(savings);
+        return new  ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/investment/{userId}")
+    public ResponseEntity<Iterable<Investment>> getInvestmentAccountsForUser(@RequestBody Investment investment, @PathVariable long userId) {
+        accountService.getInvestmentBalance(investment);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/goalaccount/{userId}")
+    public ResponseEntity<Iterable<GoalAccount>> getGoalAccountsForUser(@RequestBody GoalAccount goalAccount, @PathVariable long userId) {
+        accountService.getGoalAccountBalance(goalAccount);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -51,7 +51,7 @@ public abstract class Account {
         this.balance = balance;
     }
 
-    public java.time.LocalDate getOpeningDate() {
+    public LocalDate getOpeningDate() {
         return openingDate;
     }
 
