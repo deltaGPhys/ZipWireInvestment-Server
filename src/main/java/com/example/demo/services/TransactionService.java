@@ -29,7 +29,7 @@ public class TransactionService {
     }
 
     public Transaction getTransactionById (long id) {
-        return null;
+        return transactionRepository.findById(id).get();
     }
 
     public List<Transaction> getTransactionsForAccount (Account account) {

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SecurityRepository extends CrudRepository<Security, Long> {
+
+    public Security findByIdAndSymbolAndName(long id, String symbol, String name);
 }
