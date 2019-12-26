@@ -4,6 +4,8 @@ package com.example.demo.entities;
 import com.example.demo.authentication.CustomPassWordEncoder;
 import com.example.demo.authentication.EmailValidator;
 import com.example.demo.authentication.PasswordValidator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,6 +34,7 @@ public class User {
     @NotBlank(message = "You must enter a valid password")
     private String password;
     @OneToMany
+    @JsonIgnore
     private List<Account> accounts;
     private double rent;
     private double salary;
@@ -99,7 +103,7 @@ public class User {
         }
     }
 
-    public List<? extends Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 
@@ -127,4 +131,16 @@ public class User {
         this.salary = salary;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", rent=" + rent +
+                ", salary=" + salary +
+                '}';
+    }
 }

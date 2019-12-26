@@ -11,9 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-
-
 @Controller
+@RequestMapping("/goals")
 public class GoalController {
     private User user;
 
@@ -24,8 +23,7 @@ public class GoalController {
     AuthenticationService authenticationService;
 
 
-
-    @GetMapping("/goal/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<SavingGoal> getGoal(@PathVariable long id) {
         try {
             return new ResponseEntity<>(goalService.showSavingGoal(id), HttpStatus.OK);
@@ -34,22 +32,22 @@ public class GoalController {
         }
     }
 
-    @PutMapping("/goal/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<SavingGoal> updateGoal(@PathVariable long id, @RequestBody SavingGoal savingGoal) {
         return new ResponseEntity<>(goalService.updateSavingGoal(id, savingGoal), HttpStatus.OK);
     }
 
-    @GetMapping("/goal/{owner}")
+    @GetMapping("/{owner}")
     public ResponseEntity<Iterable<SavingGoal>> getGoalsForUser(@PathVariable User owner) {
             return new ResponseEntity<>(goalService.findAllSavingGoals(owner), HttpStatus.OK);
     }
 
-    @PostMapping("/goal")
+    @PostMapping
     public ResponseEntity<SavingGoal> createNewGoal(@RequestBody SavingGoal savingGoal) {
         return new ResponseEntity<>(goalService.createSavingGoal(savingGoal), HttpStatus.CREATED);
         }
 
-    @GetMapping("/goal")
+    @GetMapping
     public ResponseEntity<Iterable<SavingGoal>> findAllGoals () {
         return new ResponseEntity<>(goalService.findAllGoals(), HttpStatus.CREATED);
     }
@@ -58,8 +56,6 @@ public class GoalController {
     public ResponseEntity<Boolean> deleteGoal (long id){
         return new ResponseEntity<>(goalService.deleteSavingGoal(id), HttpStatus.OK);
     }
-
-
 
 }
 

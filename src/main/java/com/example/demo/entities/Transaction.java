@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import com.example.demo.enums.TransactionType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ public class Transaction {
     @Id
     @GeneratedValue
     private long id;
+    //@JsonProperty("transactionType")
     private TransactionType type;
     private double amount;
     @ManyToOne
@@ -75,6 +77,19 @@ public class Transaction {
 
     public void setAccountBalance() {
         this.accountBalance = this.account.getBalance();
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", type=" + type +
+                ", amount=" + amount +
+                ", account=" + account +
+                ", comment='" + comment + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", accountBalance=" + accountBalance +
+                '}';
     }
 }
 
