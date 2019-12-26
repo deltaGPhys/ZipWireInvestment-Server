@@ -64,20 +64,20 @@ public class SecuritiesUpdater implements Runnable {
         return pattern.matcher(strNum).matches();
     }
 
-//    public Datum parseData (LinkedHashMap<String,Object> jsonObject) {
-//        HashMap<String,Object> result = new HashMap<String,Object>();
-//        try {
-//            long timestamp = new Long((Integer) jsonObject.get("timestamp"));
-//            LinkedHashMap<String, Object> ticker = (LinkedHashMap<String, Object>) jsonObject.get("ticker");
-//            String currency = (String) ticker.get("base");
-//            Double price = Double.parseDouble((String) ticker.get("price"));
-//            Double volume = Double.parseDouble((String) ticker.get("volume"));
-//            Double change = Double.parseDouble((String) ticker.get("change"));
-//
-//            return new Datum(currency, price, volume, change, timestamp);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    public Datum parseData (LinkedHashMap<String,Object> jsonObject) {
+        HashMap<String,Object> result = new HashMap<String,Object>();
+        try {
+            long timestamp = new Long((Integer) jsonObject.get("timestamp"));
+            LinkedHashMap<String, Object> ticker = (LinkedHashMap<String, Object>) jsonObject.get("ticker");
+            String currency = (String) ticker.get("base");
+            Double price = Double.parseDouble((String) ticker.get("price"));
+            Double volume = Double.parseDouble((String) ticker.get("volume"));
+            Double change = Double.parseDouble((String) ticker.get("change"));
+
+            return new Datum(currency, price, volume, change, timestamp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

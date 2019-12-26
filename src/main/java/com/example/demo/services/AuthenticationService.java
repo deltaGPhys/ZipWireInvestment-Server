@@ -45,11 +45,15 @@ public class AuthenticationService {
         else return null;
     }
 
-    public User create(User user) {
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setEmail(user.getEmail());
-        return userRepository.save(user);
+    public User createUser (User newUser) {
+        newUser.setFirstName(newUser.getFirstName());
+        newUser.setLastName(newUser.getLastName());
+        newUser.setEmail(newUser.getEmail());
+        newUser.setPassword(newUser.getPassword());
+        newUser.setAccounts(newUser.getAccounts());
+        newUser.setRent(newUser.getRent());
+        newUser.setSalary(newUser.getSalary());
+        return userRepository.save(newUser);
     }
 
     public User update(User newUserData) {

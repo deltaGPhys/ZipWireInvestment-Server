@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -99,7 +100,7 @@ public class User {
         }
     }
 
-    public List<? extends Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 
