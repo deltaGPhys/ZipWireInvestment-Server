@@ -1,36 +1,60 @@
 package com.example.demo.entities.investment;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.util.HashMap;
 
 @Entity
 public class Security {
 
     @Id
-    private long id;
+    private Long id;
     private String symbol;
     private String name;
-    private double shareCost;
+    private Double currentPrice;
+    @Column(length=100000)
+    @JsonIgnore
+    private HashMap<LocalDate, Double> prices;
+    private Double dayChange;
+    private Double dayChangePct;
 
     public Security(String symbol, String name, double shareCost) {
         this.symbol = symbol;
         this.name = name;
-        this.shareCost = shareCost;
+        this.currentPrice = shareCost;
     }
 
     public Security(long id, String symbol, String name, double shareCost) {
         this.id = id;
         this.symbol = symbol;
         this.name = name;
-        this.shareCost = shareCost;
+        this.currentPrice = shareCost;
     }
 
-    public Security(long id, String symbol, String name) {
+    public Security(long id, String symbol, String name, double currentPrice, double dayChange, double dayChangePct) {
         this.id = id;
         this.symbol = symbol;
         this.name = name;
-        this.shareCost = 0.0;
+        this.currentPrice = currentPrice;
+        this.dayChange = dayChange;
+        this.dayChangePct = dayChangePct;
+    }
+
+    public Security(long id, String symbol, String name) { // constructor when there's no row in the table
+        this.id = id;
+        this.symbol = symbol;
+        this.name = name;
+        this.currentPrice = 0.0;
+        this.dayChange = 0.0;
+        this.dayChangePct = 0.0;
+        this.prices = new HashMap<LocalDate, Double>();
     }
 
     public Security() {}
@@ -59,12 +83,36 @@ public class Security {
         this.name = name;
     }
 
-    public double getShareCost() {
-        return shareCost;
+    public double getCurrentPrice() {
+        return currentPrice;
     }
 
-    public void setShareCost(double shareCost) {
-        this.shareCost = shareCost;
+    public void setCurrentPrice(double currentPrice) {
+        this.currentPrice = currentPrice;
+    }
+
+    public double getDayChange() {
+        return dayChange;
+    }
+
+    public void setDayChange(double dayChange) {
+        this.dayChange = dayChange;
+    }
+
+    public double getDayChangePct() {
+        return dayChangePct;
+    }
+
+    public void setDayChangePct(double dayChangePct) {
+        this.dayChangePct = dayChangePct;
+    }
+
+    public HashMap<LocalDate, Double> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(HashMap<LocalDate, Double> prices) {
+        this.prices = prices;
     }
 
     @Override
@@ -73,7 +121,9 @@ public class Security {
                 "id=" + id +
                 ", symbol='" + symbol + '\'' +
                 ", name='" + name + '\'' +
-                ", shareCost=" + shareCost +
+                ", currentPrice=" + currentPrice +
+                ", dayChange=" + dayChange +
+                ", dayChangePct=" + dayChangePct +
                 '}';
     }
 }
