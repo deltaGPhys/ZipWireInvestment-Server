@@ -11,10 +11,10 @@ public abstract class Account {
     private Long id;
     private double balance;
     private LocalDate openingDate;
-
     @ManyToOne
     private User owner;
     private String acctName;
+
 
     public Account(long id, double balance, LocalDate openingDate, User owner, String acctName) {
         this.id = id;
@@ -25,13 +25,6 @@ public abstract class Account {
     }
 
     public Account() {
-    }
-
-    public Account(double balance, LocalDate openingDate, User owner, String acctName) {
-        this.balance = balance;
-        this.openingDate = openingDate;
-        this.owner = owner;
-        this.acctName = acctName;
     }
 
     public Long getId() {
