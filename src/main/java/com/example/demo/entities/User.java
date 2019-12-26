@@ -19,7 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     @NotBlank(message = "This field cannot be left blank")
     private String firstName;
     @NotBlank(message = "This field cannot be left blank")

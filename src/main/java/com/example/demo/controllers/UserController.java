@@ -28,18 +28,18 @@ public class UserController {
         return new ResponseEntity<>(authenticationService.update(user), HttpStatus.OK);
     }
 
-    @PostMapping("/user/{id}")
-    public ResponseEntity<User> createUser(@RequestBody User owner, long id){
+    @PostMapping("/user")
+    public ResponseEntity<User> createUser(@RequestBody User owner, Long id){
         return new ResponseEntity<User>(userService.createUser(owner), HttpStatus.CREATED);
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User>show(@PathVariable long id){
+    public ResponseEntity<User>show(@PathVariable Long id){
         return new ResponseEntity<>(userService.show(id), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Boolean>delete(@PathVariable long id){
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<Boolean>delete(@PathVariable Long id){
         return new ResponseEntity<>(userService.delete(id), HttpStatus.OK);
     }
 
