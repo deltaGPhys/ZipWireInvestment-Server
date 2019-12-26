@@ -8,24 +8,16 @@ public abstract class Account {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private double balance;
-    private LocalDate openingDate = LocalDate.now();
-
+    private LocalDate openingDate;
     @ManyToOne
     private User owner;
     private String acctName;
 
-    public Account(long id, double balance,  LocalDate openingDate, User owner, String acctName) {
+
+    public Account(long id, double balance, LocalDate openingDate, User owner, String acctName) {
         this.id = id;
-        this.balance = balance;
-        this.openingDate = openingDate;
-        this.owner = owner;
-        this.acctName = acctName;
-    }
-
-
-    public Account(double balance,  LocalDate openingDate, User owner, String acctName) {
         this.balance = balance;
         this.openingDate = openingDate;
         this.owner = owner;
@@ -35,11 +27,11 @@ public abstract class Account {
     public Account() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
