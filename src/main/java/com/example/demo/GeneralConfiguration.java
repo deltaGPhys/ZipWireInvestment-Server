@@ -17,6 +17,12 @@ public class GeneralConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+//    @Bean
+//    public void setOrigin () {
+//        System.
+//    }
+
+
 
 //    @Bean
 //    public DaoAuthenticationProvider authProvider() {
