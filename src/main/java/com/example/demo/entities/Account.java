@@ -25,6 +25,13 @@ public abstract class Account {
         this.acctName = acctName;
     }
 
+    public Account(double balance, LocalDate openingDate, User owner, String acctName) {
+        this.balance = balance;
+        this.openingDate = openingDate;
+        this.owner = owner;
+        this.acctName = acctName;
+    }
+
     public Account() {
     }
 

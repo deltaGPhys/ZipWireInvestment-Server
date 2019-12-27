@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@CrossOrigin(origins="http://localhost:8080")
 public class InvestmentController {
 
     @Autowired
@@ -48,13 +49,26 @@ public class InvestmentController {
     @PostMapping("/investment/holdings")
     public ResponseEntity<SecurityHolding> buyNewSecurity(@RequestBody String data) throws JSONException {
         JSONObject jsonData = new JSONObject(data);
-        return new ResponseEntity<SecurityHolding>(investmentService.buyNewSecurity((int) jsonData.get("accountId"),(int) jsonData.get("securityId"),(double) jsonData.get("numShares")),HttpStatus.CREATED);
+        return new ResponseEntity<SecurityHolding>(investmentService.buyNewSecurity((int) jsonData.get("accountId"),(int) jsonData.get("securityId"),Double.parseDouble((String) jsonData.get("numShares"))),HttpStatus.CREATED);
 
     }
 
-    @PutMapping("/investment/holding/{id}")
-    public ResponseEntity<Iterable<SecurityHolding>> modifyHoldings(@PathVariable long id, @RequestParam Iterable<Security> securities) {
-        return null;
+    @PutMapping("/investment/holdings/{id}")
+    public ResponseEntity sellHolding(@PathVariable long id) {
+        // will need target account
+        System.out.println("account:" + id);
+        System.out.println(investmentService.verifyHolding(id));
+        if (investmentService.verifyHolding(id)) {
+            try {
+                investmentService.sellHolding(id);
+                return (!investmentService.verifyHolding(id)) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.NOT_MODIFIED);
+                } catch (Exception e) {
+                    return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping("/investment/{id}")
