@@ -62,7 +62,7 @@ public class User {
         this.salary = salary;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
