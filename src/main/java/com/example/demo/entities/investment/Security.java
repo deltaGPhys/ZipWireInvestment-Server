@@ -1,15 +1,13 @@
 package com.example.demo.entities.investment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 @Entity
 public class Security {
@@ -21,7 +19,7 @@ public class Security {
     private Double currentPrice;
     @Column(length=100000)
     @JsonIgnore
-    private HashMap<LocalDate, Double> prices;
+    private TreeMap<LocalDate, Double> prices;
     private Double dayChange;
     private Double dayChangePct;
 
@@ -54,7 +52,7 @@ public class Security {
         this.currentPrice = 0.0;
         this.dayChange = 0.0;
         this.dayChangePct = 0.0;
-        this.prices = new HashMap<LocalDate, Double>();
+        this.prices = new TreeMap<LocalDate, Double>();
     }
 
     public Security() {}
@@ -107,11 +105,11 @@ public class Security {
         this.dayChangePct = dayChangePct;
     }
 
-    public HashMap<LocalDate, Double> getPrices() {
+    public TreeMap<LocalDate, Double> getPrices() {
         return prices;
     }
 
-    public void setPrices(HashMap<LocalDate, Double> prices) {
+    public void setPrices(TreeMap<LocalDate, Double> prices) {
         this.prices = prices;
     }
 

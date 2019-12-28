@@ -2,8 +2,6 @@ package com.example.demo.automatons;
 
 import com.example.demo.entities.investment.Security;
 import com.example.demo.repositories.SecurityRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
@@ -12,9 +10,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.TreeMap;
 
 public class SecuritiesUpdater implements Runnable {
 
@@ -42,7 +38,7 @@ public class SecuritiesUpdater implements Runnable {
             security.setCurrentPrice(jsonObj.getDouble("price"));
             security.setDayChange(jsonObj.getDouble("day_change"));
             security.setDayChangePct(jsonObj.getDouble("change_pct"));
-            System.out.println(security);
+            //System.out.println(security);
             securityRepository.save(security);
             return security;
 
@@ -55,9 +51,9 @@ public class SecuritiesUpdater implements Runnable {
 
     public static Security getHistoricalData(Security security, SecurityRepository securityRepository) {
         String symbol = security.getSymbol();
-        HashMap<LocalDate,Double> stockHistory = security.getPrices();
+        TreeMap<LocalDate, Double> stockHistory = security.getPrices();
         if (stockHistory == null) {
-            stockHistory = new HashMap<LocalDate,Double>();
+            stockHistory = new TreeMap<LocalDate,Double>();
         } else if (stockHistory.containsKey(getLastWeekday())) {
             //System.out.println("All caught up");
             return security;

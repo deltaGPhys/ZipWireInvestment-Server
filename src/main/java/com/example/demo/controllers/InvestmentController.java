@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.SecurityHistoryDTO;
 import com.example.demo.entities.Investment;
 import com.example.demo.entities.investment.Security;
 import com.example.demo.entities.investment.SecurityHolding;
@@ -9,15 +10,17 @@ import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.InvestmentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @Controller
 @CrossOrigin(origins="http://localhost:8080")
@@ -68,7 +71,12 @@ public class InvestmentController {
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+    }
 
+    @GetMapping("/security/{id}")
+    public ResponseEntity<SecurityHistoryDTO> getSecurityHistory(@PathVariable long id, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate) {
+        System.out.println(investmentService.getSecurityHistory(id));
+        return (startDate != null) ? new ResponseEntity<>(investmentService.getSecurityHistory(id, startDate), HttpStatus.OK) : new ResponseEntity<>(investmentService.getSecurityHistory(id), HttpStatus.OK);
     }
 
     @GetMapping("/investment/{id}")
