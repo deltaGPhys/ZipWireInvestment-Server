@@ -17,7 +17,7 @@ public class UserService {
     }
 
     public User updateUser(Long id, User nerOwnerData) {
-        User originalUser = userRepository.findById(id).get();
+        User originalUser = show(id);
         originalUser.setFirstName(nerOwnerData.getFirstName());
         originalUser.setLastName(nerOwnerData.getLastName());
         originalUser.setEmail(nerOwnerData.getEmail());
@@ -28,8 +28,15 @@ public class UserService {
         return userRepository.save(originalUser);
     }
 
+    public User updateUserPassword (Long id, User user){
+        return null;
+    }
+
     public User show(Long id) {
-        return userRepository.findById(id).get();
+        if(userRepository.findById(id).isPresent()){
+            return userRepository.findById(id).get();
+        }
+        return null;
     }
 
     public Boolean delete(Long id) {

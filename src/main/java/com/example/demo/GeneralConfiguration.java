@@ -17,18 +17,4 @@ public class GeneralConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public void setOrigin () {
-//        System.
-//    }
-
-
-
-//    @Bean
-//    public DaoAuthenticationProvider authProvider() {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//        authProvider.setUserDetailsService(mongoUserDetails());
-//        authProvider.setPasswordEncoder(new CustomPasswordEncoder());
-//        return authProvider;
-//    }
 }

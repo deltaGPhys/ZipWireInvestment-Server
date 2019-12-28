@@ -11,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-
-
 @Controller
 @RequestMapping("/goals")
 public class GoalController {
@@ -23,7 +21,6 @@ public class GoalController {
 
     @Autowired
     AuthenticationService authenticationService;
-
 
 
     @GetMapping("/{id}")
@@ -55,7 +52,10 @@ public class GoalController {
         return new ResponseEntity<>(goalService.findAllGoals(), HttpStatus.CREATED);
     }
 
-
+    @DeleteMapping("/goal/{id}")
+    public ResponseEntity<Boolean> deleteGoal (long id){
+        return new ResponseEntity<>(goalService.deleteSavingGoal(id), HttpStatus.OK);
+    }
 
 }
 
