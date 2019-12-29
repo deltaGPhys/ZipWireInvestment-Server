@@ -74,9 +74,16 @@ public class InvestmentController {
     }
 
     @GetMapping("/security/{id}")
-    public ResponseEntity<SecurityHistoryDTO> getSecurityHistory(@PathVariable long id, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate) {
+    public ResponseEntity<SecurityHistoryDTO> getSecurityHistory(@PathVariable long id, @RequestParam(required = false) String startDate) {
+        System.out.println("startDate: "+startDate);
+        LocalDate startDateParsed = null;
+        try {
+            startDateParsed = LocalDate.parse(startDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(investmentService.getSecurityHistory(id));
-        return (startDate != null) ? new ResponseEntity<>(investmentService.getSecurityHistory(id, startDate), HttpStatus.OK) : new ResponseEntity<>(investmentService.getSecurityHistory(id), HttpStatus.OK);
+        return (startDateParsed != null) ? new ResponseEntity<>(investmentService.getSecurityHistory(id, startDateParsed), HttpStatus.OK) : new ResponseEntity<>(investmentService.getSecurityHistory(id), HttpStatus.OK);
     }
 
     @GetMapping("/investment/{id}")
