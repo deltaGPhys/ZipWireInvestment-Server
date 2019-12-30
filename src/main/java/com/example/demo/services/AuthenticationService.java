@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class AuthenticationService {
 
@@ -32,10 +34,17 @@ public class AuthenticationService {
 //        return userRepository.save(user);
 //    }
 
-
-
-    public Iterable<User> findAll() {
+    public Iterable<User> findAll(){
         return userRepository.findAll();
+    }
+
+    public Iterable<String> findAllEmails() {
+        ArrayList<String> userEmails = new ArrayList<>();
+        Iterable<User> allUsers = userRepository.findAll();
+         for (User user : allUsers){
+             userEmails.add(user.getEmail());
+         }
+         return userEmails;
     }
 
     public User showUser(Long id) {
@@ -45,11 +54,15 @@ public class AuthenticationService {
         else return null;
     }
 
-    public User create(User user) {
-        user.setFirstName(user.getFirstName());
-        user.setLastName(user.getLastName());
-        user.setEmail(user.getEmail());
-        return userRepository.save(user);
+    public User createUser (User newUser) {
+        newUser.setFirstName(newUser.getFirstName());
+        newUser.setLastName(newUser.getLastName());
+        newUser.setEmail(newUser.getEmail());
+        newUser.setPassword(newUser.getPassword());
+        newUser.setAccounts(newUser.getAccounts());
+        newUser.setRent(newUser.getRent());
+        newUser.setSalary(newUser.getSalary());
+        return userRepository.save(newUser);
     }
 
     public User update(User newUserData) {

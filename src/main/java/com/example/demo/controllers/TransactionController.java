@@ -34,6 +34,7 @@ public class TransactionController {
 
     @PostMapping("/transactions")
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
+        System.out.println(transaction);
         return new ResponseEntity<>(transactionService.createTransaction(transaction),HttpStatus.CREATED);
     }
 
@@ -45,6 +46,7 @@ public class TransactionController {
 
     @GetMapping("/transactions")
     public ResponseEntity<Iterable<Transaction>> getAllTransactions() {
+        System.out.println(new ResponseEntity<>(transactionService.getAllTransactions(), HttpStatus.OK));
         return new ResponseEntity<>(transactionService.getAllTransactions(), HttpStatus.OK);
     }
 

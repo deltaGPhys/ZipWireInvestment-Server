@@ -84,6 +84,13 @@ class UserTest {
     }
 
     @Test
+    void setEmail2() {
+        String expected = "PeteyG@yahoo.com";
+        testUser.setEmail(expected);
+        Assertions.assertEquals(expected, testUser.getEmail());
+    }
+
+    @Test
     void setPassword() {
         CustomPassWordEncoder encoder = new CustomPassWordEncoder();
         String expected = "myNewPassword!82";

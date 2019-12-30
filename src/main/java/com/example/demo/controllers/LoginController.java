@@ -4,6 +4,7 @@ import com.example.demo.entities.User;
 import com.example.demo.entities.Account;
 import com.example.demo.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,19 @@ public class LoginController {
     @Autowired
     AuthenticationService authenticationService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Account> createUser(@RequestBody User user) {
-        return null;
+    @PostMapping("/register")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return new ResponseEntity<>(authenticationService.createUser(user), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/users/email")
+    public ResponseEntity<Iterable<String>> getAllUserNames (){
+        return new ResponseEntity<>(authenticationService.findAllEmails(), HttpStatus.OK);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<Iterable<User>> getAllUsers (){
+        return new ResponseEntity<>(authenticationService.findAll(), HttpStatus.OK);
     }
 
 //    @PutMapping("/forgot-password")
