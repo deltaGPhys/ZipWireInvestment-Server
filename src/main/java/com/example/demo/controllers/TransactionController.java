@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Transaction;
+import com.example.demo.enums.TransactionType;
 import com.example.demo.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,7 @@ public class TransactionController {
     public ResponseEntity<Iterable<Transaction>> getTransactionsForAccount(@PathVariable long accountId) {
         return null;
     }
+
 
     @GetMapping("/transactions")
     public ResponseEntity<Iterable<Transaction>> getAllTransactions() {

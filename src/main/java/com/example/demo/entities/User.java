@@ -103,6 +103,10 @@ public class User {
         return accounts;
     }
 
+//    public void setAccounts(List<? extends Account> accounts) {
+//        this.accounts = (List<Account>) accounts;
+//    }
+
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
