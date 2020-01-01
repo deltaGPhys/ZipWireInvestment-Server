@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
@@ -16,7 +15,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import java.util.Arrays;
 
 
@@ -33,6 +31,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     }
 
     @Override
+    protected void configure(HttpSecurity security) throws Exception {
+        security.httpBasic().disable();
+    }
+
+
     protected void configure(HttpSecurity http) throws Exception{
         http
             // your security config here
@@ -51,9 +54,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
             .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
             .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization"));
     }
-
-
-
-
-
 }
