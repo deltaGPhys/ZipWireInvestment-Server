@@ -24,5 +24,16 @@ public class TransferService {
     GoalAccountRepository goalAccountRepository;
 
     public void transfer(Account from, Account to, double amount) {
+
+        if (from.getBalance() < amount) {
+            throw new IllegalArgumentException();
+        }
+
+
     }
 }
+
+
+
+
+
