@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import javax.persistence.*;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
@@ -18,6 +19,13 @@ public abstract class Account {
 
     public Account(long id, double balance, LocalDate openingDate, User owner, String acctName) {
         this.id = id;
+        this.balance = balance;
+        this.openingDate = openingDate;
+        this.owner = owner;
+        this.acctName = acctName;
+    }
+
+    public Account(double balance, LocalDate openingDate, User owner, String acctName) {
         this.balance = balance;
         this.openingDate = openingDate;
         this.owner = owner;

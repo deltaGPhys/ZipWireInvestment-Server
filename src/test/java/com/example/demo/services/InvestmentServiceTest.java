@@ -60,8 +60,8 @@ class InvestmentServiceTest {
     void setUp() throws Exception {
         user = new User("Zeke", "Freak", "email@email.com", "salty", null,100.00, 1000.00);
         user2 = new User("Zeke2", "Freak2", "email2@email.com", "salty", null,100.00, 1000.00);
-        userService.create(user);
-        userService.create(user2);
+//        userService.create(user);
+//        userService.create(user2);
         inv1 = new Investment(123.45,LocalDate.parse("2019-01-02"), null, "test acct", null);
 
         inv2 = new Investment(4123.45,LocalDate.parse("2019-01-02"), null, "test acct", null);

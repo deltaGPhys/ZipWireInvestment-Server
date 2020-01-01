@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.SecurityHistoryDTO;
 import com.example.demo.entities.Investment;
 import com.example.demo.entities.investment.Security;
 import com.example.demo.entities.investment.SecurityHolding;
@@ -9,17 +10,20 @@ import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.InvestmentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @Controller
+@CrossOrigin(origins="http://localhost:8080")
 public class InvestmentController {
 
     @Autowired
@@ -48,13 +52,38 @@ public class InvestmentController {
     @PostMapping("/investment/holdings")
     public ResponseEntity<SecurityHolding> buyNewSecurity(@RequestBody String data) throws JSONException {
         JSONObject jsonData = new JSONObject(data);
-        return new ResponseEntity<SecurityHolding>(investmentService.buyNewSecurity((int) jsonData.get("accountId"),(int) jsonData.get("securityId"),(double) jsonData.get("numShares")),HttpStatus.CREATED);
+        return new ResponseEntity<SecurityHolding>(investmentService.buyNewSecurity((int) jsonData.get("accountId"),(int) jsonData.get("securityId"),Double.parseDouble((String) jsonData.get("numShares"))),HttpStatus.CREATED);
 
     }
 
-    @PutMapping("/investment/holding/{id}")
-    public ResponseEntity<Iterable<SecurityHolding>> modifyHoldings(@PathVariable long id, @RequestParam Iterable<Security> securities) {
-        return null;
+    @PutMapping("/investment/holdings/{id}")
+    public ResponseEntity sellHolding(@PathVariable long id) {
+        // will need target account
+        System.out.println("account:" + id);
+        System.out.println(investmentService.verifyHolding(id));
+        if (investmentService.verifyHolding(id)) {
+            try {
+                investmentService.sellHolding(id);
+                return (!investmentService.verifyHolding(id)) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.NOT_MODIFIED);
+                } catch (Exception e) {
+                    return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/security/{id}")
+    public ResponseEntity<SecurityHistoryDTO> getSecurityHistory(@PathVariable long id, @RequestParam(required = false) String startDate) {
+        System.out.println("startDate: "+startDate);
+        LocalDate startDateParsed = null;
+        try {
+            startDateParsed = LocalDate.parse(startDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(investmentService.getSecurityHistory(id));
+        return (startDateParsed != null) ? new ResponseEntity<>(investmentService.getSecurityHistory(id, startDateParsed), HttpStatus.OK) : new ResponseEntity<>(investmentService.getSecurityHistory(id), HttpStatus.OK);
     }
 
     @GetMapping("/investment/{id}")

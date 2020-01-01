@@ -22,6 +22,11 @@ public class LoginController {
         return new ResponseEntity<>(authenticationService.createUser(user), HttpStatus.CREATED);
     }
 
+    @GetMapping("/users/email")
+    public ResponseEntity<Iterable<String>> getAllUserNames (){
+        return new ResponseEntity<>(authenticationService.findAllEmails(), HttpStatus.OK);
+    }
+
     @GetMapping("/users")
     public ResponseEntity<Iterable<User>> getAllUsers (){
         return new ResponseEntity<>(authenticationService.findAll(), HttpStatus.OK);

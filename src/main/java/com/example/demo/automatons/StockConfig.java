@@ -42,11 +42,11 @@ public class StockConfig {
             new Security(20, "XLNX", "Xilinx")
         };
 
-//        for (Security s: securities) {
-//            if (securityRepository.findByIdAndSymbolAndName(s.getId(), s.getSymbol(), s.getName()) == null) {
-//                securityRepository.save(s);
-//            }
-//        }
+        for (Security s: securities) {
+            if (securityRepository.findByIdAndSymbolAndName(s.getId(), s.getSymbol(), s.getName()) == null) {
+                securityRepository.save(s);
+            }
+        }
 
     }
 
@@ -64,7 +64,7 @@ public class StockConfig {
         for (Security s: securities) {
             if (s.getCurrentPrice() == 0. || !(today == DayOfWeek.SATURDAY || LocalDate.now().getDayOfWeek() == DayOfWeek.SUNDAY)) {
                 System.out.println("getting data for today");
-                //SecuritiesUpdater.updateStockData(s, securityRepository);
+                SecuritiesUpdater.updateStockData(s, securityRepository); //comment out for quicker loads in dev
             }
         }
     }

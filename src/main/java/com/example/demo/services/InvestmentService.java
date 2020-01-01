@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.dto.SecurityHistoryDTO;
 import com.example.demo.entities.Investment;
 import com.example.demo.entities.investment.Security;
 import com.example.demo.entities.investment.SecurityHolding;
@@ -56,5 +57,23 @@ public class InvestmentService {
         Security security = securityRepository.findById((long) securityId).get();
         SecurityHolding newHolding = new SecurityHolding(account, security, numShares, 0.0, security.getCurrentPrice(), LocalDate.now());
         return securityHoldingRepository.save(newHolding);
+    }
+
+    public void sellHolding(long holdingId) {
+        securityHoldingRepository.deleteById(holdingId);
+    }
+
+    public boolean verifyHolding(long holdingId) {
+        return securityHoldingRepository.existsById(holdingId);
+    }
+
+    public SecurityHistoryDTO getSecurityHistory(long id, LocalDate startDate) {
+        Security security = securityRepository.findById(id).get();
+        return (security != null) ? new SecurityHistoryDTO(security, startDate): null;
+    }
+
+    public SecurityHistoryDTO getSecurityHistory(long id) {
+        Security security = securityRepository.findById(id).get();
+        return (security != null) ? new SecurityHistoryDTO(security): null;
     }
 }
