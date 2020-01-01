@@ -10,5 +10,7 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
 
-    List<Transaction> findTransactionsByDateCreatedBetween(Date startDate, Date endDate);
+    Iterable<Transaction> findTransactionsByDateCreatedBetween(Date startDate, Date endDate);
+
+    Iterable<Transaction> findTransactionByAccount_Id(Long id);
 }

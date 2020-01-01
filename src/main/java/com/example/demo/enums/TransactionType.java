@@ -1,5 +1,8 @@
 package com.example.demo.enums;
 
+import com.example.demo.entities.Transaction;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum TransactionType {
 
     FEE (0,"Fee"),
@@ -17,12 +20,22 @@ public enum TransactionType {
         this.id = id;
     }
 
+    @JsonValue
     public String getDescription() {
         return description;
     }
 
     public int getId() {
         return id;
+    }
+
+    public static TransactionType fromName(String name) {
+        for (TransactionType t : TransactionType.values()) {
+            if (t.description.equalsIgnoreCase(name)) {
+                return t;
+            }
+        }
+        return null;
     }
 
     @Override
