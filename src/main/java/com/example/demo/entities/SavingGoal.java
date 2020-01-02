@@ -1,5 +1,10 @@
 package com.example.demo.entities;
 
+import com.example.demo.serializers.AccountDeserializer;
+import com.example.demo.serializers.AccountSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -14,7 +19,8 @@ public class SavingGoal {
     @ManyToOne
     private User owner;
     @OneToOne
-
+    @JsonSerialize(using = AccountSerializer.class)
+    @JsonDeserialize(using = AccountDeserializer.class)
     private GoalAccount account;
     private LocalDate endDate;
     private String description;

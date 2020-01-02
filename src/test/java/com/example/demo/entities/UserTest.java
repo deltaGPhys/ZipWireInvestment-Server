@@ -109,6 +109,16 @@ class UserTest {
     }
 
     @Test
+    void setPassword3() {
+        CustomPassWordEncoder encoder = new CustomPassWordEncoder();
+        String expected = "Kathy123$";
+        testUser.setPassword(expected);
+        String hashedNSalted = testUser.getPassword();
+        boolean check = encoder.matches(expected, hashedNSalted);
+        Assertions.assertTrue(check);
+    }
+
+    @Test
     void setAccounts() {
         Checking newCheck = new Checking();
         accounts.add(newCheck);
