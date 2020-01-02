@@ -5,11 +5,13 @@ import com.example.demo.repositories.SecurityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PostConstruct;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+@Profile("development")
 @Configuration
 public class StockConfig {
 

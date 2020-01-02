@@ -10,7 +10,10 @@ public enum TransactionType {
     INTEREST_EARNED (2,"Interest Earned"),
     INVESTMENT_RETURNS (3,"Investment Returns"),
     DEPOSIT(4,"Deposit"),
-    WITHDRAWAL(5,"Withdrawal");
+    WITHDRAWAL(5,"Withdrawal"),
+    SECURITY_PURCHASED(6, "Security Purchased"),
+    SECURITY_LIQUIDATED(7,"Security Liquidated"),
+    POS_PURCHASE(8, "Point-of-Sale Purchase");
 
     private int id;
     private String description;

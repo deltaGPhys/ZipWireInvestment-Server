@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 import com.example.demo.enums.TransactionType;
+import com.example.demo.repositories.AccountRepository;
 import com.example.demo.repositories.TransactionRepository;
+import com.example.demo.serializers.AccountDeserializer;
 import com.example.demo.serializers.TransactionTypeDeserializer;
 import com.example.demo.serializers.TransactionTypeSerializer;
 import com.example.demo.services.TransactionService;
@@ -52,6 +54,9 @@ public class TransactionTest {
     
     @MockBean
     private TransactionRepository transactionRepository;
+
+    @MockBean
+    private AccountRepository accountRepository;
     
     @Mock
     private JsonGenerator gen;
@@ -79,10 +84,11 @@ public class TransactionTest {
     @Test
     public void serializeTransaction() throws IOException {
         TransactionType type = TransactionType.fromName("Interest Earned");
-        Transaction transaction = new Transaction(234L, type, 123.45, null, "testaction", null, 456.78);
+        Account account1 = new Checking(1L,450.60,LocalDate.parse("2010-08-23"),null,"MyChecking");
+        Transaction transaction = new Transaction(234L, type, 123.45, account1, "testaction", null, 456.78);
         String actual = mapper.writeValueAsString(transaction);
 
-        String expected = "{\"id\":234,\"type\":\"Interest Earned\",\"amount\":123.45,\"account\":null,\"comment\":\"testaction\",\"dateCreated\":null,\"accountBalance\":456.78}";
+        String expected = "{\"id\":234,\"type\":\"Interest Earned\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"testaction\",\"dateCreated\":null,\"accountBalance\":456.78}";
         Assert.assertEquals(expected, actual);
     }
 
@@ -147,5 +153,50 @@ public class TransactionTest {
                 .andExpect(MockMvcResultMatchers.content().string("[{\"id\":23,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}]"));
         verify(transactionRepository, times(1)).findTransactionByAccount_Id(1L);
         //verify(transactionRepository, times(1)).existsById(24L);
+    }
+
+    @Test
+    public void addTransaction() throws Exception {
+        Account account1 = new Checking(1L,450.60,LocalDate.parse("2010-08-23"),null,"MyChecking");
+        Transaction transaction1 = new Transaction(null,TransactionType.fromName("Fee"),123.45, account1, "fun", LocalDate.parse("2012-02-05"), 200.00);
+        Transaction transaction2 = new Transaction(23L,TransactionType.fromName("Fee"),123.45, account1, "fun", LocalDate.parse("2012-02-05"), 200.00);
+        String requestJson = "{\"id\":null,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":\"2012-02-05\",\"accountBalance\":200.00}";
+
+        when(transactionRepository.save(any(Transaction.class))).thenReturn(transaction2);
+        when(accountRepository.existsById(1L)).thenReturn(true);
+        when(accountRepository.findById(1L)).thenReturn(java.util.Optional.of(account1));
+
+        this.mvc.perform(MockMvcRequestBuilders
+                .post("/transactions")
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(requestJson))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().string("{\"id\":23,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2012,2,5],\"accountBalance\":200.0}"));
+        verify(accountRepository, times(2)).findById(1L);
+        verify(transactionRepository, times(1)).save(any(Transaction.class));
+    }
+
+    @Test
+    public void deleteTransaction() throws Exception {
+        when(transactionRepository.existsById(23L)).thenReturn(true);
+
+        this.mvc.perform(MockMvcRequestBuilders
+                .delete("/transactions/23"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        verify(transactionRepository, times(1)).deleteById(23L);
+        verify(transactionRepository, times(1)).existsById(23L);
+    }
+
+    @Test
+    public void deleteTransactionNotFound() throws Exception {
+
+        when(transactionRepository.existsById(23L)).thenReturn(false);
+        this.mvc.perform(MockMvcRequestBuilders
+                .delete("/transactions/23"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+
+        verify(transactionRepository, times(0)).delete(stubTransactions().get(0));
+        verify(transactionRepository, times(1)).existsById(23L);
     }
 }

@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.Arrays;
 
 
-@Profile("development")
+@Profile({"test", "development"})
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc

@@ -3,7 +3,10 @@ package com.example.demo.controllers;
 import com.example.demo.entities.Transaction;
 import com.example.demo.enums.TransactionType;
 import com.example.demo.repositories.TransactionRepository;
+import com.example.demo.serializers.AccountDeserializer;
 import com.example.demo.services.TransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +21,7 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
-    @Autowired
-    TransactionRepository transactionRepository;
+    Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
     @GetMapping("/transactions/{id}")
     public ResponseEntity<Transaction> getTransaction(@PathVariable long id) {
@@ -44,16 +46,22 @@ public class TransactionController {
 
     @DeleteMapping("/transactions/{id}")
     public ResponseEntity deleteTransaction(@PathVariable long id) {
-        return verifyTransaction(id) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (verifyTransaction(id)) {
+            transactionService.deleteTransaction(id);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/transactions")
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
+        logger.info(String.valueOf(transaction));
         return new ResponseEntity<>(transactionService.createTransaction(transaction), HttpStatus.CREATED);
     }
 
     public boolean verifyTransaction(Long id) {
-        return transactionRepository.existsById(id);
+        return transactionService.verifyTransaction(id);
     }
 
     @GetMapping("/transaction/user/{userId}")
