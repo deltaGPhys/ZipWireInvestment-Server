@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 import com.example.demo.enums.TransactionType;
+import com.example.demo.serializers.AccountDeserializer;
+import com.example.demo.serializers.AccountSerializer;
 import com.example.demo.serializers.TransactionTypeDeserializer;
 import com.example.demo.serializers.TransactionTypeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -23,6 +25,8 @@ public class Transaction {
     private TransactionType type;
     private double amount;
     @ManyToOne
+    @JsonSerialize(using = AccountSerializer.class)
+    @JsonDeserialize(using = AccountDeserializer.class)
     private Account account;
     private String comment;
     private LocalDate dateCreated;

@@ -116,7 +116,9 @@ public class TransactionTest {
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/transactions"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("[{\"id\":23,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":25,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":26,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}]"));
+                .andExpect(MockMvcResultMatchers.content().string("[{\"id\":23,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":25,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"2\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":26,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"2\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}]"));
+
+
 
         verify(transactionRepository, times(1)).findAll();
     }
@@ -129,7 +131,7 @@ public class TransactionTest {
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/transactions/24"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}"));
+                .andExpect(MockMvcResultMatchers.content().string("{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}"));
         verify(transactionRepository, times(1)).findById(24L);
         verify(transactionRepository, times(1)).existsById(24L);
     }
@@ -143,7 +145,7 @@ public class TransactionTest {
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/transactions/account/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}"));
+                .andExpect(MockMvcResultMatchers.content().string("[{\"id\":23,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}]"));
         verify(transactionRepository, times(1)).findTransactionByAccount_Id(1L);
         //verify(transactionRepository, times(1)).existsById(24L);
     }

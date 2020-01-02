@@ -7,10 +7,10 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 
-//public class AccountSerializer extends JsonSerializer<Account> {
+public class AccountSerializer extends JsonSerializer<Account> {
 
-//    @Override
-//    public void serialize(Account account, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-//        jsonGenerator.writeString(type.getDescription());
-//    }
-//}
+    @Override
+    public void serialize(Account account, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        jsonGenerator.writeString(String.valueOf(account.getId()));
+    }
+}
