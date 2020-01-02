@@ -27,22 +27,26 @@ public class TransferService {
     @Autowired
     GoalAccountRepository goalAccountRepository;
 
+    @Autowired
+    TransferService transferService;
     public void transfer(Account from, Account to, double amount) throws InsufficientFundsException, NegativeBalanceException, OwnershipNotSameException {
+
+        transferService.transfer(from, to, amount);
 
         if (from.getBalance() < amount)
             throw new InsufficientFundsException("Insufficient funds");
 
+        else if (from.getBalance() < 0)
+            throw new NegativeBalanceException("Account balance below 0.00");
 
-        else {
-            if (from.getBalance() < 0)
-                throw new NegativeBalanceException("Account balance below 0.00");
+        else if (from.getOwner() != to.getOwner())
+            throw new OwnershipNotSameException("Account signer different");
 
-            else {
-                if (from.getOwner() != to.getOwner())
-                    throw new OwnershipNotSameException("Account signer diffrent");
-            }
-        }
+        else (
+
+
     }
+}
 }
 
 

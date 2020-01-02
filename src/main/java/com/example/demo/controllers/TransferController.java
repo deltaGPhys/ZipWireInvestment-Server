@@ -35,11 +35,11 @@ public class TransferController {
 
 
         } catch (NegativeBalanceException neg) {
-            return new ResponseEntity<NegativeBalanceException>(neg, HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
+            return new ResponseEntity<NegativeBalanceException>(neg, HttpStatus.FORBIDDEN);
 
 
         }catch (OwnershipNotSameException signer){
-            return new ResponseEntity<OwnershipNotSameException>(signer,HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<OwnershipNotSameException>(signer,HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
