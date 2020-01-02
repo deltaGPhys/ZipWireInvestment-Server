@@ -61,6 +61,9 @@ public class InvestmentService {
         Investment account = investmentRepository.findById((long) accountId).get();
         Security security = securityRepository.findById((long) securityId).get();
         SecurityHolding newHolding = new SecurityHolding(account, security, numShares, security.getCurrentPrice()*numShares, security.getCurrentPrice(), LocalDate.now());
+
+        account.setBalance(account.getBalance() + security.getCurrentPrice()*numShares);
+
         Transaction transaction = new Transaction(TransactionType.SECURITY_PURCHASED,
                 security.getCurrentPrice()*numShares,
                 account,
@@ -73,6 +76,18 @@ public class InvestmentService {
     }
 
     public void sellHolding(long holdingId) {
+        SecurityHolding holding = securityHoldingRepository.findById(holdingId).get();
+
+        holding.getAccount().setBalance(holding.getAccount().getBalance() - holding.getValue());
+
+        Transaction transaction = new Transaction(TransactionType.SECURITY_LIQUIDATED,
+                -holding.getValue(),
+                holding.getAccount(),
+                String.format("%.2f shares of %s(%s) sold at $%,.2f/share",holding.getNumShares(),holding.getSecurity().getName(),holding.getSecurity().getSymbol(),holding.getSecurity().getCurrentPrice()),
+                LocalDate.now(),
+                holding.getAccount().getBalance());
+        transactionService.createTransaction(transaction);
+
         securityHoldingRepository.deleteById(holdingId);
     }
 

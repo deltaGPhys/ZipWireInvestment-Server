@@ -1,5 +1,10 @@
 package com.example.demo.entities;
 
+import com.example.demo.serializers.UserDeserializer;
+import com.example.demo.serializers.UserSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import javax.persistence.Id;
 import java.time.LocalDate;
@@ -13,6 +18,8 @@ public abstract class Account {
     private double balance;
     private LocalDate openingDate;
     @ManyToOne
+    @JsonSerialize(using = UserSerializer.class)
+    @JsonDeserialize(using = UserDeserializer.class)
     private User owner;
     private String acctName;
 
