@@ -16,6 +16,10 @@ public class TransactionService {
     @Autowired
     TransactionRepository transactionRepository;
 
+    public boolean verifyTransaction(Long id) {
+        return transactionRepository.existsById(id);
+    }
+
     public Iterable<Transaction> getAllTransactions () {
         return transactionRepository.findAll();
     }
@@ -24,19 +28,15 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
-    public List<Transaction> getTransactionsById (long id) {
-        return null;
-    }
-
     public Transaction getTransactionById (long id) {
         return transactionRepository.findById(id).get();
     }
 
-    public List<Transaction> getTransactionsForAccount (Account account) {
-        return null;
+    public Iterable<Transaction> getTransactionsForAccount (Long id) {
+        return transactionRepository.findTransactionByAccount_Id(id);
     }
 
-    public List<Transaction> getTransactionsForUser (User user) {
-        return null;
+    public Transaction modifyTransaction(Transaction transaction) {
+        return transactionRepository.save(transaction);
     }
 }

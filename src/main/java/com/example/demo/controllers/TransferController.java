@@ -2,6 +2,8 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.Account;
 import com.example.demo.exceptions.InsufficientFundsException;
+import com.example.demo.exceptions.NegativeBalanceException;
+import com.example.demo.exceptions.OwnershipNotSameException;
 import com.example.demo.services.AccountService;
 import com.example.demo.services.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,20 @@ public class TransferController {
         try {
             Account from = accountService.showAccount(fromAccountId);
             Account to = accountService.showAccount(toAccountId);
-            transferService.transfer(from ,to, amount);
+            transferService.transfer(from, to, amount);
         } catch (InsufficientFundsException ex) {
-            return new ResponseEntity<InsufficientFundsException>(ex,HttpStatus.FORBIDDEN);
+            return new ResponseEntity<InsufficientFundsException>(ex, HttpStatus.FORBIDDEN);
+
+
+        } catch (NegativeBalanceException neg) {
+            return new ResponseEntity<NegativeBalanceException>(neg, HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
+
+
+        }catch (OwnershipNotSameException signer){
+            return new ResponseEntity<OwnershipNotSameException>(signer,HttpStatus.UNAUTHORIZED);
         }
-
-        return new ResponseEntity<>( HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }
+
+
