@@ -12,8 +12,8 @@ public class AuthenticationService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
 //    @Override
 //    public User registerNewUserAccount(User userToCheck) throws EmailExistsException {

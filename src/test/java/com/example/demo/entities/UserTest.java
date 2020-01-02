@@ -22,6 +22,7 @@ class UserTest {
         accounts.add(tsg1);
         testUser = new User(43L, "John", "Doe", "myemail@gmail.com", "Thep@ssword1", accounts, 1200.00, 75000.00);
     }
+
     @Test
     void getId () {
         Assertions.assertEquals(43L, testUser.getId());

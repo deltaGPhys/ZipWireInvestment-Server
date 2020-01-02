@@ -21,6 +21,7 @@ public class Transaction {
     private String comment;
     private Date dateCreated;
     private Double accountBalance;
+
     public long getId() {
         return id;
     }
