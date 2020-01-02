@@ -1,6 +1,8 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Account;
+import com.example.demo.exceptions.InsufficientFundsException;
+
 import com.example.demo.repositories.CheckingRepository;
 import com.example.demo.repositories.GoalAccountRepository;
 import com.example.demo.repositories.InvestmentRepository;
@@ -23,15 +25,17 @@ public class TransferService {
     @Autowired
     GoalAccountRepository goalAccountRepository;
 
-    public void transfer(Account from, Account to, double amount) {
+    public void transfer(Account from, Account to, double amount) throws InsufficientFundsException {
 
-        if (from.getBalance() < amount) {
-            throw new IllegalArgumentException();
-        }
+        if (from.getBalance() < amount)
+            throw new InsufficientFundsException("Insufficient funds");
 
 
     }
 }
+
+
+
 
 
 
