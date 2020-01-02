@@ -14,6 +14,7 @@ public class SavingGoal {
     @ManyToOne
     private User owner;
     @OneToOne
+
     private GoalAccount account;
     private LocalDate endDate;
     private String description;
