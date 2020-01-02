@@ -19,7 +19,7 @@ public class GoalReport {
     @ManyToOne
     private User owner;
     private double savingsRemaining;
-    private int daysRemaining;
+    private int daysRemaining;  //Should we do this by week?
     private String status;
 
     public long getId() {

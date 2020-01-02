@@ -10,12 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
-import javax.swing.text.html.Option;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +30,9 @@ public class SpendTrackerService {
 
     public ResponseEntity<SpendingReport> getReportForAccount(long accountId, ReportRequestDto requestDto) {
         SpendingReport spendingReport = new SpendingReport();
-        List<Transaction> transactions = transactionRepository.findTransactionsByDateCreatedBetween(requestDto.getStartDate(), requestDto.getEndDate());
+        List<Transaction> transactions = new ArrayList<>();
+
+        transactionRepository.findTransactionsByDateCreatedBetween(requestDto.getStartDate(), requestDto.getEndDate()).iterator().forEachRemaining(transactions::add);
 
         spendingReport.setUser(getAccount(accountId).getOwner());
         spendingReport.setStartDate(requestDto.getStartDate());

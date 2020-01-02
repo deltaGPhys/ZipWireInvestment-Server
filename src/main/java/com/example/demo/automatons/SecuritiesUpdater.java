@@ -1,16 +1,16 @@
 package com.example.demo.automatons;
 
-import com.example.demo.Configuration;
 import com.example.demo.entities.investment.Security;
 import com.example.demo.repositories.SecurityRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Iterator;
+import java.util.TreeMap;
 
 public class SecuritiesUpdater implements Runnable {
 
@@ -22,32 +22,24 @@ public class SecuritiesUpdater implements Runnable {
 
     }
 
-    public static Security getNewPrice(Security security, SecurityRepository securityRepository) {
+    public static Security updateStockData(Security security, SecurityRepository securityRepository) {
         String symbol = security.getSymbol();
 
         try {
             RestTemplateBuilder builder = new RestTemplateBuilder();
             RestTemplate restTemplate = builder.build();
-            ObjectMapper mapper = new ObjectMapper();
 
             String uriString = String.format("https://api.worldtradingdata.com/api/v1/stock?symbol=%s&api_token=%s",symbol,WORLDSTOCK_API_KEY);
-            //System.out.println(uriString);
-            LinkedHashMap<String,Object> jsonObject = (LinkedHashMap<String, Object>) restTemplate.getForObject(uriString, Object.class);
-            String output = jsonObject.toString();
+            String jsonObject = restTemplate.getForObject(uriString, String.class);
+            JSONObject jsonObj = new JSONObject(jsonObject);
 
-            System.out.println(jsonObject.toString());
-            System.out.println(jsonObject.get("data"));
-            Matcher matcher = Pattern.compile("(?<=\\bprice=)([\\d\\.\\d]*)").matcher(jsonObject.get("data").toString());
+            jsonObj = jsonObj.getJSONArray("data").getJSONObject(0);
 
-            String match = "";
-            while (matcher.find()) {
-                match = matcher.group(0);
-            }
-            System.out.println(match);
-            if (isNumeric(match)) {
-                security.setShareCost(Double.parseDouble(match));
-                securityRepository.save(security);
-            }
+            security.setCurrentPrice(jsonObj.getDouble("price"));
+            security.setDayChange(jsonObj.getDouble("day_change"));
+            security.setDayChangePct(jsonObj.getDouble("change_pct"));
+            //System.out.println(security);
+            securityRepository.save(security);
             return security;
 
         } catch (Exception e) {
@@ -56,28 +48,57 @@ public class SecuritiesUpdater implements Runnable {
         }
     }
 
-    private static boolean isNumeric(String strNum) {
-        Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-        if (strNum == null) {
-            return false;
+
+    public static Security getHistoricalData(Security security, SecurityRepository securityRepository) {
+        String symbol = security.getSymbol();
+        TreeMap<LocalDate, Double> stockHistory = security.getPrices();
+        if (stockHistory == null) {
+            stockHistory = new TreeMap<LocalDate,Double>();
+        } else if (stockHistory.containsKey(getLastWeekday())) {
+            //System.out.println("All caught up");
+            return security;
         }
-        return pattern.matcher(strNum).matches();
+
+        try {
+            RestTemplateBuilder builder = new RestTemplateBuilder();
+            RestTemplate restTemplate = builder.build();
+
+            String uriString = String.format("https://api.worldtradingdata.com/api/v1/history?symbol=%s&sort=newest&api_token=%s",symbol,WORLDSTOCK_API_KEY);
+            String jsonObject = restTemplate.getForObject(uriString, String.class);
+            JSONObject jsonObj = new JSONObject(jsonObject);
+
+            JSONObject history = jsonObj.getJSONObject("history");
+
+            Iterator keys = history.keys();
+            while(keys.hasNext()) {
+                String dateString = (String) keys.next();
+                LocalDate date = LocalDate.parse(dateString);
+
+                double price = history.getJSONObject(dateString).getDouble("close");
+                if (date.isAfter(LocalDate.parse("2017-01-01")) && !stockHistory.containsKey(date)) {
+                    System.out.println("Adding");
+                    System.out.println(date);
+                    System.out.println(price);
+                    stockHistory.put(date,price);
+                }
+
+            }
+
+            security.setPrices(stockHistory);
+            securityRepository.save(security);
+            return security;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-//    public Datum parseData (LinkedHashMap<String,Object> jsonObject) {
-//        HashMap<String,Object> result = new HashMap<String,Object>();
-//        try {
-//            long timestamp = new Long((Integer) jsonObject.get("timestamp"));
-//            LinkedHashMap<String, Object> ticker = (LinkedHashMap<String, Object>) jsonObject.get("ticker");
-//            String currency = (String) ticker.get("base");
-//            Double price = Double.parseDouble((String) ticker.get("price"));
-//            Double volume = Double.parseDouble((String) ticker.get("volume"));
-//            Double change = Double.parseDouble((String) ticker.get("change"));
-//
-//            return new Datum(currency, price, volume, change, timestamp);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    public static LocalDate getLastWeekday() {
+        LocalDate mostRecentWeekday = LocalDate.now();
+        while (mostRecentWeekday.getDayOfWeek() == DayOfWeek.SATURDAY || mostRecentWeekday.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            mostRecentWeekday = mostRecentWeekday.minusDays(1);
+        }
+        return mostRecentWeekday;
+    }
 }

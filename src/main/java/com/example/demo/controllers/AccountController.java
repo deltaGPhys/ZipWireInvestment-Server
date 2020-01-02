@@ -54,40 +54,35 @@ public class AccountController {
     public ResponseEntity<GoalAccount> getGoalAccount(@PathVariable long id) {
         return new ResponseEntity<>(accountService.showGoalAccounts(id), HttpStatus.OK);
     }
-//
-//    @GetMapping("/checking/{owner}")
-//    public ResponseEntity<Checking> showAllChecking(@PathVariable User owner) {
-//        accountService.showAllChecking(owner);
-//        return new ResponseEntity<>( HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/savings/{owner}")
-//    public ResponseEntity<Savings> showAllSavings(@RequestBody User owner) {
-//        accountService.showAllSavings(owner);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/investments/{owner}")
-//    public ResponseEntity<Investment> showAllInvestments(@RequestBody User owner) {
-//        accountService.showAllInvestments(owner);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/goalaccount/{owner}")
-//    public ResponseEntity<GoalAccount> showAllGoalAccounts(@RequestBody User owner) {
-//        accountService.showAllGoalAccounts(owner);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//
-//
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Account> modifyAccount(@RequestBody Account account, @PathVariable long id) {
-//        return null;
-//    }
 
+    @GetMapping("/checking/{owner}")
+    public ResponseEntity<Checking> showAllChecking(@PathVariable User owner) {
+        accountService.showAllChecking(owner);
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
 
+    @GetMapping("/savings/{owner}")
+    public ResponseEntity<Savings> showAllSavings(@RequestBody User owner) {
+        accountService.showAllSavings(owner);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/investments/{owner}")
+    public ResponseEntity<Investment> showAllInvestments(@RequestBody User owner) {
+        accountService.showAllInvestments(owner);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/goalaccount/{owner}")
+    public ResponseEntity<GoalAccount> showAllGoalAccounts(@RequestBody User owner) {
+        accountService.showAllGoalAccounts(owner);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Account> modifyAccount(@RequestBody Account account, @PathVariable long id) {
+        return null;
+    }
 
 
     @DeleteMapping("/checking/{id}")
