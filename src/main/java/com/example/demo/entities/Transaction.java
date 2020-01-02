@@ -19,7 +19,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     @JsonSerialize(using = TransactionTypeSerializer.class)
     @JsonDeserialize(using = TransactionTypeDeserializer.class)
     private TransactionType type;
@@ -54,11 +54,11 @@ public class Transaction {
     public Transaction() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

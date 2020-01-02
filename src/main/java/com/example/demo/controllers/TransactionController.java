@@ -18,9 +18,6 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
-    @Autowired
-    TransactionRepository transactionRepository;
-
     @GetMapping("/transactions/{id}")
     public ResponseEntity<Transaction> getTransaction(@PathVariable long id) {
         return verifyTransaction(id) ? new ResponseEntity<>(transactionService.getTransactionById(id), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -44,7 +41,12 @@ public class TransactionController {
 
     @DeleteMapping("/transactions/{id}")
     public ResponseEntity deleteTransaction(@PathVariable long id) {
-        return verifyTransaction(id) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (verifyTransaction(id)) {
+            transactionService.deleteTransaction(id);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/transactions")
@@ -53,7 +55,7 @@ public class TransactionController {
     }
 
     public boolean verifyTransaction(Long id) {
-        return transactionRepository.existsById(id);
+        return transactionService.verifyTransaction(id);
     }
 
     @GetMapping("/transaction/user/{userId}")

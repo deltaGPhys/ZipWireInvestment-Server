@@ -20,7 +20,8 @@ public class AccountDeserializer extends JsonDeserializer<Account> {
     public Account deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
-        Long id = node.longValue();
+        Long id = Long.parseLong(node.textValue());
+        System.out.println(accountRepository.findById(id).orElse(null));
 
         return accountRepository.findById(id).orElse(null);
     }

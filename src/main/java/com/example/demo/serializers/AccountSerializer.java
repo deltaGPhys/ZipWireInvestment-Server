@@ -11,6 +11,10 @@ public class AccountSerializer extends JsonSerializer<Account> {
 
     @Override
     public void serialize(Account account, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeString(String.valueOf(account.getId()));
+        if (account != null) {
+            jsonGenerator.writeString(String.valueOf(account.getId()));
+        } else {
+            jsonGenerator.writeString("");
+        }
     }
 }
