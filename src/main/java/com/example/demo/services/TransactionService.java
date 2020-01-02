@@ -16,6 +16,10 @@ public class TransactionService {
     @Autowired
     TransactionRepository transactionRepository;
 
+    public boolean verifyTransaction(Long id) {
+        return transactionRepository.existsById(id);
+    }
+
     public Iterable<Transaction> getAllTransactions () {
         return transactionRepository.findAll();
     }

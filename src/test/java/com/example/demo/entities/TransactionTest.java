@@ -13,8 +13,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -28,7 +31,9 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+@RunWith(SpringRunner.class)
 public class TransactionTest {
 
     public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
@@ -94,13 +99,14 @@ public class TransactionTest {
 
     
     private List<Transaction> stubTransactions() {
-        //Account account1 = new Checking();
-        Transaction transaction1 = new Transaction(23L,TransactionType.fromName("Fee"),123.45, null, "fun", LocalDate.parse("2015-02-05"), 200.00);
-        Transaction transaction2 = new Transaction(24L,TransactionType.fromName("Fee"),123.45, null, "fun", LocalDate.parse("2015-02-05"), 200.00);
-        Transaction transaction3 = new Transaction(25L,TransactionType.fromName("Fee"),123.45, null, "fun", LocalDate.parse("2015-02-05"), 200.00);
-        Transaction transaction4 = new Transaction(26L,TransactionType.fromName("Fee"),123.45, null, "fun", LocalDate.parse("2015-02-05"), 200.00);
+        Account account1 = new Checking(1L,450.60,LocalDate.parse("2010-08-23"),null,"MyChecking");
+        Account account2 = new Checking(2L,350.60,LocalDate.parse("2010-08-25"),null,"MyChecking2");
+        Transaction transaction1 = new Transaction(23L,TransactionType.fromName("Fee"),123.45, account1, "fun", LocalDate.parse("2015-02-05"), 200.00);
+        Transaction transaction2 = new Transaction(24L,TransactionType.fromName("Fee"),123.45, account1, "fun", LocalDate.parse("2015-02-05"), 200.00);
+        Transaction transaction3 = new Transaction(25L,TransactionType.fromName("Fee"),123.45, account2, "fun", LocalDate.parse("2015-02-05"), 200.00);
+        Transaction transaction4 = new Transaction(26L,TransactionType.fromName("Fee"),123.45, account2, "fun", LocalDate.parse("2015-02-05"), 200.00);
 
-        return Arrays.asList(transaction1,transaction2);
+        return Arrays.asList(transaction1,transaction2,transaction3,transaction4);
     }
 
     @Test
@@ -110,8 +116,35 @@ public class TransactionTest {
         this.mvc.perform(MockMvcRequestBuilders
                 .get("/transactions"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("[{\"id\":23,\"name\":\"Transaction A\",\"comps\":null},{\"id\":334,\"name\":\"Transaction B\",\"comps\":null}]"));
+                .andExpect(MockMvcResultMatchers.content().string("[{\"id\":23,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":25,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0},{\"id\":26,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}]"));
 
         verify(transactionRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void getTransaction() throws Exception {
+        when(transactionRepository.findById(24L)).thenReturn(java.util.Optional.ofNullable(stubTransactions().get(1)));
+        when(transactionRepository.existsById(24L)).thenReturn(true);
+
+        this.mvc.perform(MockMvcRequestBuilders
+                .get("/transactions/24"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}"));
+        verify(transactionRepository, times(1)).findById(24L);
+        verify(transactionRepository, times(1)).existsById(24L);
+    }
+
+    @Test
+    public void getTransactionsForAccount() throws Exception {
+        when(transactionRepository.findTransactionByAccount_Id(1L)).thenReturn(Arrays.asList(stubTransactions().get(0),stubTransactions().get(1)));
+        //when(accountRepository.existsById(24L)).thenReturn(true);
+        //TODO: test account existence/verification
+
+        this.mvc.perform(MockMvcRequestBuilders
+                .get("/transactions/account/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("{\"id\":24,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}"));
+        verify(transactionRepository, times(1)).findTransactionByAccount_Id(1L);
+        //verify(transactionRepository, times(1)).existsById(24L);
     }
 }

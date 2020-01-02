@@ -30,12 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         registry.addMapping("/**").allowedOrigins("http://localhost:4200");
     }
 
-    @Override
-    protected void configure(HttpSecurity security) throws Exception {
-        security.httpBasic().disable();
-    }
-
-
     protected void configure(HttpSecurity http) throws Exception{
         http
             // your security config here

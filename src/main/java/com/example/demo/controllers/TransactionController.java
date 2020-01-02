@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.Transaction;
 import com.example.demo.enums.TransactionType;
+import com.example.demo.repositories.TransactionRepository;
 import com.example.demo.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
+    @Autowired
+    TransactionRepository transactionRepository;
+
     @GetMapping("/transactions/{id}")
     public ResponseEntity<Transaction> getTransaction(@PathVariable long id) {
         return verifyTransaction(id) ? new ResponseEntity<>(transactionService.getTransactionById(id), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -29,6 +33,7 @@ public class TransactionController {
 
     @GetMapping("/transactions/account/{accountId}")
     public ResponseEntity<Iterable<Transaction>> getTransactionsForAccount(@PathVariable long accountId) {
+        // TODO: verify account
         return new ResponseEntity<>(transactionService.getTransactionsForAccount(accountId), HttpStatus.OK);
     }
 
@@ -48,10 +53,7 @@ public class TransactionController {
     }
 
     public boolean verifyTransaction(Long id) {
-        if (transactionService.getTransactionById(id) != null) {
-            return true;
-        }
-        return false;
+        return transactionRepository.existsById(id);
     }
 
     @GetMapping("/transaction/user/{userId}")
