@@ -42,7 +42,7 @@ public class GoalController {
             return new ResponseEntity<>(goalService.findAllSavingGoals(owner), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<SavingGoal> createNewGoal(@RequestBody SavingGoal savingGoal) {
         return new ResponseEntity<>(goalService.createSavingGoal(savingGoal), HttpStatus.CREATED);
         }

@@ -70,7 +70,7 @@ public class AuthenticationService {
         getUser.setFirstName(newUserData.getFirstName());
         getUser.setLastName(newUserData.getLastName());
         getUser.setEmail(newUserData.getEmail());
-        //getUser.setPassword(newUserData.getPassword());
+        getUser.setPassword(newUserData.getPassword()); //null on
         getUser.setRent(newUserData.getRent());
         getUser.setSalary(newUserData.getSalary());
         return userRepository.save(getUser);
@@ -80,14 +80,24 @@ public class AuthenticationService {
     return null;
     }
 
+    public User findUserByEmail (String email) {
+        return userRepository.findUserByEmail(email);
+
+    }
+
     public Boolean delete(Long id) {
         userRepository.deleteById(id);
         return true;
     }
 
-    public User existingUserCheck (String email) {
-
-        return null;
+    public Boolean existingUserCheck (String email) {
+        Iterable <String> allUserEmails = findAllEmails();
+        for(String userEmail : allUserEmails){
+            if(email.equals(userEmail)){
+                return false;
+            }
+        }
+        return true;
     }
 
 
