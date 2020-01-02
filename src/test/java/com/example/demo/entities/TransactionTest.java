@@ -3,6 +3,7 @@ package com.example.demo.entities;
 import com.example.demo.enums.TransactionType;
 import com.example.demo.repositories.AccountRepository;
 import com.example.demo.repositories.TransactionRepository;
+import com.example.demo.serializers.AccountDeserializer;
 import com.example.demo.serializers.TransactionTypeDeserializer;
 import com.example.demo.serializers.TransactionTypeSerializer;
 import com.example.demo.services.TransactionService;
@@ -162,7 +163,7 @@ public class TransactionTest {
         Transaction transaction2 = new Transaction(23L,TransactionType.fromName("Fee"),123.45, account1, "fun", LocalDate.parse("2012-02-05"), 200.00);
         String requestJson = "{\"id\":null,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":\"2012-02-05\",\"accountBalance\":200.00}";
 
-        when(transactionRepository.save(transaction1)).thenReturn(transaction2);
+        when(transactionRepository.save(any(Transaction.class))).thenReturn(transaction2);
         when(accountRepository.existsById(1L)).thenReturn(true);
         when(accountRepository.findById(1L)).thenReturn(java.util.Optional.of(account1));
 
@@ -170,10 +171,10 @@ public class TransactionTest {
                 .post("/transactions")
                 .contentType(APPLICATION_JSON_UTF8)
                 .content(requestJson))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
-                //.andExpect(MockMvcResultMatchers.content().string("{\"id\":23,\"type\":\"Fee\",\"amount\":123.45,\"account\":null,\"comment\":\"fun\",\"dateCreated\":[2015,2,5],\"accountBalance\":200.0}"));
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().string("{\"id\":23,\"type\":\"Fee\",\"amount\":123.45,\"account\":\"1\",\"comment\":\"fun\",\"dateCreated\":[2012,2,5],\"accountBalance\":200.0}"));
         verify(accountRepository, times(2)).findById(1L);
-        verify(transactionRepository, times(1)).save(transaction1);
+        verify(transactionRepository, times(1)).save(any(Transaction.class));
     }
 
     @Test
