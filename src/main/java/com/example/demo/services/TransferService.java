@@ -29,9 +29,8 @@ public class TransferService {
 
     @Autowired
     TransferService transferService;
-    public void transfer(Account from, Account to, double amount) throws InsufficientFundsException, NegativeBalanceException, OwnershipNotSameException {
 
-        transferService.transfer(from, to, amount);
+    public void transfer(Account from, Account to, double amount) throws InsufficientFundsException, NegativeBalanceException, OwnershipNotSameException {
 
         if (from.getBalance() < amount)
             throw new InsufficientFundsException("Insufficient funds");
@@ -42,11 +41,13 @@ public class TransferService {
         else if (from.getOwner() != to.getOwner())
             throw new OwnershipNotSameException("Account signer different");
 
-        else (
+        else {
+            from.setBalance(from.getBalance() - amount);
+            to.setBalance(to.getBalance() + amount);
 
 
+        }
     }
-}
 }
 
 

@@ -24,7 +24,7 @@ public class TransferController {
     TransferService transferService;
 
     @PostMapping("/transfer")
-    public ResponseEntity transferFunds(@RequestParam long fromAccountId, @RequestParam long toAccountId, @RequestParam double amount) {
+    public ResponseEntity transferFunds(@RequestParam Long fromAccountId, @RequestParam Long toAccountId, @RequestParam double amount) {
 
         try {
             Account from = accountService.showAccount(fromAccountId);

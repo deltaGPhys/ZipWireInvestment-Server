@@ -39,4 +39,8 @@ public class TransactionService {
     public Transaction modifyTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
     }
+
+    public void deleteTransaction(Long id) {
+        transactionRepository.deleteById(id);
+    }
 }
