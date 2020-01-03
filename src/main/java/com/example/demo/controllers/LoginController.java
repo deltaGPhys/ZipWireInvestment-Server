@@ -27,10 +27,30 @@ public class LoginController {
         return new ResponseEntity<>(authenticationService.findAllEmails(), HttpStatus.OK);
     }
 
+    @GetMapping("/users/{email}")
+    public ResponseEntity<User> findByUserEmail(@PathVariable String email) {
+        try {
+            return new ResponseEntity<>(authenticationService.findUserByEmail(email), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/verify/{email}/{password}")
+    public ResponseEntity<Boolean> verify (@PathVariable String email, @PathVariable String password) {
+        return new ResponseEntity<>(authenticationService.verify(email, password), HttpStatus.OK);
+    }
+
     @GetMapping("/users")
     public ResponseEntity<Iterable<User>> getAllUsers (){
         return new ResponseEntity<>(authenticationService.findAll(), HttpStatus.OK);
     }
+
+    @GetMapping("/checkEmail/{userName}")
+    public ResponseEntity<Boolean> checkIfEmailExists(@PathVariable String email) {
+        return new ResponseEntity<>(authenticationService.existingUserCheck(email), HttpStatus.OK);
+    }
+
 
 //    @PutMapping("/forgot-password")
 //    public ResponseEntity<String> forgotPassword(@Re)

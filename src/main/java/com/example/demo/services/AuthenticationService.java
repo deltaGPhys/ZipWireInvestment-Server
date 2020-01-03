@@ -1,8 +1,10 @@
 package com.example.demo.services;
 
+import com.example.demo.authentication.CustomPassWordEncoder;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,23 +18,6 @@ public class AuthenticationService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-//    @Override
-//    public User registerNewUserAccount(User userToCheck) throws EmailExistsException {
-//       if (emailExist(userToCheck.getEmail())) {
-//          throw new EmailExistsException(
-//                    "There is an account with that email adress:" + userToCheck.getEmail());
-//        }
-//        User user = new User();
-//        user.setFirstName(userToCheck.getFirstName());
-//        user.setLastName(userToCheck.getLastName());
-//
-//        user.setPassword(passwordEncoder.encode(userToCheck.getPassword()));
-//
-//        user.setEmail(userToCheck.getEmail());
-//        //user.setRole(new Role(Integer.valueOf(1), user));
-//        return userRepository.save(user);
-//    }
 
     public Iterable<User> findAll(){
         return userRepository.findAll();
@@ -70,7 +55,7 @@ public class AuthenticationService {
         getUser.setFirstName(newUserData.getFirstName());
         getUser.setLastName(newUserData.getLastName());
         getUser.setEmail(newUserData.getEmail());
-        //getUser.setPassword(newUserData.getPassword());
+        getUser.setPassword(newUserData.getPassword()); //null on
         getUser.setRent(newUserData.getRent());
         getUser.setSalary(newUserData.getSalary());
         return userRepository.save(getUser);
@@ -80,17 +65,31 @@ public class AuthenticationService {
     return null;
     }
 
+    public User findUserByEmail (String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
     public Boolean delete(Long id) {
         userRepository.deleteById(id);
         return true;
     }
 
-    public User existingUserCheck (String email) {
-
-        return null;
+    public Boolean existingUserCheck (String email) {
+        Iterable <String> allUserEmails = findAllEmails();
+        for(String userEmail : allUserEmails){
+            if(email.equals(userEmail)){
+                return false;
+            }
+        }
+        return true;
     }
 
-
-
+    public Boolean verify (String email, String password) {
+        User userToLogin = findUserByEmail(email);
+        String securePassword = userToLogin.getPassword();
+        boolean check = password.equals(securePassword);
+        //boolean check = passwordEncoder.matches(password, securePassword);
+        return check;
+    }
 
 }

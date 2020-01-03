@@ -4,6 +4,8 @@ import com.example.demo.authentication.CustomPassWordEncoder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.util.ArrayList;
 
 
@@ -106,6 +108,17 @@ class UserTest {
         testUser.setPassword(expected);
         //Password won't change because it doesn't meet the criteria
         Assertions.assertEquals("Thep@ssword1", testUser.getPassword());
+    }
+
+    @Test
+    void setPassword3() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String expected = "Kathy123$";
+        testUser.setPassword(expected);
+        String hashedNSalted = testUser.getPassword();
+        System.out.println(hashedNSalted);
+        boolean check = encoder.matches(expected, hashedNSalted);
+        Assertions.assertTrue(check);
     }
 
     @Test
