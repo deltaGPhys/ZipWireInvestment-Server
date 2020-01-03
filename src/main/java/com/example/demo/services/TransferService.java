@@ -41,14 +41,14 @@ public class TransferService {
         else if (from.getOwner() != to.getOwner())
             throw new OwnershipNotSameException("Account signer different");
 
-        else {
+        else
             from.setBalance(from.getBalance() - amount);
             to.setBalance(to.getBalance() + amount);
 
 
         }
     }
-}
+
 
 
 
