@@ -1,6 +1,6 @@
 package com.example.demo.automatons;
 
-import com.example.demo.entities.accounts.Investment;
+import com.example.demo.entities.Investment;
 import com.example.demo.services.AccountService;
 import com.example.demo.services.InvestmentService;
 

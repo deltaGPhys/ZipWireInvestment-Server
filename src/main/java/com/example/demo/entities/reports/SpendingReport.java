@@ -1,10 +1,12 @@
 package com.example.demo.entities.reports;
 
+import com.example.demo.entities.Transaction;
 import com.example.demo.entities.User;
 import com.example.demo.enums.SpendingCategories;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class SpendingReport {
 
@@ -14,7 +16,7 @@ public class SpendingReport {
     private double startingTotalBalance;
     private double endingTotalBalance;
     private Date statementDate;
-    private HashMap<SpendingCategories,Double> spendingMap;
+    private List<Transaction> transactions;
 
     public User getUser() {
         return user;
@@ -64,11 +66,11 @@ public class SpendingReport {
         this.statementDate = statementDate;
     }
 
-    public HashMap<SpendingCategories, Double> getSpendingMap() {
-        return spendingMap;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setSpendingMap(HashMap<SpendingCategories, Double> spendingMap) {
-        this.spendingMap = spendingMap;
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }
