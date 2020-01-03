@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.authentication.CustomPassWordEncoder;
 import com.example.demo.services.CustomPasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;

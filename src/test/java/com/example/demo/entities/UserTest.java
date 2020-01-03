@@ -4,6 +4,8 @@ import com.example.demo.authentication.CustomPassWordEncoder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.util.ArrayList;
 
 
@@ -110,10 +112,11 @@ class UserTest {
 
     @Test
     void setPassword3() {
-        CustomPassWordEncoder encoder = new CustomPassWordEncoder();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String expected = "Kathy123$";
         testUser.setPassword(expected);
         String hashedNSalted = testUser.getPassword();
+        System.out.println(hashedNSalted);
         boolean check = encoder.matches(expected, hashedNSalted);
         Assertions.assertTrue(check);
     }

@@ -6,6 +6,9 @@ import com.example.demo.authentication.EmailValidator;
 import com.example.demo.authentication.PasswordValidator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -98,8 +101,8 @@ public class User {
 
     public void setPassword(String password) {
         if(PasswordValidator.validatePassword(password)) {
-            CustomPassWordEncoder pwencoder = new CustomPassWordEncoder();
-            this.password = pwencoder.encode(password);
+            this.password = password;
+            //this.password = passwordEncoder.encode(password);
         }
     }
 
