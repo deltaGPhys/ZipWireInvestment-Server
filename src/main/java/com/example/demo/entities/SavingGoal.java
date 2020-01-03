@@ -2,6 +2,8 @@ package com.example.demo.entities;
 
 import com.example.demo.serializers.AccountDeserializer;
 import com.example.demo.serializers.AccountSerializer;
+import com.example.demo.serializers.UserDeserializer;
+import com.example.demo.serializers.UserSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -17,6 +19,8 @@ public class SavingGoal {
     private long id;
     private double goalAmount;
     @ManyToOne
+    @JsonSerialize(using = UserSerializer.class)
+    @JsonDeserialize(using = UserDeserializer.class)
     private User owner;
     @OneToOne
     @JsonSerialize(using = AccountSerializer.class)

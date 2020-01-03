@@ -1,5 +1,10 @@
 package com.example.demo.entities;
 
+import com.example.demo.serializers.UserDeserializer;
+import com.example.demo.serializers.UserSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +14,8 @@ public class GoalAccount extends Account {
     @GeneratedValue
     private long id;
     @ManyToOne
+    @JsonSerialize(using = UserSerializer.class)
+    @JsonDeserialize(using = UserDeserializer.class)
     private User owner;
     @OneToOne
     private SavingGoal goal;

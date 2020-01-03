@@ -73,9 +73,9 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/goalaccount/{owner}")
-    public ResponseEntity<GoalAccount> showAllGoalAccounts(@RequestBody User owner) {
-        accountService.showAllGoalAccounts(owner);
+    @GetMapping("/goalaccount/owner/{ownerId}")
+    public ResponseEntity<GoalAccount> showAllGoalAccounts(@PathVariable Long ownerId) {
+        accountService.showAllGoalAccounts(ownerId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -128,9 +128,9 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/goalaccount/{userId}")
-    public ResponseEntity<Iterable<GoalAccount>> getGoalAccountsForUser(@RequestBody GoalAccount goalAccount, @PathVariable long userId) {
-        accountService.getGoalAccountBalance(goalAccount);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @GetMapping("/goalaccount/{userId}")
+//    public ResponseEntity<Iterable<GoalAccount>> getGoalAccountsForUser(@RequestBody GoalAccount goalAccount, @PathVariable long userId) {
+//        accountService.getGoalAccountBalance(goalAccount);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }
