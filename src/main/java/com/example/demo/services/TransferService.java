@@ -43,13 +43,33 @@ public class TransferService {
 
         else
             from.setBalance(from.getBalance() - amount);
-            to.setBalance(to.getBalance() + amount);
-            accountRepository.save(from);
-            accountRepository.save(to);
+        to.setBalance(to.getBalance() + amount);
+        accountRepository.save(from);
+        accountRepository.save(to);
 
 
-        }
     }
+
+    public void withdraw(Account from, double amount) throws InsufficientFundsException, NegativeBalanceException {
+        if (from.getBalance() < amount)
+            throw new InsufficientFundsException("Insufficient funds");
+
+        else if (from.getBalance() < 0)
+            throw new NegativeBalanceException("Account balance below 0.00");
+        else
+            from.setBalance(from.getBalance() - amount);
+        accountRepository.save(from);
+
+    }
+
+    public void deposit( Account to, double amount) {
+        to.setBalance(to.getBalance() + amount);
+        accountRepository.save(to);
+
+    }
+
+
+}
 
 
 
