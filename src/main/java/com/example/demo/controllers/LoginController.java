@@ -18,7 +18,7 @@ public class LoginController {
     AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody User user) throws Exception {
         return new ResponseEntity<>(authenticationService.createUser(user), HttpStatus.CREATED);
     }
 
@@ -37,7 +37,7 @@ public class LoginController {
     }
 
     @GetMapping("/verify/{email}/{password}")
-    public ResponseEntity<Boolean> verify (@PathVariable String email, @PathVariable String password) {
+    public ResponseEntity<Boolean> verify (@PathVariable String email, @PathVariable String password) throws Exception {
         return new ResponseEntity<>(authenticationService.verify(email, password), HttpStatus.OK);
     }
 

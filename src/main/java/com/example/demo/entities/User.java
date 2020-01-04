@@ -1,15 +1,12 @@
 package com.example.demo.entities;
 
 
-import com.example.demo.authentication.CustomPassWordEncoder;
-import com.example.demo.authentication.EmailValidator;
-import com.example.demo.authentication.PasswordValidator;
+import com.example.demo.authentication.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -99,10 +96,12 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws Exception {
         if(PasswordValidator.validatePassword(password)) {
-            this.password = password;
-            //this.password = passwordEncoder.encode(password);
+            final String secretKey = "PasswordKey";
+            this.password = AES.encrypt(password, secretKey);
+            //this.password = password;
+            //this.password = passwordCrypt.encrypt(password);
         }
     }
 
