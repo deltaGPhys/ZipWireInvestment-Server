@@ -1,7 +1,6 @@
 package com.example.demo.entities;
 
 import com.example.demo.authentication.CustomPassWordEncoder;
-import com.example.demo.authentication.PasswordCrypt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

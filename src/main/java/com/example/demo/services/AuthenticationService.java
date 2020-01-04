@@ -1,13 +1,9 @@
 package com.example.demo.services;
 
 import com.example.demo.authentication.AES;
-import com.example.demo.authentication.CustomPassWordEncoder;
-import com.example.demo.authentication.PasswordCrypt;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
