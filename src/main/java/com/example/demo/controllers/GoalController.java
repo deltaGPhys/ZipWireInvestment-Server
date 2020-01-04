@@ -37,7 +37,7 @@ public class GoalController {
         return new ResponseEntity<>(goalService.updateSavingGoal(id, savingGoal), HttpStatus.OK);
     }
 
-    @GetMapping("/{owner}")
+    @GetMapping("/owner/{owner}")
     public ResponseEntity<Iterable<SavingGoal>> getGoalsForUser(@PathVariable User owner) {
             return new ResponseEntity<>(goalService.findAllSavingGoals(owner), HttpStatus.OK);
     }
