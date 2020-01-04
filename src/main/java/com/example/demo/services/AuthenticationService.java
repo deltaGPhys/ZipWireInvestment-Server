@@ -1,6 +1,8 @@
 package com.example.demo.services;
 
+import com.example.demo.authentication.AES;
 import com.example.demo.authentication.CustomPassWordEncoder;
+import com.example.demo.authentication.PasswordCrypt;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,8 @@ public class AuthenticationService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     public Iterable<User> findAll(){
         return userRepository.findAll();
@@ -39,7 +41,7 @@ public class AuthenticationService {
         else return null;
     }
 
-    public User createUser (User newUser) {
+    public User createUser (User newUser) throws Exception {
         newUser.setFirstName(newUser.getFirstName());
         newUser.setLastName(newUser.getLastName());
         newUser.setEmail(newUser.getEmail());
@@ -50,7 +52,7 @@ public class AuthenticationService {
         return userRepository.save(newUser);
     }
 
-    public User update(User newUserData) {
+    public User update(User newUserData) throws Exception {
         User getUser = showUser(newUserData.getId());
         getUser.setFirstName(newUserData.getFirstName());
         getUser.setLastName(newUserData.getLastName());
@@ -84,12 +86,15 @@ public class AuthenticationService {
         return true;
     }
 
-    public Boolean verify (String email, String password) {
+    public Boolean verify (String email, String password) throws Exception {
+        final String secretKey = "PasswordKey";
         User userToLogin = findUserByEmail(email);
         String securePassword = userToLogin.getPassword();
-        boolean check = password.equals(securePassword);
-        //boolean check = passwordEncoder.matches(password, securePassword);
-        return check;
+        String encryptedPassword = AES.encrypt(password, secretKey);
+        if(encryptedPassword.equals(securePassword)){
+            return true;
+        }
+        return false;
     }
 
 }

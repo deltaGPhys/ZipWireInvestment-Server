@@ -1,10 +1,12 @@
 package com.example.demo.entities;
 
 import com.example.demo.authentication.CustomPassWordEncoder;
+import com.example.demo.authentication.PasswordCrypt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.example.demo.authentication.AES;
 
 import java.util.ArrayList;
 
@@ -93,7 +95,7 @@ class UserTest {
     }
 
     @Test
-    void setPassword() {
+    void setPassword() throws Exception {
         CustomPassWordEncoder encoder = new CustomPassWordEncoder();
         String expected = "myNewPassword!82";
         testUser.setPassword(expected);
@@ -103,7 +105,7 @@ class UserTest {
     }
 
     @Test
-    void setPassword2() {
+    void setPassword2() throws Exception {
         String expected = "ineedapassword";
         testUser.setPassword(expected);
         //Password won't change because it doesn't meet the criteria
@@ -111,13 +113,27 @@ class UserTest {
     }
 
     @Test
-    void setPassword3() {
+    void setPassword3() throws Exception {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String expected = "Kathy123$";
         testUser.setPassword(expected);
         String hashedNSalted = testUser.getPassword();
         System.out.println(hashedNSalted);
         boolean check = encoder.matches(expected, hashedNSalted);
+        Assertions.assertTrue(check);
+    }
+
+    @Test
+    void setPassword4() throws Exception {
+        final String secretKey = "PasswordKey";
+        String expected = "Kathy123$";
+        testUser.setPassword(expected);
+        System.out.println("Encrypted User Password: " + testUser.getPassword());
+        String encrypted = testUser.getPassword();
+        String decrypted = AES.decrypt(encrypted, secretKey);
+        System.out.println("Decrypted User Password: " + decrypted);
+        boolean check = expected.equals(decrypted);
+        //boolean check = encoder.matches(expected, hashedNSalted);
         Assertions.assertTrue(check);
     }
 
