@@ -51,7 +51,7 @@ public class AccountController {
     }
 
     @GetMapping("/checking/id/{id}")
-    public ResponseEntity<Checking> getCheckingAccount(@PathVariable long id) {
+    public ResponseEntity<Checking> getCheckingAccount(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(accountService.showAChecking(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class AccountController {
     }
 
     @GetMapping("/savings/id/{id}")
-    public ResponseEntity<Savings> getSavingsAccount(@PathVariable long id) {
+    public ResponseEntity<Savings> getSavingsAccount(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(accountService.showSavings(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class AccountController {
     }
 
     @GetMapping("/investment/id/{id}")
-    public ResponseEntity<Investment> getInvestmentAccount(@PathVariable long id) {
+    public ResponseEntity<Investment> getInvestmentAccount(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(accountService.showInvestments(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class AccountController {
     }
 
     @GetMapping("/goalaccount/{id}")
-    public ResponseEntity<GoalAccount> getGoalAccount(@PathVariable long id) {
+    public ResponseEntity<GoalAccount> getGoalAccount(@PathVariable Long id) {
         try {
             return new ResponseEntity<>(accountService.showGoalAccounts(id), HttpStatus.OK);
         } catch (Exception e) {
@@ -127,7 +127,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/checking/{id}")
-    public ResponseEntity<Checking> closeChecking(@RequestBody Checking checking, @PathVariable long id) {
+    public ResponseEntity<Checking> closeChecking(@RequestBody Checking checking, @PathVariable Long id) {
         accountService.closeChecking(checking, id);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -137,7 +137,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/savings/{id}")
-    public ResponseEntity<Savings> closeSavings(@RequestBody Savings savings, @PathVariable long id) {
+    public ResponseEntity<Savings> closeSavings(@RequestBody Savings savings, @PathVariable Long id) {
         accountService.closeSavings(savings, id);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -147,7 +147,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/investment/{id}")
-    public ResponseEntity<Investment> closeInvestments(@RequestBody Investment investment, @PathVariable long id) {
+    public ResponseEntity<Investment> closeInvestments(@RequestBody Investment investment, @PathVariable Long id) {
         accountService.closeInvestments(investment, id);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -157,7 +157,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/goalaccount/{id}")
-    public ResponseEntity<GoalAccount> closeGoalAccount(@RequestBody GoalAccount goalAccount, @PathVariable long id) {
+    public ResponseEntity<GoalAccount> closeGoalAccount(@RequestBody GoalAccount goalAccount, @PathVariable Long id) {
         accountService.closeGoalAccount(goalAccount, id);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -166,8 +166,18 @@ public class AccountController {
         }
     }
 
+    @DeleteMapping("{id}")
+    public org.springframework.http.ResponseEntity<Account> closeAccount(@RequestBody Account account, @PathVariable Long id) {
+        accountService.closeAccount(account, id);
+        try {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/checking/{userId}")
-    public ResponseEntity<Iterable<Checking>> getCheckingAccountsForUser(@RequestBody Checking checking, @PathVariable long userId) {
+    public ResponseEntity<Iterable<Checking>> getCheckingAccountsForUser(@RequestBody Checking checking, @PathVariable Long userId) {
         accountService.getCheckingBalance(checking);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -177,7 +187,7 @@ public class AccountController {
     }
 
     @GetMapping("/savings/{userId}")
-    public ResponseEntity<Iterable<Savings>> getSavingsAccountsForUser(@RequestBody Savings savings, @PathVariable long userId) {
+    public ResponseEntity<Iterable<Savings>> getSavingsAccountsForUser(@RequestBody Savings savings, @PathVariable Long userId) {
         accountService.getSavingBalance(savings);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -187,7 +197,7 @@ public class AccountController {
     }
 
     @GetMapping("/investment/{userId}")
-    public ResponseEntity<Iterable<Investment>> getInvestmentAccountsForUser(@RequestBody Investment investment, @PathVariable long userId) {
+    public ResponseEntity<Iterable<Investment>> getInvestmentAccountsForUser(@RequestBody Investment investment, @PathVariable Long userId) {
         accountService.getInvestmentBalance(investment);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -197,7 +207,7 @@ public class AccountController {
     }
 
     @GetMapping("/goalaccount/{userId}")
-    public ResponseEntity<Iterable<GoalAccount>> getGoalAccountsForUser(@RequestBody GoalAccount goalAccount, @PathVariable long userId) {
+    public ResponseEntity<Iterable<GoalAccount>> getGoalAccountsForUser(@RequestBody GoalAccount goalAccount, @PathVariable Long userId) {
         accountService.getGoalAccountBalance(goalAccount);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -213,10 +223,5 @@ public class AccountController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
         }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Account> modifyAccount(@RequestBody Account account, @PathVariable long id) {
-        return null;
     }
 }
