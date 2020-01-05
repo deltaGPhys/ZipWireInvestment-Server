@@ -126,15 +126,6 @@ public class AccountController {
         }
     }
 
-    @PutMapping("/accounts/{id}")
-    public ResponseEntity<Account> updateBalance(@PathVariable Long id, @RequestBody Account account) {
-        try {
-            return new ResponseEntity<>(accountService.updateBalance(id, account), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
-        }
-    }
-
     @DeleteMapping("/checking/{id}")
     public ResponseEntity<Checking> closeChecking(@RequestBody Checking checking, @PathVariable long id) {
         accountService.closeChecking(checking, id);
@@ -212,6 +203,15 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/accounts/{id}")
+    public ResponseEntity<Account> updateBalance(@PathVariable Long id, @RequestBody Account account) {
+        try {
+            return new ResponseEntity<>(accountService.updateBalance(id, account), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
         }
     }
 
