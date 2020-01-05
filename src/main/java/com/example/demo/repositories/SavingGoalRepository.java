@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SavingGoalRepository extends CrudRepository<SavingGoal, Long> {
 
-
-    public Iterable<SavingGoal> findAllByOwner(User user);
+    Iterable<SavingGoal> findAllByOwnerIdEquals(Long id);
+    Iterable<SavingGoal> findAllByOwner(User user);
 
 }

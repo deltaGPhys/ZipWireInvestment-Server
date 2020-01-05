@@ -34,35 +34,35 @@ public class AccountController {
 
     @PostMapping("/investment")
     public ResponseEntity<Investment> createInvestments(@RequestBody Investment investment, User owner) {
-         try {
+        try {
             return new ResponseEntity<>(accountService.createInvestments(investment, owner), HttpStatus.CREATED);
-         } catch (Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-         }
+        }
     }
 
     @PostMapping("/goalaccount")
     public ResponseEntity<GoalAccount> createGoalAccount(@RequestBody GoalAccount goalAccount, User owner) {
-          try {
-             return new ResponseEntity<>(accountService.createGoalAccount(goalAccount, owner), HttpStatus.CREATED);
-          } catch (Exception e) {
-              return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-          }
-     }
+        try {
+            return new ResponseEntity<>(accountService.createGoalAccount(goalAccount, owner), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @GetMapping("/checking/id/{id}")
     public ResponseEntity<Checking> getCheckingAccount(@PathVariable long id) {
-           try {
-               return new ResponseEntity<>(accountService.showAChecking(id), HttpStatus.OK);
-           } catch (Exception e) {
-               return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-           }
+        try {
+            return new ResponseEntity<>(accountService.showAChecking(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/savings/id/{id}")
     public ResponseEntity<Savings> getSavingsAccount(@PathVariable long id) {
         try {
-        return new ResponseEntity<>(accountService.showSavings(id), HttpStatus.OK);
+            return new ResponseEntity<>(accountService.showSavings(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -71,7 +71,7 @@ public class AccountController {
     @GetMapping("/investment/id/{id}")
     public ResponseEntity<Investment> getInvestmentAccount(@PathVariable long id) {
         try {
-        return new ResponseEntity<>(accountService.showInvestments(id), HttpStatus.OK);
+            return new ResponseEntity<>(accountService.showInvestments(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -80,7 +80,7 @@ public class AccountController {
     @GetMapping("/goalaccount/{id}")
     public ResponseEntity<GoalAccount> getGoalAccount(@PathVariable long id) {
         try {
-        return new ResponseEntity<>(accountService.showGoalAccounts(id), HttpStatus.OK);
+            return new ResponseEntity<>(accountService.showGoalAccounts(id), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
@@ -90,8 +90,8 @@ public class AccountController {
     public ResponseEntity<Checking> showAllChecking(@PathVariable User owner) {
         accountService.showAllChecking(owner);
         try {
-        return new ResponseEntity<>( HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
@@ -100,8 +100,8 @@ public class AccountController {
     public ResponseEntity<Savings> showAllSavings(@RequestBody User owner) {
         accountService.showAllSavings(owner);
         try {
-            return new ResponseEntity<>( HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
@@ -110,27 +110,27 @@ public class AccountController {
     public ResponseEntity<Investment> showAllInvestments(@RequestBody User owner) {
         accountService.showAllInvestments(owner);
         try {
-            return new ResponseEntity<>( HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("/goalaccount/{owner}")
-    public ResponseEntity<GoalAccount> showAllGoalAccounts(@RequestBody User owner) {
-        accountService.showAllGoalAccounts(owner);
+    public ResponseEntity<GoalAccount> showAllGoalAccounts(@PathVariable Long ownerId) {
+        accountService.showAllGoalAccounts(ownerId);
         try {
-            return new ResponseEntity<>( HttpStatus.OK);
-        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/accounts/{id}")
-    public ResponseEntity<Account> updateBalance(@PathVariable Long id, @RequestBody Account account){
+    public ResponseEntity<Account> updateBalance(@PathVariable Long id, @RequestBody Account account) {
         try {
             return new ResponseEntity<>(accountService.updateBalance(id, account), HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
         }
     }
@@ -139,8 +139,8 @@ public class AccountController {
     public ResponseEntity<Checking> closeChecking(@RequestBody Checking checking, @PathVariable long id) {
         accountService.closeChecking(checking, id);
         try {
-        return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
@@ -158,19 +158,19 @@ public class AccountController {
     @DeleteMapping("/investment/{id}")
     public ResponseEntity<Investment> closeInvestments(@RequestBody Investment investment, @PathVariable long id) {
         accountService.closeInvestments(investment, id);
-            try {
-                return new ResponseEntity<>(HttpStatus.OK);
-            } catch (Exception e){
-                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-            }
+        try {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
+    }
 
     @DeleteMapping("/goalaccount/{id}")
     public ResponseEntity<GoalAccount> closeGoalAccount(@RequestBody GoalAccount goalAccount, @PathVariable long id) {
         accountService.closeGoalAccount(goalAccount, id);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
@@ -179,8 +179,8 @@ public class AccountController {
     public ResponseEntity<Iterable<Checking>> getCheckingAccountsForUser(@RequestBody Checking checking, @PathVariable long userId) {
         accountService.getCheckingBalance(checking);
         try {
-        return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
@@ -190,7 +190,7 @@ public class AccountController {
         accountService.getSavingBalance(savings);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
@@ -200,7 +200,7 @@ public class AccountController {
         accountService.getInvestmentBalance(investment);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
@@ -210,7 +210,7 @@ public class AccountController {
         accountService.getGoalAccountBalance(goalAccount);
         try {
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }

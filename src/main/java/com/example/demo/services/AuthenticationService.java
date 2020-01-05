@@ -1,9 +1,9 @@
 package com.example.demo.services;
 
+import com.example.demo.authentication.AES;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,25 +14,8 @@ public class AuthenticationService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-//    @Override
-//    public User registerNewUserAccount(User userToCheck) throws EmailExistsException {
-//       if (emailExist(userToCheck.getEmail())) {
-//          throw new EmailExistsException(
-//                    "There is an account with that email adress:" + userToCheck.getEmail());
-//        }
-//        User user = new User();
-//        user.setFirstName(userToCheck.getFirstName());
-//        user.setLastName(userToCheck.getLastName());
-//
-//        user.setPassword(passwordEncoder.encode(userToCheck.getPassword()));
-//
-//        user.setEmail(userToCheck.getEmail());
-//        //user.setRole(new Role(Integer.valueOf(1), user));
-//        return userRepository.save(user);
-//    }
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     public Iterable<User> findAll(){
         return userRepository.findAll();
@@ -54,7 +37,7 @@ public class AuthenticationService {
         else return null;
     }
 
-    public User createUser (User newUser) {
+    public User createUser (User newUser) throws Exception {
         newUser.setFirstName(newUser.getFirstName());
         newUser.setLastName(newUser.getLastName());
         newUser.setEmail(newUser.getEmail());
@@ -65,12 +48,12 @@ public class AuthenticationService {
         return userRepository.save(newUser);
     }
 
-    public User update(User newUserData) {
+    public User update(User newUserData) throws Exception {
         User getUser = showUser(newUserData.getId());
         getUser.setFirstName(newUserData.getFirstName());
         getUser.setLastName(newUserData.getLastName());
         getUser.setEmail(newUserData.getEmail());
-        //getUser.setPassword(newUserData.getPassword());
+        getUser.setPassword(newUserData.getPassword()); //null on
         getUser.setRent(newUserData.getRent());
         getUser.setSalary(newUserData.getSalary());
         return userRepository.save(getUser);
@@ -80,17 +63,34 @@ public class AuthenticationService {
     return null;
     }
 
+    public User findUserByEmail (String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
     public Boolean delete(Long id) {
         userRepository.deleteById(id);
         return true;
     }
 
-    public User existingUserCheck (String email) {
-
-        return null;
+    public Boolean existingUserCheck (String email) {
+        Iterable <String> allUserEmails = findAllEmails();
+        for(String userEmail : allUserEmails){
+            if(email.equals(userEmail)){
+                return false;
+            }
+        }
+        return true;
     }
 
-
-
+    public Boolean verify (String email, String password) throws Exception {
+        final String secretKey = "PasswordKey";
+        User userToLogin = findUserByEmail(email);
+        String securePassword = userToLogin.getPassword();
+        String encryptedPassword = AES.encrypt(password, secretKey);
+        if(encryptedPassword.equals(securePassword)){
+            return true;
+        }
+        return false;
+    }
 
 }

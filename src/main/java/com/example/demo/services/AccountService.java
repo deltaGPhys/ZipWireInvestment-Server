@@ -178,8 +178,8 @@ public class AccountService {
         return investmentRepository.findAll();
     }
 
-    public Iterable<GoalAccount>showAllGoalAccounts(User owner){
-        return goalAccountRepository.findAll();
+    public Iterable<GoalAccount>showAllGoalAccounts(Long ownerId){
+        return goalAccountRepository.findAllByOwner_Id(ownerId);
     }
 
     public Boolean closeChecking(Checking checking, long id){

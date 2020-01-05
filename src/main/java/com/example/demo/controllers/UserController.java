@@ -26,13 +26,8 @@ public class UserController {
 
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser (@Valid @RequestBody User user) {
+    public ResponseEntity<User> updateUser (@Valid @RequestBody User user) throws Exception {
         return new ResponseEntity<>(authenticationService.update(user), HttpStatus.OK);
-    }
-
-    @PostMapping("/user")
-    public ResponseEntity<User> createUser(@RequestBody User owner, Long id){
-        return new ResponseEntity<User>(userService.createUser(owner), HttpStatus.CREATED);
     }
 
     @GetMapping("/user/{id}")
