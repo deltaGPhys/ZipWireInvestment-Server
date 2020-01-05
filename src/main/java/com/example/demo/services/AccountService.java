@@ -40,32 +40,19 @@ public class AccountService {
     }
 
     public Checking createChecking(Checking checking, User owner){
-//        List<Account> userAccounts = owner.getAccounts();
-//        userAccounts.add(checking);
-//        userRepository.save(owner);
-//        checking.setOwner(user);
         return checkingRepository.save(checking);
     }
 
     public Savings createSavings(Savings savings, User owner) {
-//        List<Account> userAccounts = owner.getAccounts();
-//        userAccounts.add(savings);
-//        userRepository.save(owner);
         return savingsRepository.save(savings);
 
     }
 
     public Investment createInvestments(Investment investment, User owner){
-//        List<Account> userAccounts = owner.getAccounts();
-//        userAccounts.add(investment);
-//        userRepository.save(owner);
         return investmentRepository.save(investment);
     }
 
     public GoalAccount createGoalAccount(GoalAccount goalAccount, User owner) {
-//        List<Account> userAccounts = owner.getAccounts();
-//        userAccounts.add(goalAccount);
-//        userRepository.save(owner);
         return goalAccountRepository.save(goalAccount);
     }
 
@@ -228,6 +215,12 @@ public class AccountService {
         }
         else
             return false;
+    }
+
+    public Account updateBalance(Long id, Account newAccountData){
+        Account originalAccount = accountRepository.findById(id).get();
+        originalAccount.setBalance(newAccountData.getBalance());
+        return accountRepository.save(originalAccount);
     }
 
 }
