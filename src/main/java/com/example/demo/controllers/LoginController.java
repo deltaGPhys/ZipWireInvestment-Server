@@ -46,7 +46,12 @@ public class LoginController {
         return new ResponseEntity<>(authenticationService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/checkEmail/{userName}")
+//    @GetMapping("/checkEmail")
+//    public ResponseEntity<Boolean> checkIfEmailExists(@RequestParam(value="email") String email) {
+//        return new ResponseEntity<>(authenticationService.existingUserCheck(email), HttpStatus.OK);
+//    }
+
+    @GetMapping("/checkEmail/{email}")
     public ResponseEntity<Boolean> checkIfEmailExists(@PathVariable String email) {
         return new ResponseEntity<>(authenticationService.existingUserCheck(email), HttpStatus.OK);
     }
