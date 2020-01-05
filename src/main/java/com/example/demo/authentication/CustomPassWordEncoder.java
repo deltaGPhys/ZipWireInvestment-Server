@@ -11,7 +11,7 @@ public class CustomPassWordEncoder implements PasswordEncoder {
 
     @Override
     public String encode(CharSequence rawPassword) {
-        String hashed = BCrypt.hashpw(rawPassword.toString(), BCrypt.gensalt(0));
+        String hashed = BCrypt.hashpw(rawPassword.toString(), BCrypt.gensalt(12));
         return hashed;
     }
 

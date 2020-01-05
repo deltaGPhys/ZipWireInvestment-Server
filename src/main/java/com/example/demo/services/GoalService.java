@@ -17,27 +17,17 @@ public class GoalService {
     @Autowired
     SavingGoalRepository savingGoalRepository;
 
-//    public Iterable<GoalAccount> findAllGoalAccounts() {
-//        return goalAccountRepository.findAll();
-//    }
-
     public Iterable<SavingGoal> findAllSavingGoals(User owner) {
         return savingGoalRepository.findAllByOwner(owner);
     }
 
     public Iterable<SavingGoal> findAllGoals() {
-        return savingGoalRepository.findAll();
+        Iterable<SavingGoal> allGoals =  savingGoalRepository.findAll();
+        return allGoals;
     }
 
-//    public GoalAccount showUGoalAccount(long id) {
-//        return goalAccountRepository.findById(id).get();
-//    }
-
-    public SavingGoal showSavingGoal(long id) {
-        if (savingGoalRepository.findById(id).isPresent()){
-            return savingGoalRepository.findById(id).get();
-        }
-        return null;
+    public Iterable<SavingGoal> showSavingGoalsForUser (long userId) {
+       return savingGoalRepository.findAllByOwnerIdEquals(userId);
     }
 
 //    public GoalAccount createGoalAccount(GoalAccount goalAccount) {
@@ -45,6 +35,7 @@ public class GoalService {
 //    }
 
     public SavingGoal createSavingGoal(SavingGoal savingGoal) {
+        //GoalAccount goalAccount = new GoalAccount();
         return savingGoalRepository.save(savingGoal);
     }
 
@@ -54,8 +45,8 @@ public class GoalService {
 //        return null;
 //    }
 
-    public SavingGoal updateSavingGoal(long id, SavingGoal updatedSavingGoal) {
-        SavingGoal savingGoal = showSavingGoal(id);
+    public SavingGoal updateSavingGoal(long goalId, SavingGoal updatedSavingGoal) {
+        SavingGoal savingGoal = getSavingGoalByGoalId(goalId);
         savingGoal.setGoalAmount(updatedSavingGoal.getGoalAmount());
         savingGoal.setOwner(updatedSavingGoal.getOwner());
         savingGoal.setAccount(updatedSavingGoal.getAccount());
@@ -64,19 +55,14 @@ public class GoalService {
         return savingGoalRepository.save(savingGoal);
     }
 
-//    public boolean deleteGoalAccount(long id) {
-//        goalAccountRepository.deleteById(id);
-//        return true;
-//    }
-
-    public boolean deleteSavingGoal(long id) {
-        savingGoalRepository.deleteById(id);
+    public boolean deleteSavingGoal(long goalId) {
+        savingGoalRepository.deleteById(goalId);
         return true;
     }
 
-//    public GoalAccount existingGoalAcctCheck (long id) {
-//        return null;
-//    }
+    public SavingGoal getSavingGoalByGoalId (long goalId){
+        return savingGoalRepository.findById(goalId).get();
+    }
 
 }
 
