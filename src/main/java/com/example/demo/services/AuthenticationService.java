@@ -82,15 +82,29 @@ public class AuthenticationService {
         return true;
     }
 
-    public Boolean verify (String email, String password) throws Exception {
-        final String secretKey = "PasswordKey";
-        User userToLogin = findUserByEmail(email);
-        String securePassword = userToLogin.getPassword();
-        String encryptedPassword = AES.encrypt(password, secretKey);
-        if(encryptedPassword.equals(securePassword)){
-            return true;
+//    public Boolean verify (String email, String password) throws Exception {
+//        final String secretKey = "PasswordKey";
+//        User userToLogin = findUserByEmail(email);
+//        String securePassword = userToLogin.getPassword();
+//        String encryptedPassword = AES.encrypt(password, secretKey);
+//        if(encryptedPassword.equals(securePassword)){
+//            return true;
+//        }
+//        return false;
+//    }
+
+        public User verify (String email, String password) throws Exception {
+            final String secretKey = "PasswordKey";
+            User userToLogin = findUserByEmail(email);
+            String securePassword = userToLogin.getPassword();
+            String encryptedPassword = AES.encrypt(password, secretKey);
+            if (encryptedPassword.equals(securePassword)) {
+                return userToLogin;
+            }
+            return null;
         }
-        return false;
-    }
+
+
+
 
 }

@@ -36,8 +36,13 @@ public class LoginController {
         }
     }
 
+//    @GetMapping("/verify/{email}/{password}")
+//    public ResponseEntity<Boolean> verify (@PathVariable String email, @PathVariable String password) throws Exception {
+//        return new ResponseEntity<>(authenticationService.verify(email, password), HttpStatus.OK);
+//    }
+
     @GetMapping("/verify/{email}/{password}")
-    public ResponseEntity<Boolean> verify (@PathVariable String email, @PathVariable String password) throws Exception {
+    public ResponseEntity<User> verify (@PathVariable String email, @PathVariable String password) throws Exception {
         return new ResponseEntity<>(authenticationService.verify(email, password), HttpStatus.OK);
     }
 
@@ -61,10 +66,10 @@ public class LoginController {
 //    public ResponseEntity<String> forgotPassword(@Re)
 
 
-//    @GetMapping("/users/{id}")
-//    public ResponseEntity<Account> getUser(@PathVariable long id) {
-//        return null;
-//    }
+    @GetMapping("/users/id/{id}")
+    public ResponseEntity<User> getUserById (@PathVariable long userId) {
+        return new ResponseEntity<>(authenticationService.showUser(userId), HttpStatus.OK);
+    }
 
     @GetMapping("/{email}")
     public ResponseEntity<Account> logIn(@PathVariable String email, @RequestParam String password) {

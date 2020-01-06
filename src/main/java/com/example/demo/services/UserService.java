@@ -13,7 +13,7 @@ public class UserService {
     UserRepository userRepository;
 
     public User updateUser(Long id, User nerOwnerData) throws Exception {
-        User originalUser = show(id);
+        User originalUser = showByUserId(id);
         originalUser.setFirstName(nerOwnerData.getFirstName());
         originalUser.setLastName(nerOwnerData.getLastName());
         originalUser.setEmail(nerOwnerData.getEmail());
@@ -28,11 +28,15 @@ public class UserService {
         return null;
     }
 
-    public User show(Long id) {
-        if(userRepository.findById(id).isPresent()){
-            return userRepository.findById(id).get();
+    public User showByUserId (Long userId) {
+        if(userRepository.findById(userId).isPresent()){
+            return userRepository.findById(userId).get();
         }
         return null;
+    }
+
+    public User showUserByUserName (String email) {
+        return userRepository.findUserByEmail(email);
     }
 
     public Boolean delete(Long id) {

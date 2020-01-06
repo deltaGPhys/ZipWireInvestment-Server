@@ -3,12 +3,16 @@ package com.example.demo.entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+import com.example.demo.serializers.SavingGoalDeserializer;
+import com.example.demo.serializers.SavingGoalSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 public class GoalAccount extends Account {
 
-    @JsonSerialize
+    @JsonSerialize(using = SavingGoalSerializer.class)
+    @JsonDeserialize(using = SavingGoalDeserializer.class)
     @OneToOne
     private SavingGoal goal;
 

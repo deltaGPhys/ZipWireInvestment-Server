@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.entities.SavingGoal;
 import com.example.demo.entities.User;
 import com.example.demo.entities.GoalAccount;
+import com.example.demo.repositories.AccountRepository;
 import com.example.demo.repositories.GoalAccountRepository;
 import com.example.demo.repositories.SavingGoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,11 @@ public class GoalService {
     @Autowired
     SavingGoalRepository savingGoalRepository;
 
-    public Iterable<SavingGoal> findAllSavingGoals(User owner) {
-        return savingGoalRepository.findAllByOwner(owner);
+    @Autowired
+    AccountRepository accountRepository;
+
+    public Iterable<SavingGoal> findAllSavingGoalsByUserName(String email) {
+        return savingGoalRepository.findAllByOwnerEmail(email);
     }
 
     public Iterable<SavingGoal> findAllGoals() {
@@ -26,7 +30,7 @@ public class GoalService {
         return allGoals;
     }
 
-    public Iterable<SavingGoal> showSavingGoalsForUser (long userId) {
+    public Iterable<SavingGoal> showSavingGoalsByUserId (long userId) {
        return savingGoalRepository.findAllByOwnerIdEquals(userId);
     }
 
@@ -35,7 +39,9 @@ public class GoalService {
 //    }
 
     public SavingGoal createSavingGoal(SavingGoal savingGoal) {
-        //GoalAccount goalAccount = new GoalAccount();
+        GoalAccount goalAccount = new GoalAccount();
+        accountRepository.save(goalAccount);
+        savingGoal.setAccount(goalAccount);
         return savingGoalRepository.save(savingGoal);
     }
 
@@ -63,6 +69,8 @@ public class GoalService {
     public SavingGoal getSavingGoalByGoalId (long goalId){
         return savingGoalRepository.findById(goalId).get();
     }
+
+
 
 }
 
