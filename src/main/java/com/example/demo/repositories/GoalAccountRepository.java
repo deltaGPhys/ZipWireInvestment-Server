@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GoalAccountRepository extends CrudRepository<GoalAccount, Long> {
 
+    public Iterable<GoalAccount> findAllByOwner_Id(Long id);
+
 }

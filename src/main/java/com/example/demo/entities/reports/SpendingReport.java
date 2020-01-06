@@ -4,6 +4,7 @@ import com.example.demo.entities.Transaction;
 import com.example.demo.entities.User;
 import com.example.demo.enums.SpendingCategories;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,11 +12,11 @@ import java.util.List;
 public class SpendingReport {
 
     private User user;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private double startingTotalBalance;
     private double endingTotalBalance;
-    private Date statementDate;
+    private LocalDate statementDate;
     private List<Transaction> transactions;
 
     public User getUser() {
@@ -26,19 +27,19 @@ public class SpendingReport {
         this.user = user;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -46,9 +47,7 @@ public class SpendingReport {
         return startingTotalBalance;
     }
 
-    public void setStartingTotalBalance(double startingTotalBalance) {
-        this.startingTotalBalance = startingTotalBalance;
-    }
+    public void setStartingTotalBalance(double startingTotalBalance) { this.startingTotalBalance = startingTotalBalance; }
 
     public double getEndingTotalBalance() {
         return endingTotalBalance;
@@ -58,11 +57,11 @@ public class SpendingReport {
         this.endingTotalBalance = endingTotalBalance;
     }
 
-    public Date getStatementDate() {
+    public LocalDate getStatementDate() {
         return statementDate;
     }
 
-    public void setStatementDate(Date statementDate) {
+    public void setStatementDate(LocalDate statementDate) {
         this.statementDate = statementDate;
     }
 

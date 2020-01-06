@@ -12,11 +12,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User createUser(User owner) {
-        return userRepository.save(owner);
-    }
-
-    public User updateUser(Long id, User nerOwnerData) {
+    public User updateUser(Long id, User nerOwnerData) throws Exception {
         User originalUser = show(id);
         originalUser.setFirstName(nerOwnerData.getFirstName());
         originalUser.setLastName(nerOwnerData.getLastName());

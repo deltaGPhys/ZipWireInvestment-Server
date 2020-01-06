@@ -26,7 +26,6 @@ public class Transaction {
     @JsonDeserialize(using = AccountDeserializer.class)
     private Account account;
     private String comment;
-//    @Temporal(TemporalType.DATE)
     private LocalDate dateCreated;
     private Double accountBalance;
 

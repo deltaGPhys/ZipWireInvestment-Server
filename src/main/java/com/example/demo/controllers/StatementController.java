@@ -13,8 +13,6 @@ import java.util.Date;
 @Controller
 public class StatementController {
 
-
-
     @GetMapping("/statement/{accountId}")
     public ResponseEntity<Statement> getStatementForAccount(@PathVariable long accountId, @RequestParam Date date) {
         return null;

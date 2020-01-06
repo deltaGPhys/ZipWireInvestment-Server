@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,7 @@ public class SpendTrackerService {
         spendingReport.setEndDate(requestDto.getEndDate());
         spendingReport.setStartingTotalBalance(transactions.get(0).getAccountBalance());
         spendingReport.setEndingTotalBalance(transactions.get(transactions.size()-1).getAccountBalance());
-        spendingReport.setStatementDate(new Date());
+        spendingReport.setStatementDate(LocalDate.now());
         spendingReport.setTransactions(transactions);
 
 

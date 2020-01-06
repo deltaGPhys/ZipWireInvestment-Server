@@ -1,6 +1,8 @@
 package com.example.demo.automatons;
 
 import com.example.demo.entities.investment.Security;
+import com.example.demo.entities.investment.SecurityHolding;
+import com.example.demo.repositories.SecurityHoldingRepository;
 import com.example.demo.repositories.SecurityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +19,9 @@ public class StockConfig {
 
     @Autowired
     SecurityRepository securityRepository;
+
+    @Autowired
+    SecurityHoldingRepository securityHoldingRepository;
 
     @Bean
     @PostConstruct
@@ -68,6 +73,10 @@ public class StockConfig {
                 System.out.println("getting data for today");
                 SecuritiesUpdater.updateStockData(s, securityRepository); //comment out for quicker loads in dev
             }
+        }
+
+        for (SecurityHolding h: securityHoldingRepository.findAll()) {
+            h.setValue(h.getNumShares()*h.getSecurity().getCurrentPrice());
         }
     }
 }
