@@ -10,7 +10,7 @@ import com.example.demo.authentication.AES;
 import java.util.ArrayList;
 
 
-class git aUserTest {
+class UserTest {
     private User testUser;
     private Checking tc1, tc2;
     private Savings ts1;
