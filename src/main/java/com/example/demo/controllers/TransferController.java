@@ -55,7 +55,7 @@ public class TransferController {
     public ResponseEntity withdrawFunds(@RequestParam Long fromAccountId, @RequestParam double amount) {
         try {
             Account from = accountService.showAccount(fromAccountId);
-            transferService.withdraw(from, null, amount);
+            transferService.withdraw(from, amount);
         } catch (InsufficientFundsException ex) {
             return new ResponseEntity<InsufficientFundsException>(ex, HttpStatus.FORBIDDEN);
 
@@ -71,7 +71,7 @@ public class TransferController {
     @PostMapping("/deposit")
     public ResponseEntity depositFunds(@RequestParam Long toAccountId, @RequestParam double amount) {
         Account to = accountService.showAccount(toAccountId);
-        transferService.deposit(null, to, amount);
+        transferService.deposit( to, amount);
 
         return new ResponseEntity(HttpStatus.OK);
     }
