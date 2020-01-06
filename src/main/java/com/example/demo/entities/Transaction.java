@@ -8,10 +8,7 @@ import com.example.demo.serializers.TransactionTypeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -29,6 +26,7 @@ public class Transaction {
     @JsonDeserialize(using = AccountDeserializer.class)
     private Account account;
     private String comment;
+//    @Temporal(TemporalType.DATE)
     private LocalDate dateCreated;
     private Double accountBalance;
 
