@@ -37,17 +37,10 @@ public class GoalController {
         return new ResponseEntity<>(goalService.updateSavingGoal(id, savingGoal), HttpStatus.OK);
     }
 
-<<<<<<< HEAD
     @GetMapping("/owner/{owner}")
     public ResponseEntity<Iterable<SavingGoal>> getGoalsForUser(@PathVariable User owner) {
             return new ResponseEntity<>(goalService.findAllSavingGoals(owner), HttpStatus.OK);
     }
-=======
-//    @GetMapping("/{owner}")
-//    public ResponseEntity<Iterable<SavingGoal>> getGoalsForUser(@PathVariable User owner) {
-//            return new ResponseEntity<>(goalService.findAllSavingGoals(owner), HttpStatus.OK);
-//    }
->>>>>>> dave
 
     @PostMapping("/add")
     public ResponseEntity<SavingGoal> createNewGoal(@RequestBody SavingGoal savingGoal) {

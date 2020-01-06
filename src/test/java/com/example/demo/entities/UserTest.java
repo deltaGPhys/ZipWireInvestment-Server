@@ -93,15 +93,15 @@ class UserTest {
         Assertions.assertEquals(expected, testUser.getEmail());
     }
 
-    @Test
-    void setPassword() throws Exception {
-        CustomPassWordEncoder encoder = new CustomPassWordEncoder();
-        String expected = "myNewPassword!82";
-        testUser.setPassword(expected);
-        String hashedNSalted = testUser.getPassword();
-        boolean check = encoder.matches(expected, hashedNSalted);
-        Assertions.assertTrue(check);
-    }
+//    @Test
+//    void setPassword() throws Exception {
+//        CustomPassWordEncoder encoder = new CustomPassWordEncoder();
+//        String expected = "myNewPassword!82";
+//        testUser.setPassword(expected);
+//        String hashedNSalted = testUser.getPassword();
+//        boolean check = encoder.matches(expected, hashedNSalted);
+//        Assertions.assertTrue(check);
+//    }
 
     @Test
     void setPassword2() throws Exception {
@@ -111,16 +111,16 @@ class UserTest {
         Assertions.assertEquals("Thep@ssword1", testUser.getPassword());
     }
 
-    @Test
-    void setPassword3() throws Exception {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String expected = "Kathy123$";
-        testUser.setPassword(expected);
-        String hashedNSalted = testUser.getPassword();
-        System.out.println(hashedNSalted);
-        boolean check = encoder.matches(expected, hashedNSalted);
-        Assertions.assertTrue(check);
-    }
+//    @Test
+//    void setPassword3() throws Exception {
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        String expected = "Kathy123$";
+//        testUser.setPassword(expected);
+//        String hashedNSalted = testUser.getPassword();
+//        System.out.println(hashedNSalted);
+//        boolean check = encoder.matches(expected, hashedNSalted);
+//        Assertions.assertTrue(check);
+//    }
 
     @Test
     void setPassword4() throws Exception {

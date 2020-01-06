@@ -26,9 +26,6 @@ public class AccountDeserializer extends JsonDeserializer<Account> {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
         Long id = node.asLong();
-        logger.info(String.valueOf(id));
-        logger.info(String.valueOf(node));
-        logger.info(String.valueOf(accountRepository.findById(id).orElse(null)));
 
         return accountRepository.findById(id).orElse(null);
     }

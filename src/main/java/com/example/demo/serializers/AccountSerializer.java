@@ -12,9 +12,9 @@ public class AccountSerializer extends JsonSerializer<Account> {
     @Override
     public void serialize(Account account, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         if (account != null) {
-            jsonGenerator.writeString(String.valueOf(account.getId()));
+            jsonGenerator.writeNumber(account.getId());
         } else {
-            jsonGenerator.writeString("");
+            jsonGenerator.writeNull();
         }
     }
 }
