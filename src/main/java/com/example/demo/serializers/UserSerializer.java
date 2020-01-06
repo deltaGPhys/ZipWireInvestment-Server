@@ -13,9 +13,9 @@ public class UserSerializer extends JsonSerializer<User> {
     @Override
     public void serialize(User user, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         if (user != null) {
-            jsonGenerator.writeString(String.valueOf(user.getId()));
+            jsonGenerator.writeNumber(user.getId());
         } else {
-            jsonGenerator.writeString("");
+            jsonGenerator.writeNull();
         }
     }
 }

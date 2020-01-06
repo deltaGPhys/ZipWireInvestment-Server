@@ -32,17 +32,15 @@ public class GoalController {
         }
     }
 
-
-
     @PutMapping("/update/{id}")
     public ResponseEntity<SavingGoal> updateGoal(@PathVariable long id, @RequestBody SavingGoal savingGoal) {
         return new ResponseEntity<>(goalService.updateSavingGoal(id, savingGoal), HttpStatus.OK);
     }
 
-//    @GetMapping("/{owner}")
-//    public ResponseEntity<Iterable<SavingGoal>> getGoalsForUser(@PathVariable User owner) {
-//            return new ResponseEntity<>(goalService.findAllSavingGoals(owner), HttpStatus.OK);
-//    }
+    @GetMapping("/owner/{userName}")
+    public ResponseEntity<Iterable<SavingGoal>> getGoalsForUser(@PathVariable String userName) {
+            return new ResponseEntity<>(goalService.findAllSavingGoalsByUserName(userName), HttpStatus.OK);
+    }
 
     @PostMapping("/add")
     public ResponseEntity<SavingGoal> createNewGoal(@RequestBody SavingGoal savingGoal) {
@@ -54,12 +52,12 @@ public class GoalController {
         return new ResponseEntity<>(goalService.findAllGoals(), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/goal/{id}")
+    @DeleteMapping("/goal/{goalId}")
     public ResponseEntity<Boolean> deleteGoal (@PathVariable long goalId){
         return new ResponseEntity<>(goalService.deleteSavingGoal(goalId), HttpStatus.OK);
     }
 
-    @GetMapping("/goalId/{id}")
+    @GetMapping("/goalId/{goalId}")
     public ResponseEntity<SavingGoal> showIndividualGoalById (@PathVariable long goalId) {
         return new ResponseEntity<>(goalService.getSavingGoalByGoalId(goalId), HttpStatus.OK);
     }

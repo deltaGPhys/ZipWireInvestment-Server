@@ -1,5 +1,10 @@
 package com.example.demo.entities;
 
+import com.example.demo.serializers.UserDeserializer;
+import com.example.demo.serializers.UserSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -10,6 +15,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 public class GoalAccount extends Account {
+
 
     @JsonSerialize(using = SavingGoalSerializer.class)
     @JsonDeserialize(using = SavingGoalDeserializer.class)
