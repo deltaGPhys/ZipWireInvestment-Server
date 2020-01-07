@@ -25,17 +25,22 @@ public class UserController {
     private UserService userService;
 
 
-    @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser (@Valid @RequestBody User user) throws Exception {
-        return new ResponseEntity<>(authenticationService.update(user), HttpStatus.OK);
+    @PutMapping("/user/update/")
+    public ResponseEntity<User> updateUser (@Valid @RequestBody User userToUpdate) throws Exception {
+        return new ResponseEntity<>(authenticationService.update(userToUpdate), HttpStatus.OK);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User>show(@PathVariable Long id){
-        return new ResponseEntity<>(userService.show(id), HttpStatus.OK);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<User>show(@PathVariable Long userId){
+        return new ResponseEntity<>(userService.showByUserId(userId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/user/{id}")
+    @GetMapping("/user/name/{userName}")
+    public ResponseEntity<User>show(@PathVariable String userName){
+        return new ResponseEntity<>(userService.showUserByUserName(userName), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/remove/{id}")
     public ResponseEntity<Boolean>delete(@PathVariable Long id){
         return new ResponseEntity<>(userService.delete(id), HttpStatus.OK);
     }

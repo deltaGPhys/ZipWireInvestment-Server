@@ -24,11 +24,6 @@ public class LoginController {
         return new ResponseEntity<>(authenticationService.createUser(user), HttpStatus.CREATED);
     }
 
-    @GetMapping("/users/email")
-    public ResponseEntity<Iterable<String>> getAllUserNames (){
-        return new ResponseEntity<>(authenticationService.findAllEmails(), HttpStatus.OK);
-    }
-
     @GetMapping("/users/{email}")
     public ResponseEntity<User> findByUserEmail(@PathVariable String email) {
         try {
@@ -52,11 +47,6 @@ public class LoginController {
         return new ResponseEntity<>(authenticationService.findAll(), HttpStatus.OK);
     }
 
-//    @GetMapping("/checkEmail")
-//    public ResponseEntity<Boolean> checkIfEmailExists(@RequestParam(value="email") String email) {
-//        return new ResponseEntity<>(authenticationService.existingUserCheck(email), HttpStatus.OK);
-//    }
-
     @PostMapping("/checkEmail")
     public ResponseEntity<Boolean> checkIfEmailExists(@RequestBody String data) throws JSONException {
         JSONObject jsonData = new JSONObject(data);
@@ -64,19 +54,9 @@ public class LoginController {
         return new ResponseEntity<>(authenticationService.emailAvailabilityCheck(email), HttpStatus.OK);
     }
 
-
-//    @PutMapping("/forgot-password")
-//    public ResponseEntity<String> forgotPassword(@Re)
-
-
-//    @GetMapping("/users/{id}")
-//    public ResponseEntity<Account> getUser(@PathVariable long id) {
-//        return null;
-//    }
-
-    @GetMapping("/{email}")
-    public ResponseEntity<Account> logIn(@PathVariable String email, @RequestParam String password) {
-        return null;
+    @GetMapping("/users/id/{id}")
+    public ResponseEntity<User> getUserById (@PathVariable long userId) {
+        return new ResponseEntity<>(authenticationService.showUser(userId), HttpStatus.OK);
     }
 
 

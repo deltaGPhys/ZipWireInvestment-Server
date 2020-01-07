@@ -21,8 +21,8 @@ public class GoalService {
     @Autowired
     AccountRepository accountRepository;
 
-    public Iterable<SavingGoal> findAllSavingGoals(User owner) {
-        return savingGoalRepository.findAllByOwner(owner);
+    public Iterable<SavingGoal> findAllSavingGoalsByUserName(String email) {
+        return savingGoalRepository.findAllByOwnerEmail(email);
     }
 
     public Iterable<SavingGoal> findAllGoals() {
@@ -30,7 +30,7 @@ public class GoalService {
         return allGoals;
     }
 
-    public Iterable<SavingGoal> showSavingGoalsForUser (long userId) {
+    public Iterable<SavingGoal> showSavingGoalsByUserId (long userId) {
        return savingGoalRepository.findAllByOwnerIdEquals(userId);
     }
 
@@ -69,6 +69,8 @@ public class GoalService {
     public SavingGoal getSavingGoalByGoalId (long goalId){
         return savingGoalRepository.findById(goalId).get();
     }
+
+
 
 }
 

@@ -30,9 +30,9 @@ public class AuthenticationService {
          return userEmails;
     }
 
-    public User showUser(Long id) {
-        if(userRepository.findById(id).isPresent()) {
-            return userRepository.findById(id).get();
+    public User showUser(Long userId) {
+        if(userRepository.findById(userId).isPresent()) {
+            return userRepository.findById(userId).get();
         }
         else return null;
     }
@@ -53,7 +53,7 @@ public class AuthenticationService {
         getUser.setFirstName(newUserData.getFirstName());
         getUser.setLastName(newUserData.getLastName());
         getUser.setEmail(newUserData.getEmail());
-        getUser.setPassword(newUserData.getPassword()); //null on
+        getUser.setPassword(newUserData.getPassword());
         getUser.setRent(newUserData.getRent());
         getUser.setSalary(newUserData.getSalary());
         return userRepository.save(getUser);
@@ -82,15 +82,15 @@ public class AuthenticationService {
         return true;
     }
 
-    public User verify (String email, String password) throws Exception {
-        final String secretKey = "PasswordKey";
-        User userToLogin = findUserByEmail(email);
-        String securePassword = userToLogin.getPassword();
-        String encryptedPassword = AES.encrypt(password, secretKey);
-        if(encryptedPassword.equals(securePassword)){
-            return userToLogin;
+        public User verify (String email, String password) throws Exception {
+            final String secretKey = "PasswordKey";
+            User userToLogin = findUserByEmail(email);
+            String securePassword = userToLogin.getPassword();
+            String encryptedPassword = AES.encrypt(password, secretKey);
+            if (encryptedPassword.equals(securePassword)) {
+                return userToLogin;
+            }
+            return null;
         }
-        return null;
-    }
 
 }
