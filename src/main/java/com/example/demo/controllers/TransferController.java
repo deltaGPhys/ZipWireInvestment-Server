@@ -45,11 +45,38 @@ public class TransferController {
             return new ResponseEntity<NegativeBalanceException>(neg, HttpStatus.FORBIDDEN);
 
 
-        }catch (OwnershipNotSameException signer){
-            return new ResponseEntity<OwnershipNotSameException>(signer,HttpStatus.FORBIDDEN);
+        } catch (OwnershipNotSameException signer) {
+            return new ResponseEntity<OwnershipNotSameException>(signer, HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("/withdraw")
+    public ResponseEntity withdrawFunds(@RequestParam Long fromAccountId, @RequestParam double amount) {
+        try {
+            Account from = accountService.showAccount(fromAccountId);
+            transferService.withdraw(from, amount);
+        } catch (InsufficientFundsException ex) {
+            return new ResponseEntity<InsufficientFundsException>(ex, HttpStatus.FORBIDDEN);
+
+
+        } catch (NegativeBalanceException neg) {
+            return new ResponseEntity<NegativeBalanceException>(neg, HttpStatus.FORBIDDEN);
+
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @PostMapping("/deposit")
+    public ResponseEntity depositFunds(@RequestParam Long toAccountId, @RequestParam double amount) {
+        Account to = accountService.showAccount(toAccountId);
+        transferService.deposit( to, amount);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }
+
 
 
