@@ -3,6 +3,8 @@ package com.example.demo.controllers;
 import com.example.demo.entities.User;
 import com.example.demo.entities.Account;
 import com.example.demo.services.AuthenticationService;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +38,13 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/verify/{email}/{password}")
-    public ResponseEntity<Boolean> verify (@PathVariable String email, @PathVariable String password) throws Exception {
-        return new ResponseEntity<>(authenticationService.verify(email, password), HttpStatus.OK);
+    @PostMapping("/verify")
+    public ResponseEntity<User> verify (@RequestBody String data) throws Exception {
+        JSONObject jsonData = new JSONObject(data);
+        String email = (String) jsonData.get("email");
+        String password = (String) jsonData.get("password");
+        User loggedInUser = authenticationService.verify(email, password);
+        return (loggedInUser != null) ? new ResponseEntity<>(loggedInUser, HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/users")
@@ -51,9 +57,11 @@ public class LoginController {
 //        return new ResponseEntity<>(authenticationService.existingUserCheck(email), HttpStatus.OK);
 //    }
 
-    @GetMapping("/checkEmail/{email}")
-    public ResponseEntity<Boolean> checkIfEmailExists(@PathVariable String email) {
-        return new ResponseEntity<>(authenticationService.existingUserCheck(email), HttpStatus.OK);
+    @PostMapping("/checkEmail")
+    public ResponseEntity<Boolean> checkIfEmailExists(@RequestBody String data) throws JSONException {
+        JSONObject jsonData = new JSONObject(data);
+        String email = (String) jsonData.get("email");
+        return new ResponseEntity<>(authenticationService.emailAvailabilityCheck(email), HttpStatus.OK);
     }
 
 

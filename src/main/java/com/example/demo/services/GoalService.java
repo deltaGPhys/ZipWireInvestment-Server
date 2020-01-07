@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.entities.SavingGoal;
 import com.example.demo.entities.User;
 import com.example.demo.entities.GoalAccount;
+import com.example.demo.repositories.AccountRepository;
 import com.example.demo.repositories.GoalAccountRepository;
 import com.example.demo.repositories.SavingGoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class GoalService {
 
     @Autowired
     SavingGoalRepository savingGoalRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     public Iterable<SavingGoal> findAllSavingGoals(User owner) {
         return savingGoalRepository.findAllByOwner(owner);
@@ -32,10 +36,12 @@ public class GoalService {
 
 //    public GoalAccount createGoalAccount(GoalAccount goalAccount) {
 //        return goalAccountRepository.save(goalAccount);
-//    }
+//
 
     public SavingGoal createSavingGoal(SavingGoal savingGoal) {
-        //GoalAccount goalAccount = new GoalAccount();
+        GoalAccount goalAccount = new GoalAccount();
+        accountRepository.save(goalAccount);
+        savingGoal.setAccount(goalAccount);
         return savingGoalRepository.save(savingGoal);
     }
 

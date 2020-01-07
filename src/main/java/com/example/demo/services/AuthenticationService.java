@@ -72,7 +72,7 @@ public class AuthenticationService {
         return true;
     }
 
-    public Boolean existingUserCheck (String email) {
+    public Boolean emailAvailabilityCheck(String email) {
         Iterable <String> allUserEmails = findAllEmails();
         for(String userEmail : allUserEmails){
             if(email.equals(userEmail)){
@@ -82,15 +82,15 @@ public class AuthenticationService {
         return true;
     }
 
-    public Boolean verify (String email, String password) throws Exception {
+    public User verify (String email, String password) throws Exception {
         final String secretKey = "PasswordKey";
         User userToLogin = findUserByEmail(email);
         String securePassword = userToLogin.getPassword();
         String encryptedPassword = AES.encrypt(password, secretKey);
         if(encryptedPassword.equals(securePassword)){
-            return true;
+            return userToLogin;
         }
-        return false;
+        return null;
     }
 
 }
