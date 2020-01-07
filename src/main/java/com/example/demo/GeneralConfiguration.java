@@ -10,16 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class GeneralConfiguration {
 
-    @Bean
-    private static final PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
 
-    //public static
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
 
 }

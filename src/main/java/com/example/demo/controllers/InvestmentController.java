@@ -73,10 +73,12 @@ public class InvestmentController {
     public ResponseEntity<SecurityHistoryDTO> getSecurityHistory(@PathVariable long id, @RequestParam(required = false) String startDate) {
         System.out.println("startDate: "+startDate);
         LocalDate startDateParsed = null;
-        try {
-            startDateParsed = LocalDate.parse(startDate);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (startDateParsed != null) {
+            try {
+                startDateParsed = LocalDate.parse(startDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         System.out.println(investmentService.getSecurityHistory(id));
         return (startDateParsed != null) ? new ResponseEntity<>(investmentService.getSecurityHistory(id, startDateParsed), HttpStatus.OK) : new ResponseEntity<>(investmentService.getSecurityHistory(id), HttpStatus.OK);
