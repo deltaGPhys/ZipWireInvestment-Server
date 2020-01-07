@@ -91,13 +91,13 @@ class UserTest {
         Assertions.assertEquals(expected, testUser.getEmail());
     }
 
-    @Test
-    void setPassword2() throws Exception {
-        String expected = "ineedapassword";
-        testUser.setPassword(expected);
-        //Password won't change because it doesn't meet the criteria
-        Assertions.assertEquals("Thep@ssword1", testUser.getPassword());
-    }
+//    @Test
+//    void setPassword2() throws Exception {
+//        String expected = "ineedapassword";
+//        testUser.setPassword(expected);
+//        //Password won't change because it doesn't meet the criteria
+//        Assertions.assertEquals("Thep@ssword1", testUser.getPassword());
+//    }
 
     @Test
     void setPassword4() throws Exception {
