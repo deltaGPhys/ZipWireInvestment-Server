@@ -1,10 +1,8 @@
 package com.example.demo.entities;
 
-import com.example.demo.authentication.CustomPassWordEncoder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.example.demo.authentication.AES;
 
 import java.util.ArrayList;
@@ -93,16 +91,6 @@ class UserTest {
         Assertions.assertEquals(expected, testUser.getEmail());
     }
 
-//    @Test
-//    void setPassword() throws Exception {
-//        CustomPassWordEncoder encoder = new CustomPassWordEncoder();
-//        String expected = "myNewPassword!82";
-//        testUser.setPassword(expected);
-//        String hashedNSalted = testUser.getPassword();
-//        boolean check = encoder.matches(expected, hashedNSalted);
-//        Assertions.assertTrue(check);
-//    }
-
     @Test
     void setPassword2() throws Exception {
         String expected = "ineedapassword";
@@ -110,17 +98,6 @@ class UserTest {
         //Password won't change because it doesn't meet the criteria
         Assertions.assertEquals("Thep@ssword1", testUser.getPassword());
     }
-
-//    @Test
-//    void setPassword3() throws Exception {
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        String expected = "Kathy123$";
-//        testUser.setPassword(expected);
-//        String hashedNSalted = testUser.getPassword();
-//        System.out.println(hashedNSalted);
-//        boolean check = encoder.matches(expected, hashedNSalted);
-//        Assertions.assertTrue(check);
-//    }
 
     @Test
     void setPassword4() throws Exception {

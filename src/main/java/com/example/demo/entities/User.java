@@ -87,9 +87,7 @@ public class User {
     }
 
    public void setEmail(String email) {
-       if(EmailValidator.validateEmail(email)){
-           this.email = email;
-       }
+       this.email = email;
     }
 
     public String getPassword() {
@@ -97,21 +95,13 @@ public class User {
     }
 
     public void setPassword(String password) throws Exception {
-        if(PasswordValidator.validatePassword(password)) {
-            final String secretKey = "PasswordKey";
-            this.password = AES.encrypt(password, secretKey);
-            //this.password = password;
-            //this.password = passwordCrypt.encrypt(password);
-        }
+        final String secretKey = "PasswordKey";
+        this.password = AES.encrypt(password, secretKey);
     }
 
     public List<Account> getAccounts() {
         return accounts;
     }
-
-//    public void setAccounts(List<? extends Account> accounts) {
-//        this.accounts = (List<Account>) accounts;
-//    }
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
