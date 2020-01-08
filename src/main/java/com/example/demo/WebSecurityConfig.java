@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
@@ -26,9 +27,20 @@ import java.util.Arrays;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        //System.out.println(System.getenv("FE_DOMAIN"));
+//        registry.addMapping("/**").allowedOrigins("https://financeapp.cfapps.io/");
+//    }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("POST")
+                .allowedHeaders("Content-Type", "Authorization")
+                .allowCredentials(false)
+                .maxAge(32400);  // 9 hours max age
     }
 
     protected void configure(HttpSecurity http) throws Exception{

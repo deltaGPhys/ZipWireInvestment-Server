@@ -33,7 +33,7 @@ public class InvestmentService {
     private TransactionService transactionService;
 
     public Investment findById(Long id){
-        System.out.println(id);
+
         return investmentRepository.findById(id).get();
     }
 
@@ -43,7 +43,7 @@ public class InvestmentService {
 
     public Investment createAccount(Investment investment) {
         Investment newAcct = investmentRepository.save(investment);
-        System.out.println(newAcct);
+
         return newAcct;
     }
 

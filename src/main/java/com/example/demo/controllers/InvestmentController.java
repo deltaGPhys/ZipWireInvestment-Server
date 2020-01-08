@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 
 @Controller
-@CrossOrigin(origins="http://localhost:8080")
+@CrossOrigin(origins = "https://financeapp.cfapps.io/")
 public class InvestmentController {
 
     @Autowired
