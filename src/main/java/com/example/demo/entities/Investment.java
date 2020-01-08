@@ -27,6 +27,10 @@ public class Investment extends Account {
     public Investment() {
     }
 
+    public Investment(User owner) {
+        super(0., LocalDate.now(),owner,String.format("%s's Investments",owner.getFirstName()));
+    }
+
     public List<SecurityHolding> getHoldings() {
         return holdings;
     }

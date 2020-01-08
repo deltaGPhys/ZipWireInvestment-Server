@@ -31,10 +31,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         registry.addMapping("/**").allowedOrigins("http://localhost:4200");
     }
 
-//    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-//    }
-
     protected void configure(HttpSecurity http) throws Exception{
         http
             // your security config here

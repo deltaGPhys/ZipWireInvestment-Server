@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.authentication.AES;
+import com.example.demo.entities.Investment;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class AuthenticationService {
     @Autowired
     UserRepository userRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    InvestmentService investmentService;
 
     public Iterable<User> findAll(){
         return userRepository.findAll();
@@ -38,14 +39,9 @@ public class AuthenticationService {
     }
 
     public User createUser (User newUser) throws Exception {
-        newUser.setFirstName(newUser.getFirstName());
-        newUser.setLastName(newUser.getLastName());
-        newUser.setEmail(newUser.getEmail());
-        newUser.setPassword(newUser.getPassword());
-        newUser.setAccounts(newUser.getAccounts());
-        newUser.setRent(newUser.getRent());
-        newUser.setSalary(newUser.getSalary());
-        return userRepository.save(newUser);
+        User savedUser = userRepository.save(newUser);
+        Investment account = investmentService.createAccount(new Investment(savedUser));
+        return savedUser;
     }
 
     public User update(User newUserData) throws Exception {
