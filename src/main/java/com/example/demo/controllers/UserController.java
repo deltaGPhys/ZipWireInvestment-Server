@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/dashboard")
 public class UserController {
     @Autowired
@@ -25,9 +26,9 @@ public class UserController {
     private UserService userService;
 
 
-    @PutMapping("/user/update/")
-    public ResponseEntity<User> updateUser (@Valid @RequestBody User userToUpdate) throws Exception {
-        return new ResponseEntity<>(authenticationService.update(userToUpdate), HttpStatus.OK);
+    @PostMapping("/user/update")
+    public ResponseEntity<User> updateUser (@RequestBody User user) {
+        return new ResponseEntity<>(userService.updateNameAndEmail(user), HttpStatus.OK);
     }
 
     @GetMapping("/user/{userId}")

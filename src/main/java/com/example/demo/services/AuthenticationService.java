@@ -44,15 +44,14 @@ public class AuthenticationService {
         return savedUser;
     }
 
-    public User update(User newUserData) throws Exception {
-        User getUser = showUser(newUserData.getId());
-        getUser.setFirstName(newUserData.getFirstName());
-        getUser.setLastName(newUserData.getLastName());
-        getUser.setEmail(newUserData.getEmail());
-        getUser.setPassword(newUserData.getPassword());
-        getUser.setRent(newUserData.getRent());
-        getUser.setSalary(newUserData.getSalary());
-        return userRepository.save(getUser);
+    public User updateName(User newUserData) {
+//        getUser.setFirstName(newUserData.getFirstName());
+//        getUser.setLastName(newUserData.getLastName());
+//        getUser.setEmail(newUserData.getEmail());
+//        getUser.setPassword(newUserData.getPassword());
+//        getUser.setRent(newUserData.getRent());
+//        getUser.setSalary(newUserData.getSalary());
+        return userRepository.save(newUserData);
     }
 
     public User updatePassword (User user){
