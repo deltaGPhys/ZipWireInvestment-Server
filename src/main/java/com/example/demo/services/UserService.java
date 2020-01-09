@@ -16,6 +16,7 @@ public class UserService {
         User getUser = showByUserId(user.getId());
         getUser.setFirstName(user.getFirstName());
         getUser.setLastName(user.getLastName());
+        getUser.setEmail(user.getEmail());
         return userRepository.save(getUser);
     }
 
