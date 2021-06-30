@@ -2,8 +2,6 @@
 ## Account-Management Micro Web Application - Server
 
 
-
-
 Follow the following instructions to successfully run this application on your local machine!
 
 # Cloning This Repository
